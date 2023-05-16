@@ -1,25 +1,21 @@
-import { data } from "./data";
+// import { data } from "./data";
 import { useRef, useState } from "react";
 import Header from './Components/Header';
 import Form from "./Components/Form";
 import Task from "./Components/Task";
+import { addTaskToStorage, getAllTasks, getNumberOfTasks, removeTaskFromStorage } from "./Storage";
 
 export default function App() {
 
-  let [tasks, setTasks] = useState(data);
+  let [tasks, setTasks] = useState(getAllTasks());
   let form = useRef(0);
 
   function deleteTask(id) {
-    setTasks(() => tasks.filter(task => task.id !== id));
+    removeTaskFromStorage(id, setTasks)
   }
 
   function addTask(taskName, time) {
-    if (tasks.length) {
-      // create an id that is equal to (the last task is + 1)
-      setTasks(values => [...values, { id: tasks[tasks.length - 1].id + 1, taskName: taskName, time: time }]);
-    } else {
-      setTasks([{ id: 0, taskName: taskName, time: time }]);
-    }
+    addTaskToStorage({ id: Math.floor(Math.random() * 10 ** 9), taskName: taskName, time: time, checked: false }, setTasks)
   }
 
   function toggleForm() {
@@ -38,7 +34,7 @@ export default function App() {
 
       <div className='container my-5' style={{ minHeight: '85vh' }}>
 
-        <h3>لديك {tasks.length} مهام اليوم</h3>
+        <h3 onClick={() => console.log(getAllTasks())}>لديك {getNumberOfTasks()} مهام اليوم</h3>
 
         <div className='shadow-sm my-4 bg-white rounded'>
           {tasks.length ?

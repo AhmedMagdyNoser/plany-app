@@ -5,6 +5,8 @@ import './styles/fontawesome/all.min.css';
 import './styles/master.css';
 import App from './App';
 
+!localStorage.getItem('tasks') && localStorage.setItem('tasks', '[]');
+
 ReactDOM.createRoot(document.getElementById('root')).render(
     <App />
 );
