@@ -18,12 +18,10 @@ export default function App() {
   }
 
   function toggleForm() {
-    if (form.current.style.opacity === '1') {
-      form.current.style.opacity = '0';
-      form.current.style.transform = 'translateY(25px)';
+    if (form.current.style.display === 'block') {
+      form.current.style.display = 'none';
     } else {
-      form.current.style.opacity = '1';
-      form.current.style.transform = 'translateY(0)';
+      form.current.style.display = 'block';
     }
   }
 
@@ -43,9 +41,9 @@ export default function App() {
           }
         </div>
 
-        <button className='btn btn-primary px-5' onClick={toggleForm}>اضف مهمة جديدة</button>
+        <button className='btn btn-primary px-5 mb-3' onClick={toggleForm}>اضف مهمة جديدة</button>
 
-        <div style={{ opacity: '0', transform: 'translateY(25px)', transition: '250ms ease' }} ref={form}>
+        <div style={{ display: 'none', transition: '250ms ease' }} ref={form}>
           <Form addTask={addTask} />
         </div>
 
