@@ -1,8 +1,6 @@
 import { useRef } from "react";
 export default function Form({ addTask }) {
 
-  let taskName = useRef(0);
-  let time = useRef(0);
   let AM = useRef(0);
   let PM = useRef(0);
   let period = 'صباحا';
@@ -17,18 +15,18 @@ export default function Form({ addTask }) {
 
   function addNewTask(e) {
     e.preventDefault();
-    addTask(taskName.current.value, time.current.value + ' ' + period);
-    taskName.current.value = '';
-    time.current.value = '';
+    let formData = new FormData(e.target);
+    addTask(formData.get('name'), formData.get('time') + ' ' + period);
+    e.target.reset();
   }
 
   return (
-    <form id='form' className='py-3' onSubmit={addNewTask}>
+    <form className='py-3' onSubmit={addNewTask}>
 
-      <input ref={taskName} required className='form-control shadow-none fw-bold' placeholder='اسم المهمة' title='' />
+      <input name="name" required className='form-control shadow-none fw-bold' placeholder='اسم المهمة' />
 
       <div className='d-flex gap-2 py-2'>
-        <input type='number' min='1' max='12' ref={time} required className='form-control shadow-none fw-bold' placeholder='التوقيت بالساعة' title='' />
+        <input name="time" type='number' min='1' max='12' required className='form-control shadow-none fw-bold' placeholder='التوقيت بالساعة' />
         <div className='d-flex gap-2'>
           <button ref={AM} className='btn btn-outline-primary active' onClick={setPeriod}>صباحا</button>
           <button ref={PM} className='btn btn-outline-primary' onClick={setPeriod}>مساء</button>
@@ -36,7 +34,7 @@ export default function Form({ addTask }) {
       </div>
 
       <div className="d-grid">
-        <button type="submit" className="btn btn-primary">اضف</button>
+        <input type="submit" value='اضف' className="btn btn-primary"/>
       </div>
 
     </form>
