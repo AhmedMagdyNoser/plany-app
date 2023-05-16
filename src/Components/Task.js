@@ -1,28 +1,38 @@
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
+import { updateTaskInStorage } from "../Storage";
 import Fade from "./Fade"
 
 let uncheckedStyle = 'fa-regular fa-circle fa-xl icon-hover'
-let hoverStyle = 'fa-regular fa-circle-check fa-xl icon-hover'
 let checkedStyle = 'fa-solid fa-circle-check fa-xl icon-hover'
+let hoverStyle = 'fa-regular fa-circle-check fa-xl icon-hover'
 
 export default function Task({ task, deleteTask }) {
 
-  let [iconStyle, setIconStyle] = useState(uncheckedStyle)
   let [checked, setChecked] = useState(task.checked);
+  let [iconStyle, setIconStyle] = useState('')
+  let [titleStyle, setTitleStyle] = useState('');
 
   let card = useRef(0);
-  let titleElement = useRef(0);
 
-  function handleClick() {
+  function checkIfChecked() {
     if (checked) {
-      setChecked(false);
-      setIconStyle(uncheckedStyle)
-      titleElement.current.classList.remove('text-decoration-line-through');
-    } else {
-      setChecked(true);
       setIconStyle(checkedStyle)
-      titleElement.current.classList.add('text-decoration-line-through');
+      setTitleStyle('text-decoration-line-through')
+    } else {
+      setIconStyle(uncheckedStyle)
+      setTitleStyle('')
     }
+  }
+
+  useEffect(() => {
+    checkIfChecked();
+  }, [checked]);
+
+  function updateTask() {
+    if (checked)
+      updateTaskInStorage(task.id, false, setChecked)
+    else
+      updateTaskInStorage(task.id, true, setChecked)
   }
 
   function handleMouseEnter() {
@@ -42,10 +52,10 @@ export default function Task({ task, deleteTask }) {
       <div ref={card} className='py-3 px-4 d-flex align-items-center justify-content-between border-bottom task-hover'>
 
         <div className="d-flex align-items-center">
-          <i onClick={handleClick} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className={iconStyle}></i>
+          <i onClick={updateTask} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className={iconStyle}></i>
           <div className='px-3'>
-            <p ref={titleElement} className='my-1 fw-bold'>{task.taskName}</p>
-            <span className='text-muted'>{task.time}</span>
+            <p className={'my-1 fw-bold ' + titleStyle} >{task.name}</p>
+            <span className='text-muted' >{task.time}</span>
           </div>
         </div>
 
@@ -58,7 +68,7 @@ export default function Task({ task, deleteTask }) {
           }}
           className="fa-solid fa-trash-can fa-lg mx-2 opacity-75 trash-icon-hover"
         ></i>
-        
+
         <style>
           {`
             @keyframes fade-out {

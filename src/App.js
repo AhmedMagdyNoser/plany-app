@@ -1,8 +1,7 @@
-// import { data } from "./data";
-import { useRef, useState } from "react";
 import Header from './Components/Header';
 import Form from "./Components/Form";
 import Task from "./Components/Task";
+import { useRef, useState } from "react";
 import { addTaskToStorage, getAllTasks, getNumberOfTasks, removeTaskFromStorage } from "./Storage";
 
 export default function App() {
@@ -14,8 +13,8 @@ export default function App() {
     removeTaskFromStorage(id, setTasks)
   }
 
-  function addTask(taskName, time) {
-    addTaskToStorage({ id: Math.floor(Math.random() * 10 ** 9), taskName: taskName, time: time, checked: false }, setTasks)
+  function addTask(name, time) {
+    addTaskToStorage({ id: Math.floor(Math.random() * 10 ** 9), name: name, time: time, checked: false }, setTasks)
   }
 
   function toggleForm() {
@@ -34,7 +33,7 @@ export default function App() {
 
       <div className='container my-5' style={{ minHeight: '85vh' }}>
 
-        <h3 onClick={() => console.log(getAllTasks())}>لديك {getNumberOfTasks()} مهام اليوم</h3>
+        <h3>لديك {getNumberOfTasks()} مهام اليوم</h3>
 
         <div className='shadow-sm my-4 bg-white rounded'>
           {tasks.length ?

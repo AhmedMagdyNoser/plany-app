@@ -23,10 +23,10 @@ export default function Form({ addTask }) {
   return (
     <form className='py-3' onSubmit={addNewTask}>
 
-      <input name="name" required className='form-control shadow-none fw-bold' placeholder='اسم المهمة' />
+      <input name="name" required className='form-control shadow-none' placeholder='اسم المهمة' />
 
       <div className='d-flex gap-2 py-2'>
-        <input name="time" type='number' min='1' max='12' required className='form-control shadow-none fw-bold' placeholder='التوقيت بالساعة' />
+        <input name="time" type='number' min='1' max='12' required className='form-control shadow-none' placeholder='التوقيت بالساعة' />
         <div className='d-flex gap-2'>
           <button ref={AM} className='btn btn-outline-primary active' onClick={setPeriod}>صباحا</button>
           <button ref={PM} className='btn btn-outline-primary' onClick={setPeriod}>مساء</button>
