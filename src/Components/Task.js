@@ -59,7 +59,7 @@ export default function Task({ id, taskName, time, deleteTask }) {
           className="fa-solid fa-trash-can fa-lg mx-2 opacity-75 trash-icon-hover"
         ></i>
         
-        <style jsx>
+        <style>
           {`
             @keyframes fade-out {
               from {
