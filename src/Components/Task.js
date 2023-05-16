@@ -5,10 +5,10 @@ let uncheckedStyle = 'fa-regular fa-circle fa-xl icon-hover'
 let hoverStyle = 'fa-regular fa-circle-check fa-xl icon-hover'
 let checkedStyle = 'fa-solid fa-circle-check fa-xl icon-hover'
 
-export default function Task({ id, taskName, time, deleteTask }) {
+export default function Task({ task, deleteTask }) {
 
   let [iconStyle, setIconStyle] = useState(uncheckedStyle)
-  let [checked, setChecked] = useState(false);
+  let [checked, setChecked] = useState(task.checked);
 
   let card = useRef(0);
   let titleElement = useRef(0);
@@ -44,15 +44,15 @@ export default function Task({ id, taskName, time, deleteTask }) {
         <div className="d-flex align-items-center">
           <i onClick={handleClick} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className={iconStyle}></i>
           <div className='px-3'>
-            <p ref={titleElement} className='my-1 fw-bold'>{taskName}</p>
-            <span className='text-muted'>{time}</span>
+            <p ref={titleElement} className='my-1 fw-bold'>{task.taskName}</p>
+            <span className='text-muted'>{task.time}</span>
           </div>
         </div>
 
         <i
           onClick={() => {
             // we can simply deleteTask(id) but let's add animation
-            setTimeout(deleteTask, 250, id);
+            setTimeout(deleteTask, 250, task.id);
             card.current.style.animation = 'fade-out 350ms'
             card.current.style.opacity = '0';
           }}
