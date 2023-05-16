@@ -16,10 +16,21 @@ export default function Fade(props) {
   });
 
   useEffect(() => showIfOnScreen());
-  
+
   return (
     <div ref={myElement} style={{ opacity: '0' }} >
       {props.children}
+      <style jsx>
+        {`
+          @keyframes fade-in {
+            from {
+              opacity: 0;
+            } to {
+              opacity: 1;
+            }
+          }
+        `}
+      </style>
     </div>
   )
 
