@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Form from "./Components/Form";
 import Header from './Components/Header';
-import AllTasks from './Components/AllTasks';
+import TasksContainer from './Components/TasksContainer';
 import { getAllTasks, getNumberOfTasks } from "./Storage";
 
 export default function App() {
@@ -17,7 +17,7 @@ export default function App() {
 
         <h3>لديك {getNumberOfTasks()} مهام اليوم</h3>
 
-        <AllTasks tasks={tasks} setTasks={setTasks} />
+        <TasksContainer tasks={tasks} setTasks={setTasks} />
 
         <Form setTasks={setTasks} />
 

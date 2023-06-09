@@ -1,6 +1,6 @@
 import Task from "./Task";
 
-export default function AllTasks({ tasks, setTasks }) {
+export default function TasksContainer({ tasks, setTasks }) {
   return (
     <div className='shadow-sm my-4 bg-white rounded'>
       {tasks.length ?
