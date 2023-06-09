@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from "react"
-import { updateTaskInStorage } from "../Storage";
+import { removeTaskFromStorage, updateTaskInStorage } from "../Storage";
 import Fade from "./Fade"
 
 let uncheckedStyle = 'fa-regular fa-circle fa-xl icon-hover'
 let checkedStyle = 'fa-solid fa-circle-check fa-xl icon-hover'
 let hoverStyle = 'fa-regular fa-circle-check fa-xl icon-hover'
 
-export default function Task({ task, deleteTask }) {
+export default function Task({ task, setTasks }) {
 
   let [checked, setChecked] = useState(task.checked);
   let [iconStyle, setIconStyle] = useState('')
@@ -60,8 +60,8 @@ export default function Task({ task, deleteTask }) {
 
         <i
           onClick={() => {
-            // we can simply deleteTask(id) but let's add animation
-            setTimeout(deleteTask, 250, task.id);
+            // we can simply removeTaskFromStorage(task.id, setTasks) but let's add animation
+            setTimeout(removeTaskFromStorage, 250, task.id, setTasks);
             card.current.style.animation = 'fade-out 350ms'
             card.current.style.opacity = '0';
           }}
