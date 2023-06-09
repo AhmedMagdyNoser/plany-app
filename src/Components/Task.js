@@ -24,9 +24,8 @@ export default function Task({ task, deleteTask }) {
     }
   }
 
-  useEffect(() => {
-    checkIfChecked();
-  }, [checked]);
+  // eslint-disable-next-line
+  useEffect(() => { checkIfChecked(); }, [checked]);
 
   function updateTask() {
     if (checked)
