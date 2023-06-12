@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react"
 
-export default function Fade({ time, children }) {
+export function FadeIn({ time, children }) {
 
   let myElement = useRef(0);
 

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import { removeTaskFromStorage, updateTaskInStorage } from "../Storage";
-import Fade from "./Fade"
+import { FadeIn } from "./Utils/Fade"
 
 let uncheckedStyle = 'fa-regular fa-circle fa-xl icon-hover'
 let checkedStyle = 'fa-solid fa-circle-check fa-xl icon-hover'
@@ -47,7 +47,7 @@ export default function Task({ task, setTasks }) {
   }
 
   return (
-    <Fade time='1s'>
+    <FadeIn time='1s'>
       <div ref={card} className='py-3 px-4 d-flex align-items-center justify-content-between border-bottom task-hover'>
 
         <div className="d-flex align-items-center">
@@ -81,6 +81,6 @@ export default function Task({ task, setTasks }) {
         </style>
 
       </div>
-    </Fade>
+    </FadeIn>
   )
 }
