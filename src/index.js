@@ -4,9 +4,13 @@ import 'bootstrap/dist/js/bootstrap.min.js'
 import './styles/fontawesome/all.min.css';
 import './styles/master.css';
 import App from './App';
+import { Provider } from 'react-redux';
+import { store } from './Redux/store';
 
 !localStorage.getItem('tasks') && localStorage.setItem('tasks', '[]');
 
 ReactDOM.createRoot(document.getElementById('root')).render(
+  <Provider store={store}>
     <App />
+  </Provider>
 );

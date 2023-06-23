@@ -1,21 +1,23 @@
 import { useEffect, useRef, useState } from "react"
-import { removeTaskFromStorage, updateTaskInStorage } from "../Storage";
-import { FadeIn } from "./Utils/Fade"
+import { removeTask, updateTask } from "../../Redux/tasksSlice";
+import { FadeIn } from "../Utils/Fade"
+import { useDispatch } from "react-redux";
 
 let uncheckedStyle = 'fa-regular fa-circle fa-xl icon-hover'
 let checkedStyle = 'fa-solid fa-circle-check fa-xl icon-hover'
 let hoverStyle = 'fa-regular fa-circle-check fa-xl icon-hover'
 
-export default function Task({ task, setTasks }) {
+export default function Task({ task }) {
 
-  let [checked, setChecked] = useState(task.checked);
+  const dispatch = useDispatch()
+
   let [iconStyle, setIconStyle] = useState('')
   let [titleStyle, setTitleStyle] = useState('');
 
   let card = useRef(0);
 
   function checkIfChecked() {
-    if (checked) {
+    if (task.checked) {
       setIconStyle(checkedStyle)
       setTitleStyle('text-decoration-line-through')
     } else {
@@ -25,25 +27,25 @@ export default function Task({ task, setTasks }) {
   }
 
   // eslint-disable-next-line
-  useEffect(() => { checkIfChecked(); }, [checked]);
-
-  function updateTask() {
-    if (checked)
-      updateTaskInStorage(task.id, false, setChecked)
-    else
-      updateTaskInStorage(task.id, true, setChecked)
-  }
+  useEffect(() => { checkIfChecked(); }, [task.checked]);
 
   function handleMouseEnter() {
     setIconStyle(hoverStyle)
   }
 
   function handleMouseLeave() {
-    if (checked) {
+    if (task.checked) {
       setIconStyle(checkedStyle)
     } else {
       setIconStyle(uncheckedStyle)
     }
+  }
+
+  function handleUpdateTask() {
+    if (task.checked)
+      dispatch(updateTask({ id: task.id, checked: false }))
+    else
+      dispatch(updateTask({ id: task.id, checked: true }))
   }
 
   return (
@@ -51,7 +53,7 @@ export default function Task({ task, setTasks }) {
       <div ref={card} className='py-3 px-4 d-flex align-items-center justify-content-between border-bottom task-hover'>
 
         <div className="d-flex align-items-center">
-          <i onClick={updateTask} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className={iconStyle}></i>
+          <i onClick={handleUpdateTask} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className={iconStyle}></i>
           <div className='px-3'>
             <p className={'my-1 fw-bold ' + titleStyle} >{task.name}</p>
             <span className='text-muted' >{task.time}</span>
@@ -60,8 +62,8 @@ export default function Task({ task, setTasks }) {
 
         <i
           onClick={() => {
-            // we can simply removeTaskFromStorage(task.id, setTasks) but let's add animation
-            setTimeout(removeTaskFromStorage, 250, task.id, setTasks);
+            // we can simply dispatch(removeTask(task.id)); but let's add animation
+            setTimeout(() => { dispatch(removeTask(task.id)) }, 250);
             card.current.style.animation = 'fade-out 350ms'
             card.current.style.opacity = '0';
           }}

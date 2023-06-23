@@ -1,9 +1,12 @@
 import { useRef } from "react";
-import { FadeIn } from "./Utils/Fade";
-import { addTaskToStorage } from "../Storage";
-import { RadioButton, RadioButtonsGroup } from "./Utils/RadioButtons";
+import { useDispatch } from "react-redux";
+import { RadioButton, RadioButtonsGroup } from "../Utils/RadioButtons";
+import { addTask } from "../../Redux/tasksSlice";
+import { FadeIn } from "../Utils/Fade";
 
-export default function Form({ setTasks }) {
+export default function NewTaskForm() {
+
+  const dispatch = useDispatch()
 
   let form = useRef(0);
 
@@ -18,15 +21,14 @@ export default function Form({ setTasks }) {
   function addNewTask(e) {
     e.preventDefault();
     let formData = new FormData(e.target);
-    addTaskToStorage(
+    dispatch(addTask(
       {
         id: Math.floor(Math.random() * 10 ** 9),
         name: formData.get('name'),
         time: formData.get('time') + ' ' + formData.get('period'),
         checked: false
-      },
-      setTasks
-    );
+      }
+    ))
     e.target.reset();
   }
 
