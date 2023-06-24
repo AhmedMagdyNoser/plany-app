@@ -59,10 +59,9 @@ function NewNotePopup() {
           position: fixed;
           top: 50%;
           left: 50%;
-          transform: translateX(-50%, -50%);
+          transform: translate(-50%, -50%);
           width: 500px;
           max-width: 95%;
-          transition: 1s;
         }
         .fa-xmark {
           transition: 0.25s;
