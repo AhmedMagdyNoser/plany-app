@@ -4,7 +4,7 @@ import { RadioButton, RadioButtonsGroup } from "../Utils/RadioButtons";
 import { addTask } from "../../Redux/tasksSlice";
 import { FadeIn } from "../Utils/Fade";
 
-export default function NewTaskForm() {
+export default function NewTask() {
 
   const dispatch = useDispatch()
 

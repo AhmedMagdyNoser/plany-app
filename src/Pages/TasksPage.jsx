@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import NewTaskForm from "../Components/Tasks/NewTaskForm";
+import NewTask from "../Components/Tasks/NewTask";
 import Task from "../Components/Tasks/Task";
 
 export default function TasksPage() {
@@ -10,7 +10,7 @@ export default function TasksPage() {
     <div className='container my-5'>
       <h3>لديك {tasks.length} مهام اليوم</h3>
       <TasksList tasks={tasks} />
-      <NewTaskForm />
+      <NewTask />
     </div>
   )
 }

@@ -3,9 +3,9 @@ import { removeTask, updateTask } from "../../Redux/tasksSlice";
 import { FadeIn } from "../Utils/Fade"
 import { useDispatch } from "react-redux";
 
-let uncheckedStyle = 'fa-regular fa-circle fa-xl icon-hover'
-let checkedStyle = 'fa-solid fa-circle-check fa-xl icon-hover'
-let hoverStyle = 'fa-regular fa-circle-check fa-xl icon-hover'
+let uncheckedStyle = 'fa-regular fa-circle fa-xl cursor-pointer'
+let checkedStyle = 'fa-solid fa-circle-check fa-xl cursor-pointer'
+let hoverStyle = 'fa-regular fa-circle-check fa-xl cursor-pointer'
 
 export default function Task({ task }) {
 
