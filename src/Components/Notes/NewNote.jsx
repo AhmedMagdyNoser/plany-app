@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { addNote, openPopup } from "../../Redux/notesSlice";
+import { randomDigits } from "../../utils";
 
 export default function NewNote() {
 
@@ -34,7 +35,7 @@ function NewNotePopup() {
     const formattedDate = new Date().toLocaleDateString('ar-US', { month: 'long', day: 'numeric', year: 'numeric' });
     dispatch(addNote(
       {
-        id: Math.floor(Math.random() * 10 ** 9),
+        id: randomDigits(9),
         title: formData.get('title'),
         description: formData.get('description'),
         date: formattedDate,

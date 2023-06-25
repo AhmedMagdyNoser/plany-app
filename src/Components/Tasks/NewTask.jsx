@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { RadioButton, RadioButtonsGroup } from "../Utils/RadioButtons";
 import { addTask } from "../../Redux/tasksSlice";
 import { FadeIn } from "../Utils/Fade";
+import { randomDigits } from "../../utils";
 
 export default function NewTask() {
 
@@ -23,7 +24,7 @@ export default function NewTask() {
     let formData = new FormData(e.target);
     dispatch(addTask(
       {
-        id: Math.floor(Math.random() * 10 ** 9),
+        id: randomDigits(9),
         name: formData.get('name'),
         time: formData.get('time') + ' ' + formData.get('period'),
         checked: false
