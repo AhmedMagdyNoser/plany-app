@@ -31,7 +31,7 @@ function NewNotePopup() {
   function handleSubmit(e) {
     e.preventDefault();
     let formData = new FormData(e.target);
-    const formattedDate = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+    const formattedDate = new Date().toLocaleDateString('ar-US', { month: 'long', day: 'numeric', year: 'numeric' });
     dispatch(addNote(
       {
         id: Math.floor(Math.random() * 10 ** 9),

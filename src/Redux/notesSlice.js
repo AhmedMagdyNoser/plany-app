@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addNoteToStorage, getAllNotes } from "../Storage";
+import { addNoteToStorage, getAllNotes, removeNoteFromStorage } from "../Storage";
 
 const notes = createSlice({
   name: 'notes',
@@ -12,12 +12,16 @@ const notes = createSlice({
       addNoteToStorage(action.payload);
       state.data = getAllNotes();
     },
+    removeNote: (state, action) => {
+      removeNoteFromStorage(action.payload);
+      state.data = getAllNotes();
+    },
     openPopup: (state, action) => {
       state.popup = action.payload;
     }
   }
 })
 
-export const { addNote, openPopup } = notes.actions;
+export const { addNote, removeNote, openPopup } = notes.actions;
 
 export default notes.reducer;
