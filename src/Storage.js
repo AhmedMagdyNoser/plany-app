@@ -1,3 +1,5 @@
+// ========================== Tasks ==========================
+
 export function addTaskToStorage(task) {
   // get the old set and add the new one to them
   let allTasks = getAllTasks(); allTasks.push(task);
@@ -27,4 +29,17 @@ export function removeTaskFromStorage(id) {
 
 export function getAllTasks() {
   return JSON.parse(localStorage.getItem('tasks'));
+}
+
+// ========================== Notes ==========================
+
+export function addNoteToStorage(note) {
+  // get the old set and add the new one to them
+  let allNotes = getAllNotes(); allNotes.push(note);
+  // set the new set to the local storage again
+  localStorage.setItem('notes', JSON.stringify(allNotes));
+};
+
+export function getAllNotes() {
+  return JSON.parse(localStorage.getItem('notes'));
 }

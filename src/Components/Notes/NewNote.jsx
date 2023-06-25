@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { openPopup } from "../../Redux/notesSlice";
+import { addNote, openPopup } from "../../Redux/notesSlice";
 
 export default function NewNote() {
 
@@ -23,27 +23,47 @@ export default function NewNote() {
   )
 }
 
-
 function NewNotePopup() {
 
   let popup = useSelector(store => store.notes.popup);
   let dispatch = useDispatch();
 
+  function handleSubmit(e) {
+    e.preventDefault();
+    let formData = new FormData(e.target);
+    const formattedDate = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+    dispatch(addNote(
+      {
+        id: Math.floor(Math.random() * 10 ** 9),
+        title: formData.get('title'),
+        description: formData.get('description'),
+        date: formattedDate,
+      }
+    ))
+    e.target.reset();
+  }
+
   return (
     <>
       <div className="overlay">
+
         <div className="popup-box bg-white rounded shadow-lg">
+
           <div className="d-flex align-items-center justify-content-between gap-5 py-3 px-4 border-bottom">
             <h4 className="m-0">اضف ملاحظة جديدة</h4>
             <i onClick={() => dispatch(openPopup(false))} className="fa-solid fa-xmark rounded p-2 cursor-pointer"></i>
           </div>
-          <div className="d-flex flex-column p-4 gap-3">
-            <input type="text" placeholder="العنوان" className="form-control shadow-none" />
-            <textarea rows={10} placeholder="المحتوى" className="form-control shadow-none" />
+
+          <form onSubmit={handleSubmit} className="d-flex flex-column p-4 gap-3">
+            <input name="title" type="text" placeholder="العنوان" className="form-control shadow-none" />
+            <textarea name="description" rows={10} placeholder="المحتوى" className="form-control shadow-none" />
             <input type="submit" value="اضف" className="btn btn-primary" />
-          </div>
+          </form>
+
         </div>
+
       </div>
+
       <style> {`
         .overlay {
           background: #0002;
@@ -70,6 +90,7 @@ function NewNotePopup() {
           background: #eee;
         }
       `} </style>
+
     </>
   )
 }

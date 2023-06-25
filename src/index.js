@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 import { store } from './Redux/store';
 
 !localStorage.getItem('tasks') && localStorage.setItem('tasks', '[]');
+!localStorage.getItem('notes') && localStorage.setItem('notes', '[]');
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
