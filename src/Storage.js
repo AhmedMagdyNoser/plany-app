@@ -40,6 +40,25 @@ export function addNoteToStorage(note) {
   localStorage.setItem('notes', JSON.stringify(allNotes));
 };
 
+export function updateNoteInStorage(id, updatedFields) {
+  // get the old set
+  const allNotes = getAllNotes();
+  // find the note you want to update
+  const noteIndex = allNotes.findIndex(note => note.id === id);
+  if (noteIndex !== -1) {
+    // create a new note object with updated fields
+    const updatedNote = {
+      ...allNotes[noteIndex],
+      ...updatedFields,
+      date: new Date().toLocaleDateString('ar-US', { month: 'long', day: 'numeric', year: 'numeric' })
+    };
+    // update the note in the array
+    allNotes[noteIndex] = updatedNote;
+    // set the new set to the local storage again
+    localStorage.setItem('notes', JSON.stringify(allNotes));
+  }
+}
+
 export function removeNoteFromStorage(id) {
   // get the old set and remove the unwanted note from it
   let allNotes = getAllNotes();
