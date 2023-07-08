@@ -19,32 +19,38 @@ export default function NoteDetailsPage() {
 
   return (
     note ?
-      <div className="container bg-white my-5 p-4 rounded shadow-sm">
-        {!editing ?
-          <h1 onDoubleClick={() => setEditing(true)} >{note.title}</h1>
-          :
-          <input
-            type="text"
-            placeholder="العنوان"
-            onChange={(e) => dispatchUpdateNote({ title: e.target.value })}
-            defaultValue={note.title}
-            className="form-control shadow-none border-0 fs-1 p-0 mb-2"
-          />
-        }
-        {
-          !editing ?
-            <ReactMarkdown className="lh-lg">
-              {note.description}
-            </ReactMarkdown>
+      <div className="py-5">
+        <div className="container">
+          {!editing ?
+            <>
+              <div className="border-bottom pb-3 mb-3 d-flex justify-content-between ">
+                <h1 className="m-0 trancate-1">{note.title}</h1>
+                <button onClick={() => setEditing(true)} className="btn btn-primary">تعديل</button>
+              </div>
+              <ReactMarkdown className="lh-lg">
+                {note.description}
+              </ReactMarkdown>
+            </>
             :
-            <textarea
-              className="form-control shadow-none border-0 p-0 overflow-hidden lh-lg"
-              onChange={(e) => dispatchUpdateNote({ description: e.target.value })}
-              defaultValue={note.description}
-              style={{minHeight: '65vh'}}
-            />
-        }
-        <span className="text-muted">تاريخ اخر تعديل: <b>{note.date}</b></span>
+            <form className="d-flex flex-column gap-2">
+              <input
+                type="text"
+                placeholder="العنوان"
+                onChange={(e) => dispatchUpdateNote({ title: e.target.value })}
+                defaultValue={note.title}
+                className="form-control shadow-none border-0 fs-1 p-2"
+              />
+              <textarea
+                className="form-control shadow-none border-0 p-2 overflow-hidden lh-lg"
+                onChange={(e) => dispatchUpdateNote({ description: e.target.value })}
+                defaultValue={note.description}
+                style={{ minHeight: '50vh' }}
+              />
+              <input type="submit" value="حفظ التعديلات" className="btn btn-primary w-100" />
+            </form>
+          }
+          <span className="text-muted d-block mt-2">تاريخ اخر تعديل: <b>{note.date}</b></span>
+        </div>
       </div>
       :
       <h2 className="container my-5 text-center">خطأ</h2>
