@@ -1,8 +1,8 @@
 {
-  "name": "to-do-list",
+  "name": "plany",
   "version": "2.0.0",
   "private": true,
-  "homepage": "https://AhmedMagdyNoser.github.io/To-Do-List",
+  "homepage": "https://AhmedMagdyNoser.github.io/Plany",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
     "@testing-library/jest-dom": "^5.16.5",
