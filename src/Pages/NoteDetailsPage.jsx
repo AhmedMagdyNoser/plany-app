@@ -1,20 +1,31 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom"
-import { getNote } from "../Storage";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateNote } from "../Redux/notesSlice";
 
 export default function NoteDetailsPage() {
 
   const params = useParams();
   const id = parseInt(params.id);
-  const dispatch = useDispatch();
-  let [editing, setEditing] = useState(false);
-  let [note] = useState(getNote(id))
 
-  function dispatchUpdateNote(updatedFields) {
-    dispatch(updateNote({ id, updatedFields }))
+  const dispatch = useDispatch();
+  const notes = useSelector(store => store.notes.data) // Needs Updates
+  const [note] = notes.filter(note => note.id === id)
+  
+  let [editing, setEditing] = useState(false);
+  
+  async function handleSubmit(e) {
+    e.preventDefault();
+    let formData = new FormData(e.target);
+    dispatch(updateNote({
+      id,
+      updatedFields: {
+        title: formData.get('title'),
+        description: formData.get('description'),
+      }
+    }))
+    setEditing(false)
   }
 
   return (
@@ -32,19 +43,19 @@ export default function NoteDetailsPage() {
               </ReactMarkdown>
             </>
             :
-            <form className="d-flex flex-column gap-2">
+            <form onSubmit={handleSubmit} className="d-flex flex-column gap-2">
               <input
                 type="text"
+                name="title"
                 placeholder="العنوان"
-                onChange={(e) => dispatchUpdateNote({ title: e.target.value })}
                 defaultValue={note.title}
                 className="form-control shadow-none border-0 fs-1 p-2"
               />
               <textarea
-                className="form-control shadow-none border-0 p-2 overflow-hidden lh-lg"
-                onChange={(e) => dispatchUpdateNote({ description: e.target.value })}
+                name="description"
                 defaultValue={note.description}
                 style={{ minHeight: '50vh' }}
+                className="form-control shadow-none border-0 p-2 overflow-hidden lh-lg"
               />
               <input type="submit" value="حفظ التعديلات" className="btn btn-primary w-100" />
             </form>
