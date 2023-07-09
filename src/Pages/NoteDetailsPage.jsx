@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import { removeNote, updateNote } from "../Redux/notesSlice";
+import ConfirmationPopupBox from "../Components/Global/ConfirmationPopupBox";
 
 export default function NoteDetailsPage() {
   const navigate = useNavigate();
@@ -16,7 +17,9 @@ export default function NoteDetailsPage() {
   const notes = useSelector((store) => store.notes.data);
   const [note] = notes.filter((note) => note.id === id);
 
-  let [editing, setEditing] = useState(false);
+  let [editingMode, setEditingMode] = useState(false);
+
+  const [isRemoveBoxOpened, setIsRemoveBoxOpened] = useState(false);
 
   function handleUpdate(e) {
     e.preventDefault();
@@ -30,7 +33,7 @@ export default function NoteDetailsPage() {
         },
       })
     );
-    setEditing(false);
+    setEditingMode(false);
   }
 
   function handleRemove() {
@@ -41,23 +44,34 @@ export default function NoteDetailsPage() {
   return note ? (
     <div className="py-5">
       <div className="container">
-        {!editing ? (
+        {!editingMode ? (
           <>
             <div className="border-bottom pb-3 mb-3 d-flex justify-content-between ">
               <h1 className="m-0 trancate-1">{note.title}</h1>
               <div className="d-flex gap-2">
                 <button
-                  onClick={() => setEditing(true)}
+                  onClick={() => setEditingMode(true)}
                   className="btn btn-primary"
                 >
                   تعديل
                 </button>
-                <button onClick={handleRemove} className="btn btn-primary">
+                <button
+                  onClick={() => setIsRemoveBoxOpened(true)}
+                  className="btn btn-primary"
+                >
                   حذف
                 </button>
               </div>
             </div>
             <ReactMarkdown className="lh-lg">{note.description}</ReactMarkdown>
+            <ConfirmationPopupBox
+              isOpened={isRemoveBoxOpened}
+              setIsOpened={setIsRemoveBoxOpened}
+              action={handleRemove}
+              message="هل انت متأكد من الحذف؟"
+              confirmButtonTitle="حذف"
+              discardButtonTitle="إلغاء"
+            />
           </>
         ) : (
           <form onSubmit={handleUpdate} className="d-flex flex-column gap-2">
@@ -81,7 +95,7 @@ export default function NoteDetailsPage() {
                 className="btn btn-primary w-100"
               />
               <button
-                onClick={() => setEditing(false)}
+                onClick={() => setEditingMode(false)}
                 className="btn btn-secondary"
               >
                 إلغاء
