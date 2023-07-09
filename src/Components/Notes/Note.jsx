@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { removeNote } from "../../Redux/notesSlice";
+// import { removeNote } from "../../Redux/notesSlice";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 
 export default function Note({ note }) {
@@ -18,7 +18,7 @@ export default function Note({ note }) {
         </Link>
         <div className="text-muted d-flex justify-content-between align-items-center border-top pt-3">
           <span>{note.date}</span>
-          <i onClick={() => dispatch(removeNote(note.id))} className="fa-solid fa-trash cursor-pointer option"></i>
+          {/* <i onClick={() => dispatch(removeNote(note.id))} className="fa-solid fa-trash cursor-pointer option"></i> */}
         </div>
       </div>
       <style>
