@@ -1,13 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import { addNote, openPopup } from "../../Redux/notesSlice";
 import { randomDigits } from "../../utils";
+import { FadeIn } from "../Utils/Fade";
 
 export default function NewNote() {
 
   let dispatch = useDispatch();
 
   return (
-    <>
+    <FadeIn time='1s'>
       <div
         onClick={() => dispatch(openPopup(true))}
         className="add p-5 text-primary bg-white rounded shadow-sm d-flex flex-column align-items-center justify-content-center cursor-pointer" >
@@ -20,7 +21,7 @@ export default function NewNote() {
       </div>
       <style>{` .add:hover {  opacity: 0.75; } `}</style>
       <NewNotePopup />
-    </>
+    </FadeIn>
   )
 }
 

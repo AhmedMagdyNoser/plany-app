@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 export default function NavMenu({ isOpened, setIsOpened }) {
   return (
     <div
-      className={`nav-menu bg-white shadow-lg ${
+      className={`nav-menu bg-white shadow ${
         !isOpened && "nav-menu-closed"
       }`}
     >
@@ -35,8 +35,8 @@ export default function NavMenu({ isOpened, setIsOpened }) {
             transition: 0.35s
           }
           .nav-menu-closed {
-            left: -300px;
-            shadow: none !important;
+            left: -325px;
+            // box-shadow: none !important;
           }
           .fa-xmark {
             transition: 0.25s;
