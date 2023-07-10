@@ -34,7 +34,7 @@ export default function ConfirmationPopupBox({
         <style>
           {`
             .overlay {
-              background: #0004;
+              background: #0003;
               position: fixed;
               top: 0;
               left: 0;
