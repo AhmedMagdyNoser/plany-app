@@ -1,4 +1,4 @@
-export default function ConfirmationPopupBox({
+export default function ConfirmBox({
   isOpened,
   setIsOpened,
   action,
@@ -6,7 +6,7 @@ export default function ConfirmationPopupBox({
   confirmButtonTitle,
   discardButtonTitle,
 }) {
-  function handleDelete() {
+  function handleAction() {
     action();
     setIsOpened(false);
   }
@@ -20,7 +20,7 @@ export default function ConfirmationPopupBox({
           </span>
           <p className="border-bottom pb-2 text-center">{message}</p>
           <div className="d-flex gap-2 w-100">
-            <button onClick={handleDelete} className="btn btn-danger flex-fill">
+            <button onClick={handleAction} className="btn btn-danger flex-fill">
               {confirmButtonTitle}
             </button>
             <button

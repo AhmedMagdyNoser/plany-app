@@ -5,33 +5,6 @@ body {
   background-color: #f5f5f5;
 }
 
-.cursor-pointer {
-  cursor: pointer;
-}
-
-.task-hover:hover {
-  background-color: #f1f1f1;
-}
-
-.trash-icon-hover:hover {
-  cursor: pointer;
-  opacity: 1 !important;
-}
-
-.list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, auto));
-  gap: 25px;
-}
-
-.notification {
-  transition: 250ms ;
-}
-
-.notification:hover {
-  background-color: #eee;
-}
-
 /* =========================== Scrollbar =========================== */
 ::-webkit-scrollbar {
   width: 10px;
@@ -45,11 +18,52 @@ body {
   background-color: #ddd;
 }
 
-/* =========================== Trancate =========================== */
+/* =========================== Global =========================== */
 .trancate-1 {
   display: -webkit-box;
-  -webkit-line-clamp: 1; /* number of lines to display */
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   text-overflow: ellipsis;
   overflow: hidden;
 }
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.gray-hover {
+  transition: 250ms ;
+}
+
+.gray-hover:hover {
+  background-color: #f0f0f0;
+}
+
+.trash-icon-hover:hover {
+  cursor: pointer;
+  opacity: 1 !important;
+}
+
+/* =========================== Components =========================== */
+.side-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 325px;
+  max-width: 100%;
+  height: 100vh;
+  z-index: 9;
+  transition: 0.35s
+}
+
+.side-menu-closed {
+  left: -350px;
+  box-shadow: none !important;
+}
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, auto));
+  gap: 25px;
+}
+

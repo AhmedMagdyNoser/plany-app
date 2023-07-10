@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import { removeNote, updateNote } from "../Redux/notesSlice";
-import ConfirmationPopupBox from "../Components/Global/ConfirmationPopupBox";
+import ConfirmBox from "../Components/Global/ConfirmBox";
 
 export default function NoteDetailsPage() {
   const navigate = useNavigate();
@@ -64,7 +64,7 @@ export default function NoteDetailsPage() {
               </div>
             </div>
             <ReactMarkdown className="lh-lg">{note.description}</ReactMarkdown>
-            <ConfirmationPopupBox
+            <ConfirmBox
               isOpened={isRemoveBoxOpened}
               setIsOpened={setIsRemoveBoxOpened}
               action={handleRemove}

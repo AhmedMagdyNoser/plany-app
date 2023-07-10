@@ -47,6 +47,7 @@ function NewNotePopup() {
       })
     );
     e.target.reset();
+    dispatch(openPopup(false))
   }
 
   return (
@@ -57,7 +58,7 @@ function NewNotePopup() {
             <h4 className="m-0">اضف ملاحظة جديدة</h4>
             <i
               onClick={() => dispatch(openPopup(false))}
-              className="fa-solid fa-xmark rounded p-2 cursor-pointer"
+              className="fa-solid fa-xmark gray-hover rounded p-2 cursor-pointer"
             ></i>
           </div>
 
@@ -103,12 +104,6 @@ function NewNotePopup() {
           max-width: 95%;
           transition: 0.25s ease-in-out; 
           ${popup? 'scale: 1; opacity: 1;' : 'scale: 0; opacity: 0;'}
-        }
-        .fa-xmark {
-          transition: 0.25s;
-        }
-        .fa-xmark:hover {
-          background: #eee;
         }
       `}
       </style>

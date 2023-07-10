@@ -50,7 +50,7 @@ export default function Task({ task }) {
 
   return (
     <FadeIn time='1s'>
-      <div ref={card} className='py-3 px-4 d-flex align-items-center justify-content-between border-bottom task-hover'>
+      <div ref={card} className='py-3 px-4 d-flex align-items-center justify-content-between border-bottom gray-hover'>
 
         <div className="d-flex align-items-center">
           <i onClick={handleUpdateTask} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className={iconStyle}></i>

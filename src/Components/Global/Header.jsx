@@ -39,22 +39,3 @@ export default function Header() {
     </>
   );
 }
-
-function NotificationArea() {
-  return (
-    <div className="box position-absolute bg-white border rounded shadow-sm">
-      
-      <style>
-        {`
-        .box {
-          top: calc(100% + 25px);
-          left: 50%;
-          transform: translateX(-50%);
-          width: 250px
-        }
-        `}
-      </style>
-    </div>
-  );
-}
-
