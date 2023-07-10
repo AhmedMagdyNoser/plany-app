@@ -24,6 +24,14 @@ body {
   gap: 25px;
 }
 
+.notification {
+  transition: 250ms ;
+}
+
+.notification:hover {
+  background-color: #eee;
+}
+
 /* =========================== Scrollbar =========================== */
 ::-webkit-scrollbar {
   width: 10px;
@@ -37,6 +45,7 @@ body {
   background-color: #ddd;
 }
 
+/* =========================== Trancate =========================== */
 .trancate-1 {
   display: -webkit-box;
   -webkit-line-clamp: 1; /* number of lines to display */

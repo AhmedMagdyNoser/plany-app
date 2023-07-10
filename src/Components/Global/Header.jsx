@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import NavMenu from "./NavMenu";
 import { useState } from "react";
+import NotiArea from "./NotiArea";
 
 export default function Header() {
-
   const [isNavMenuOpened, setIsNavMenuOpened] = useState(false);
+  const [isNotiAreaOpened, setIsNotiAreaOpened] = useState(false);
 
   return (
     <>
@@ -19,10 +20,41 @@ export default function Header() {
               />
             </Link>
           </div>
-          <i className="fa-solid fa-bars text-white fa-2x cursor-pointer" onClick={() => setIsNavMenuOpened(true)} ></i>
+          <div className="d-flex gap-4 justify-content-center align-items-center">
+            <i
+              className="fa-regular fa-bell text-white cursor-pointer"
+              style={{ fontSize: "1.5rem" }}
+              onClick={() => setIsNotiAreaOpened(true)}
+            ></i>
+            <i
+              className="fa-solid fa-bars text-white cursor-pointer"
+              style={{ fontSize: "1.5rem" }}
+              onClick={() => setIsNavMenuOpened(true)}
+            ></i>
+          </div>
         </div>
       </header>
-      <NavMenu isOpened={isNavMenuOpened} setIsOpened={setIsNavMenuOpened}/>
+      <NavMenu isOpened={isNavMenuOpened} setIsOpened={setIsNavMenuOpened} />
+      <NotiArea isOpened={isNotiAreaOpened} setIsOpened={setIsNotiAreaOpened} />
     </>
   );
 }
+
+function NotificationArea() {
+  return (
+    <div className="box position-absolute bg-white border rounded shadow-sm">
+      
+      <style>
+        {`
+        .box {
+          top: calc(100% + 25px);
+          left: 50%;
+          transform: translateX(-50%);
+          width: 250px
+        }
+        `}
+      </style>
+    </div>
+  );
+}
+
