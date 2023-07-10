@@ -36,7 +36,7 @@ export default function NavMenu({ isOpened, setIsOpened }) {
           }
           .nav-menu-closed {
             left: -325px;
-            // box-shadow: none !important;
+            box-shadow: none !important;
           }
           .fa-xmark {
             transition: 0.25s;
