@@ -11,10 +11,10 @@ export default function NewNote() {
     <FadeIn time="1s">
       <div
         onClick={() => setIsNotePopupOpened(true)}
-        className="add p-5 text-primary bg-white rounded shadow-sm d-flex flex-column align-items-center justify-content-center cursor-pointer"
+        className="add p-5 text-primary bg-white rounded shadow-sm flex-center flex-column cursor-pointer"
       >
         <div
-          className="border border-primary rounded-circle d-flex align-items-center justify-content-center"
+          className="border border-primary rounded-circle flex-center"
           style={{ width: "85px", height: "85px" }}
         >
           <i className="fa-solid fa-plus fs-2"></i>
@@ -55,8 +55,8 @@ function NewNotePopup({ isOpened, setIsOpened }) {
 
   return (
     <>
-      <div className="overlay d-flex align-items-center justify-content-center">
-        <div className="popup-box bg-white rounded shadow-lg">
+      <div className="screen-overlay check-screen flex-center">
+        <div className="check-box content bg-white rounded shadow-lg">
           <div className="d-flex align-items-center justify-content-between gap-5 py-3 px-4 border-bottom">
             <h4 className="m-0">اضف ملاحظة جديدة</h4>
             <i
@@ -72,12 +72,14 @@ function NewNotePopup({ isOpened, setIsOpened }) {
             <input
               name="title"
               type="text"
+              required
               placeholder="العنوان"
               className="form-control shadow-none"
             />
             <textarea
               name="description"
               rows={10}
+              required
               placeholder="المحتوى"
               className="form-control shadow-none"
             />
@@ -88,25 +90,20 @@ function NewNotePopup({ isOpened, setIsOpened }) {
 
       <style>
         {`
-        .overlay {
-          background: #0003;
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100vw;
-          height: 100vh;
-          transition: 0.25s;
+        .check-screen {
           ${
             isOpened
               ? "pointer-events: auto; opacity: 1;"
               : "pointer-events: none; opacity: 0;"
           }
         }
-        .popup-box {
-          width: 500px;
-          max-width: 95%;
+        .check-box {
           transition: 0.25s ease-in-out; 
           ${isOpened ? "scale: 1; opacity: 1;" : "scale: 0; opacity: 0;"}
+        }
+        .content {
+          width: 500px;
+          max-width: 95%;
         }
       `}
       </style>

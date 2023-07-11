@@ -20,7 +20,7 @@ export default function Header() {
               />
             </Link>
           </div>
-          <div className="d-flex gap-4 justify-content-center align-items-center">
+          <div className="flex-center gap-4">
             <i
               className="fa-regular fa-bell text-white cursor-pointer"
               style={{ fontSize: "1.5rem" }}
