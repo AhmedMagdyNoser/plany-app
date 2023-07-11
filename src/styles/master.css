@@ -65,6 +65,12 @@ body {
   align-items: center;
 }
 
+.btn:focus {
+  color: var(--bs-btn-hover-color);
+  background-color: var(--bs-btn-hover-bg);
+  border-color: var(--bs-btn-hover-border-color);
+}
+
 /* =========================== Components =========================== */
 .screen-overlay {
   background: #0003;
