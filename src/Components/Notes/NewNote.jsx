@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addNote } from "../../Redux/notesSlice";
 import { randomDigits } from "../../utils";
@@ -32,6 +32,11 @@ export default function NewNote() {
 
 function NewNotePopup({ isOpened, setIsOpened }) {
   let dispatch = useDispatch();
+  let titleInput = useRef(null);
+
+  useEffect(() => {
+    titleInput.current.focus();
+  }, [isOpened])
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -73,6 +78,7 @@ function NewNotePopup({ isOpened, setIsOpened }) {
               name="title"
               type="text"
               required
+              ref={titleInput}
               placeholder="العنوان"
               className="form-control shadow-none"
             />
