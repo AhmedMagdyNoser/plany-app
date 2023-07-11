@@ -9,7 +9,8 @@ export default function ConfirmBox({
   confirmButtonTitle,
   discardButtonTitle,
 }) {
-  let focusedButton = useRef(null);
+  let confirmButton = useRef(null);
+  let discardButton = useRef(null);
 
   function handleAction() {
     action();
@@ -17,10 +18,18 @@ export default function ConfirmBox({
   }
 
   useEffect(() => {
-    if (focusedButton.current) {
-      focusedButton.current.focus();
+    confirmButton.current.focus();
+  }, [isOpened]);
+
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      setIsOpened(false);
+    } else if (e.key === "ArrowRight") {
+      confirmButton.current.focus();
+    } else if (e.key === "ArrowLeft") {
+      discardButton.current.focus();
     }
-  }, [focusedButton.current, isOpened]);
+  });
 
   return (
     <div className="screen-overlay check-screen flex-center">
@@ -32,13 +41,14 @@ export default function ConfirmBox({
           <p className="border-bottom pb-2 text-center">{message}</p>
           <div className="d-flex gap-2 w-100">
             <button
-              ref={focusedButton}
+              ref={confirmButton}
               onClick={handleAction}
               className="btn btn-outline-danger flex-fill fw-bold"
             >
               {confirmButtonTitle}
             </button>
             <button
+              ref={discardButton}
               onClick={() => setIsOpened(false)}
               className="btn btn-outline-secondary flex-fill fw-bold"
             >
