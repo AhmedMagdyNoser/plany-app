@@ -35,7 +35,7 @@ function NewNotePopup({ isOpened, setIsOpened }) {
   let titleInput = useRef(null);
 
   useEffect(() => {
-    titleInput.current.focus();
+    isOpened && titleInput.current.focus();
   }, [isOpened])
 
   function handleSubmit(e) {
