@@ -1,15 +1,16 @@
-import { useDispatch, useSelector } from "react-redux";
-import { addNote, openPopup } from "../../Redux/notesSlice";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addNote } from "../../Redux/notesSlice";
 import { randomDigits } from "../../utils";
 import { FadeIn } from "../Utils/Fade";
 
 export default function NewNote() {
-  let dispatch = useDispatch();
+  const [isNotePopupOpened, setIsNotePopupOpened] = useState(false);
 
   return (
     <FadeIn time="1s">
       <div
-        onClick={() => dispatch(openPopup(true))}
+        onClick={() => setIsNotePopupOpened(true)}
         className="add p-5 text-primary bg-white rounded shadow-sm d-flex flex-column align-items-center justify-content-center cursor-pointer"
       >
         <div
@@ -21,13 +22,15 @@ export default function NewNote() {
         <p className="m-0 mt-3">ملاحظة جديدة</p>
       </div>
       <style>{` .add:hover {  opacity: 0.75; } `}</style>
-      <NewNotePopup />
+      <NewNotePopup
+        isOpened={isNotePopupOpened}
+        setIsOpened={setIsNotePopupOpened}
+      />
     </FadeIn>
   );
 }
 
-function NewNotePopup() {
-  let popup = useSelector((store) => store.notes.popup);
+function NewNotePopup({ isOpened, setIsOpened }) {
   let dispatch = useDispatch();
 
   function handleSubmit(e) {
@@ -47,7 +50,7 @@ function NewNotePopup() {
       })
     );
     e.target.reset();
-    dispatch(openPopup(false))
+    setIsOpened(false);
   }
 
   return (
@@ -57,7 +60,7 @@ function NewNotePopup() {
           <div className="d-flex align-items-center justify-content-between gap-5 py-3 px-4 border-bottom">
             <h4 className="m-0">اضف ملاحظة جديدة</h4>
             <i
-              onClick={() => dispatch(openPopup(false))}
+              onClick={() => setIsOpened(false)}
               className="fa-solid fa-xmark gray-hover rounded p-2 cursor-pointer"
             ></i>
           </div>
@@ -94,7 +97,7 @@ function NewNotePopup() {
           height: 100vh;
           transition: 0.25s;
           ${
-            popup
+            isOpened
               ? "pointer-events: auto; opacity: 1;"
               : "pointer-events: none; opacity: 0;"
           }
@@ -103,7 +106,7 @@ function NewNotePopup() {
           width: 500px;
           max-width: 95%;
           transition: 0.25s ease-in-out; 
-          ${popup? 'scale: 1; opacity: 1;' : 'scale: 0; opacity: 0;'}
+          ${isOpened ? "scale: 1; opacity: 1;" : "scale: 0; opacity: 0;"}
         }
       `}
       </style>

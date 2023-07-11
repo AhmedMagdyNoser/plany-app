@@ -5,7 +5,6 @@ const notes = createSlice({
   name: 'notes',
   initialState: {
     data: getAllNotes(),
-    popup: false,
   },
   reducers: {
     addNote: (state, action) => {
@@ -21,12 +20,9 @@ const notes = createSlice({
       removeNoteFromStorage(action.payload);
       state.data = getAllNotes();
     },
-    openPopup: (state, action) => {
-      state.popup = action.payload;
-    }
   }
 })
 
-export const { addNote, updateNote, removeNote, openPopup } = notes.actions;
+export const { addNote, updateNote, removeNote } = notes.actions;
 
 export default notes.reducer;
