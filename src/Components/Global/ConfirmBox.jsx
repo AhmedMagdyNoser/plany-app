@@ -1,3 +1,6 @@
+import { useRef } from "react";
+import { useEffect } from "react";
+
 export default function ConfirmBox({
   isOpened,
   setIsOpened,
@@ -6,10 +9,18 @@ export default function ConfirmBox({
   confirmButtonTitle,
   discardButtonTitle,
 }) {
+  let focusedButton = useRef(null);
+
   function handleAction() {
     action();
     setIsOpened(false);
   }
+
+  useEffect(() => {
+    if (focusedButton.current) {
+      focusedButton.current.focus();
+    }
+  }, [focusedButton.current, isOpened]);
 
   return (
     <div className="overlay d-flex align-items-center justify-content-center">
@@ -24,6 +35,7 @@ export default function ConfirmBox({
               {confirmButtonTitle}
             </button>
             <button
+              ref={focusedButton}
               onClick={() => setIsOpened(false)}
               className="btn btn-secondary flex-fill"
             >
@@ -41,11 +53,15 @@ export default function ConfirmBox({
               width: 100vw;
               height: 100vh;
               transition: 250ms;
-              ${isOpened ? 'pointer-events: auto; opacity: 1;' : 'pointer-events: none; opacity: 0;'}
+              ${
+                isOpened
+                  ? "pointer-events: auto; opacity: 1;"
+                  : "pointer-events: none; opacity: 0;"
+              }
             }
             .popup {
               transition: 250ms;
-              ${isOpened ? 'scale: 1; opacity: 1;' : 'scale: 0; opacity: 0;'}
+              ${isOpened ? "scale: 1; opacity: 1;" : "scale: 0; opacity: 0;"}
             }
             .popup-content {
               width: 100%;
