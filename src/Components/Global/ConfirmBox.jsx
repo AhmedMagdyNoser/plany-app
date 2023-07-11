@@ -31,13 +31,16 @@ export default function ConfirmBox({
           </span>
           <p className="border-bottom pb-2 text-center">{message}</p>
           <div className="d-flex gap-2 w-100">
-            <button onClick={handleAction} className="btn btn-danger flex-fill">
+            <button
+              ref={focusedButton}
+              onClick={handleAction}
+              className="btn btn-outline-danger flex-fill fw-bold"
+            >
               {confirmButtonTitle}
             </button>
             <button
-              ref={focusedButton}
               onClick={() => setIsOpened(false)}
-              className="btn btn-secondary flex-fill"
+              className="btn btn-outline-secondary flex-fill fw-bold"
             >
               {discardButtonTitle}
             </button>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
@@ -20,6 +20,12 @@ export default function NoteDetailsPage() {
   let [editingMode, setEditingMode] = useState(false);
 
   const [isRemoveBoxOpened, setIsRemoveBoxOpened] = useState(false);
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Delete") {
+      setIsRemoveBoxOpened(true)
+    }
+  });
 
   function handleUpdate(e) {
     e.preventDefault();

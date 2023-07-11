@@ -43,6 +43,10 @@ body {
   overflow: hidden;
 }
 
+.btn {
+  box-shadow: none !important;
+}
+
 .cursor-pointer {
   cursor: pointer;
 }
