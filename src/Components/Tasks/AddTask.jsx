@@ -50,7 +50,7 @@ export default function AddTask() {
         id: randomDigits(9),
         name: formData.get("name"),
         time: settingTimeMode ? formData.get("time") : null,
-        notifiy: settingTimeMode ? isNotificationOn : null,
+        notify: settingTimeMode ? isNotificationOn : null,
       })
     );
     e.target.reset();
@@ -83,16 +83,13 @@ export default function AddTask() {
             <span className="text-nowrap">{isNotificationOn ? "الاشعارات مفعلة" : "تشغيل الاشعارات"}</span>
           </div>
           <div className="flex-center">
-            <div className="pe-2">
-              <i className="fa-spin fa-solid fa-clock text-primary mx-2"></i>
-            </div>
             <div className="datetime-input">
               <input name="time" type="datetime-local" className="btn btn-outline-primary px-0 border-0" />
             </div>
           </div>
         </div>
       )}
-      {invalidTime && (
+      {invalidTime && settingTimeMode && (
         <div className="text-danger">
           <i className="fa-solid fa-triangle-exclamation mx-2"></i>
           {invalidTime}

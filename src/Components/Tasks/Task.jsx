@@ -1,75 +1,80 @@
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react";
 import { removeTask, updateTask } from "../../Redux/tasksSlice";
-import { FadeIn } from "../Utils/Fade"
+import { FadeIn } from "../Utils/Fade";
 import { useDispatch } from "react-redux";
 import { formatDateAndTime } from "../../utils";
 
-let uncheckedStyle = 'fa-regular fa-circle fa-xl cursor-pointer'
-let checkedStyle = 'fa-solid fa-circle-check fa-xl cursor-pointer'
-let hoverStyle = 'fa-regular fa-circle-check fa-xl cursor-pointer'
+let uncheckedStyle = "fa-regular fa-circle fa-xl cursor-pointer";
+let checkedStyle = "fa-solid fa-circle-check fa-xl cursor-pointer";
+let hoverStyle = "fa-regular fa-circle-check fa-xl cursor-pointer";
 
 export default function Task({ task }) {
+  const dispatch = useDispatch();
 
-  const dispatch = useDispatch()
-
-  let [iconStyle, setIconStyle] = useState('')
-  let [titleStyle, setTitleStyle] = useState('');
+  let [iconStyle, setIconStyle] = useState("");
+  let [titleStyle, setTitleStyle] = useState("");
 
   let card = useRef(0);
 
   function checkIfChecked() {
     if (task.checked) {
-      setIconStyle(checkedStyle)
-      setTitleStyle('text-decoration-line-through')
+      setIconStyle(checkedStyle);
+      setTitleStyle("text-decoration-line-through");
     } else {
-      setIconStyle(uncheckedStyle)
-      setTitleStyle('')
+      setIconStyle(uncheckedStyle);
+      setTitleStyle("");
     }
   }
 
-  // eslint-disable-next-line
-  useEffect(() => { checkIfChecked(); }, [task.checked]);
+  useEffect(() => {
+    checkIfChecked();
+    // eslint-disable-next-line
+  }, [task.checked]);
 
   function handleMouseEnter() {
-    setIconStyle(hoverStyle)
+    setIconStyle(hoverStyle);
   }
 
   function handleMouseLeave() {
     if (task.checked) {
-      setIconStyle(checkedStyle)
+      setIconStyle(checkedStyle);
     } else {
-      setIconStyle(uncheckedStyle)
+      setIconStyle(uncheckedStyle);
     }
   }
 
   function handleUpdateTask() {
-    if (task.checked)
-      dispatch(updateTask({ id: task.id, checked: false }))
-    else
-      dispatch(updateTask({ id: task.id, checked: true }))
+    if (task.checked) dispatch(updateTask({ id: task.id, checked: false }));
+    else dispatch(updateTask({ id: task.id, checked: true }));
   }
 
   return (
-    <FadeIn time='1s'>
-      <div ref={card} className='py-3 px-4 d-flex align-items-center justify-content-between border-bottom gray-hover'>
-
-        <div className="d-flex align-items-center">
+    <FadeIn time="1s">
+      <div ref={card} className="py-3 px-4 flex-center justify-content-between border-bottom gray-hover">
+        <div className="flex-center">
           <i onClick={handleUpdateTask} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className={iconStyle}></i>
-          <div className='px-3'>
-            <p className={'my-1 fw-bold ' + titleStyle} >{task.name}</p>
-            {task.time && <span className='text-muted' >{formatDateAndTime(task.time)}</span>}
+          <div className="px-3">
+            <p className={"my-1 fw-bold " + titleStyle}>{task.name}</p>
+            {task.time && <span className="text-muted">{formatDateAndTime(task.time)}</span>}
           </div>
         </div>
 
-        <i
-          onClick={() => {
-            // we can simply dispatch(removeTask(task.id)); but let's add animation
-            setTimeout(() => { dispatch(removeTask(task.id)) }, 250);
-            card.current.style.animation = 'fade-out 350ms'
-            card.current.style.opacity = '0';
-          }}
-          className="fa-solid fa-trash-can fa-lg mx-2 opacity-75 trash-icon-hover"
-        ></i>
+        <div className="flex-center gap-4 mx-2">
+          {task.notify !== null && (
+            <i className={(task.notify ? "fa-solid text-primary" : "fa-regular") + " fa-bell fa-lg opacity-hover cursor-pointer"}></i>
+          )}
+          <i
+            onClick={() => {
+              // we can simply dispatch(removeTask(task.id)); but let's add animation
+              setTimeout(() => {
+                dispatch(removeTask(task.id));
+              }, 250);
+              card.current.style.animation = "fade-out 350ms";
+              card.current.style.opacity = "0";
+            }}
+            className="fa-solid fa-trash-can fa-lg opacity-hover cursor-pointer"
+          ></i>
+        </div>
 
         <style>
           {`
@@ -82,8 +87,7 @@ export default function Task({ task }) {
             }
           `}
         </style>
-
       </div>
     </FadeIn>
-  )
+  );
 }
