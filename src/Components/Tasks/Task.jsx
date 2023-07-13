@@ -43,16 +43,21 @@ export default function Task({ task }) {
     }
   }
 
-  function handleUpdateTask() {
-    if (task.checked) dispatch(updateTask({ id: task.id, checked: false }));
-    else dispatch(updateTask({ id: task.id, checked: true }));
+  function handleUpdateChecked() {
+    if (task.checked) dispatch(updateTask({ id: task.id, notify: task.notify, checked: false }));
+    else dispatch(updateTask({ id: task.id, notify: task.notify, checked: true }));
+  }
+
+  function handleUpdateNotify() {
+    if (task.notify) dispatch(updateTask({ id: task.id, notify: false, checked: task.checked }));
+    else dispatch(updateTask({ id: task.id, notify: true, checked: task.checked }));
   }
 
   return (
     <FadeIn time="1s">
       <div ref={card} className="py-3 px-4 flex-center justify-content-between border-bottom gray-hover">
         <div className="flex-center">
-          <i onClick={handleUpdateTask} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className={iconStyle}></i>
+          <i onClick={handleUpdateChecked} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className={iconStyle}></i>
           <div className="px-3">
             <p className={"my-1 fw-bold " + titleStyle}>{task.name}</p>
             {task.time && <span className="text-muted">{formatDateAndTime(task.time)}</span>}
@@ -61,7 +66,10 @@ export default function Task({ task }) {
 
         <div className="flex-center gap-4 mx-2">
           {task.notify !== null && (
-            <i className={(task.notify ? "fa-solid text-primary" : "fa-regular") + " fa-bell fa-lg opacity-hover cursor-pointer"}></i>
+            <i
+              onClick={handleUpdateNotify}
+              className={(task.notify ? "fa-solid fa-bell text-primary" : "fa-regular fa-bell-slash") + " fa-lg opacity-hover cursor-pointer"}
+            ></i>
           )}
           <i
             onClick={() => {

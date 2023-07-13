@@ -79,7 +79,7 @@ export default function AddTask() {
       {settingTimeMode && (
         <div className={"p-2 gap-2 rounded flex-center justify-content-between flex-wrap bg-white" + (invalidTime && " border-danger border")}>
           <div className="flex-center gap-2 py-2 px-3 rounded gray-hover cursor-pointer text-secondary" onClick={handleNotificationMode}>
-            <i className={(isNotificationOn ? "fa-bounce fa-solid text-primary" : "fa-regular") + " fa-bell"}></i>
+            <i className={(isNotificationOn ? "fa-bounce fa-solid fa-bell text-primary" : "fa-regular fa-bell-slash")}></i>
             <span className="text-nowrap">{isNotificationOn ? "الاشعارات مفعلة" : "تشغيل الاشعارات"}</span>
           </div>
           <div className="flex-center">

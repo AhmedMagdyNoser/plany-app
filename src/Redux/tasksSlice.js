@@ -12,8 +12,8 @@ const tasks = createSlice({
       state.data = getAllTasks();
     },
     updateTask: (state, action) => {
-      const { id, checked } = action.payload;
-      updateTaskInStorage(id, checked);
+      const { id, notify, checked } = action.payload;
+      updateTaskInStorage(id, notify, checked);
       state.data = getAllTasks();
     },
     removeTask: (state, action) => {
