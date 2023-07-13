@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react"
 import { removeTask, updateTask } from "../../Redux/tasksSlice";
 import { FadeIn } from "../Utils/Fade"
 import { useDispatch } from "react-redux";
+import { formatDateAndTime } from "../../utils";
 
 let uncheckedStyle = 'fa-regular fa-circle fa-xl cursor-pointer'
 let checkedStyle = 'fa-solid fa-circle-check fa-xl cursor-pointer'
@@ -56,7 +57,7 @@ export default function Task({ task }) {
           <i onClick={handleUpdateTask} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className={iconStyle}></i>
           <div className='px-3'>
             <p className={'my-1 fw-bold ' + titleStyle} >{task.name}</p>
-            <span className='text-muted' >{task.time}</span>
+            {task.time && <span className='text-muted' >{formatDateAndTime(task.time)}</span>}
           </div>
         </div>
 
