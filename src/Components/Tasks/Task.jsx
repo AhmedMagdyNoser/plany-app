@@ -59,8 +59,8 @@ export default function Task({ task }) {
         <div className="flex-center">
           <i onClick={handleUpdateChecked} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className={iconStyle}></i>
           <div className="px-3">
-            <p className={"my-1 fw-bold " + titleStyle}>{task.name}</p>
-            {task.time && <span className="text-muted">{formatDateAndTime(task.time)}</span>}
+            <p className={"my-1 fw-bold trancate-1 " + titleStyle}>{task.name}</p>
+            {task.time && <small className="text-muted trancate-1">{formatDateAndTime(task.time)}</small>}
           </div>
         </div>
 
@@ -68,7 +68,7 @@ export default function Task({ task }) {
           {task.notify !== null && (
             <i
               onClick={handleUpdateNotify}
-              className={(task.notify ? "fa-solid fa-bell text-primary" : "fa-regular fa-bell-slash") + " fa-lg opacity-hover cursor-pointer"}
+              className={(task.notify ? "fa-solid fa-bell text-primary" : "fa-regular fa-bell-slash") + " fs-5 opacity-hover cursor-pointer"}
             ></i>
           )}
           <i
@@ -80,7 +80,7 @@ export default function Task({ task }) {
               card.current.style.animation = "fade-out 350ms";
               card.current.style.opacity = "0";
             }}
-            className="fa-solid fa-trash-can fa-lg opacity-hover cursor-pointer"
+            className="fa-solid fa-trash-can fs-5 opacity-hover cursor-pointer"
           ></i>
         </div>
 

@@ -7,7 +7,7 @@ export default function TasksPage() {
 
   return (
     <div className="container my-5">
-      <h3>لديك {tasks.length} مهام اليوم</h3>
+      <h3>لديك {tasks.length} من المهام فى قائمتك</h3>
       <TasksList tasks={tasks} />
       <AddTask />
     </div>

@@ -84,7 +84,7 @@ export default function AddTask() {
           </div>
           <div className="flex-center">
             <div className="datetime-input">
-              <input name="time" type="datetime-local" className="btn btn-outline-primary px-0 border-0" />
+              <input name="time" type="datetime-local" className="btn btn-outline-primary" />
             </div>
           </div>
         </div>
