@@ -11,6 +11,10 @@ import { store } from "./Redux/store";
 !localStorage.getItem("notes") && localStorage.setItem("notes", "[]");
 !localStorage.getItem("notifications") && localStorage.setItem("notifications", "[]");
 
+document.addEventListener("contextmenu", e => {
+  e.preventDefault();
+})
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
     <App />

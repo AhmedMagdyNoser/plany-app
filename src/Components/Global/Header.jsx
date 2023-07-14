@@ -12,7 +12,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="bg-dark py-3">
+      <header className="bg-dark py-3" style={{position: 'relative', zIndex: '5'}}>
         <div className="container d-flex justify-content-between align-items-center">
           <div className="fw-bold fs-2">
             <Link to={"/"} className="text-white text-decoration-none">
