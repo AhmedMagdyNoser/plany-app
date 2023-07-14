@@ -62,7 +62,7 @@ export default function AddTask() {
       {/* Task Name */}
       <div className={"p-2 gap-2 rounded flex-center bg-white" + (invalidName && " border-danger border")}>
         <i className="fa-solid fa-plus me-3"></i>
-        <input name="name" type="text" placeholder="اضف مهمة جديدة" autoComplete="off" className="w-100 border-0" />
+        <input name="name" type="text" placeholder="اضف مهمة جديدة" autoComplete="off" className="w-100 py-2 border-0" />
         <div className="flex-center gap-2 py-2 px-3 rounded gray-hover cursor-pointer text-secondary" onClick={handleSettingTimeMode}>
           <span className="text-nowrap">{settingTimeMode ? "إلغاء" : "اضف ميعادا"}</span>
           <i className={(settingTimeMode ? "fa-spin text-primary" : "fa-regular") + " fa-solid fa-clock"}></i>
@@ -79,7 +79,7 @@ export default function AddTask() {
       {settingTimeMode && (
         <div className={"p-2 gap-2 rounded flex-center justify-content-between flex-wrap bg-white" + (invalidTime && " border-danger border")}>
           <div className="flex-center gap-2 py-2 px-3 rounded gray-hover cursor-pointer text-secondary" onClick={handleNotificationMode}>
-            <i className={(isNotificationOn ? "fa-bounce fa-solid fa-bell text-primary" : "fa-regular fa-bell-slash")}></i>
+            <i className={isNotificationOn ? "fa-bounce fa-solid fa-bell text-primary" : "fa-regular fa-bell-slash"}></i>
             <span className="text-nowrap">{isNotificationOn ? "الاشعارات مفعلة" : "تشغيل الاشعارات"}</span>
           </div>
           <div className="flex-center">

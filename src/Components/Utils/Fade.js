@@ -4,10 +4,7 @@ export function FadeIn({ children, time, className }) {
   let myElement = useRef(0);
 
   function showIfOnScreen() {
-    if (
-      myElement.current &&
-      window.pageYOffset + window.innerHeight > myElement.current.offsetTop
-    ) {
+    if (myElement.current && window.pageYOffset + window.innerHeight > myElement.current.offsetTop) {
       // when scrolling into an element
       myElement.current.style.animation = `fade-in ${time}`; // fade-in is defined in css below
       myElement.current.style.opacity = `1`;

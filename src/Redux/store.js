@@ -5,6 +5,6 @@ import notes from "./notesSlice";
 export const store = configureStore({
   reducer: {
     tasks,
-    notes
-  }
-})
+    notes,
+  },
+});

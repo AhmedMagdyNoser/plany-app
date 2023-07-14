@@ -23,7 +23,7 @@ export default function NoteDetailsPage() {
 
   document.addEventListener("keydown", (e) => {
     if (e.key === "Delete") {
-      setIsRemoveBoxOpened(true)
+      setIsRemoveBoxOpened(true);
     }
   });
 
@@ -55,16 +55,10 @@ export default function NoteDetailsPage() {
             <div className="border-bottom pb-3 mb-3 d-flex justify-content-between ">
               <h1 className="m-0 trancate-1">{note.title}</h1>
               <div className="d-flex gap-2">
-                <button
-                  onClick={() => setEditingMode(true)}
-                  className="btn btn-primary"
-                >
+                <button onClick={() => setEditingMode(true)} className="btn btn-primary">
                   تعديل
                 </button>
-                <button
-                  onClick={() => setIsRemoveBoxOpened(true)}
-                  className="btn btn-primary"
-                >
+                <button onClick={() => setIsRemoveBoxOpened(true)} className="btn btn-primary">
                   حذف
                 </button>
               </div>
@@ -95,15 +89,8 @@ export default function NoteDetailsPage() {
               className="form-control shadow-none border-0 p-3 lh-lg"
             />
             <div className="d-flex gap-2">
-              <input
-                type="submit"
-                value="حفظ التعديلات"
-                className="btn btn-primary w-100"
-              />
-              <button
-                onClick={() => setEditingMode(false)}
-                className="btn btn-secondary"
-              >
+              <input type="submit" value="حفظ التعديلات" className="btn btn-primary w-100" />
+              <button onClick={() => setEditingMode(false)} className="btn btn-secondary">
                 إلغاء
               </button>
             </div>

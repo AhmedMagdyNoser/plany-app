@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { addTaskToStorage, updateTaskInStorage, removeTaskFromStorage, getAllTasks } from "../Storage";
 
 const tasks = createSlice({
-  name: 'tasks',
+  name: "tasks",
   initialState: {
     data: getAllTasks(),
   },
@@ -19,9 +19,9 @@ const tasks = createSlice({
     removeTask: (state, action) => {
       removeTaskFromStorage(action.payload);
       state.data = getAllTasks();
-    }
-  }
-})
+    },
+  },
+});
 
 export const { addTask, updateTask, removeTask } = tasks.actions;
 

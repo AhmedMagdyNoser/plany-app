@@ -13,11 +13,7 @@ export default function Header() {
         <div className="container d-flex justify-content-between align-items-center">
           <div className="fw-bold fs-2">
             <Link to={"/"} className="text-white text-decoration-none">
-              <img
-                style={{ height: "50px" }}
-                src={require("../../Imgs/plany.ico")}
-                alt="Plany"
-              />
+              <img style={{ height: "50px" }} src={require("../../Imgs/plany.ico")} alt="Plany" />
             </Link>
           </div>
           <div className="flex-center gap-4">

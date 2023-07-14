@@ -3,12 +3,12 @@ import Header from "./Components/Global/Header";
 import TasksPage from "./Pages/TasksPage";
 import NotesPage from "./Pages/NotesPage";
 import HomePage from "./Pages/HomePage";
-import PageNoteFound from "./Pages/PageNotFound"
-import NoteDetailsPage from "./Pages/NoteDetailsPage"
+import PageNoteFound from "./Pages/PageNotFound";
+import NoteDetailsPage from "./Pages/NoteDetailsPage";
 
 export default function App() {
   return (
-    <div style={{ minHeight: '101vh' }}>
+    <div style={{ minHeight: "101vh" }}>
       <HashRouter>
         <Header />
         <Routes>
@@ -19,7 +19,6 @@ export default function App() {
           <Route path="*" element={<PageNoteFound />} />
         </Routes>
       </HashRouter>
-
     </div>
-  )
+  );
 }

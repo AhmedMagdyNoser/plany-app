@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { addNoteToStorage, getAllNotes, removeNoteFromStorage, updateNoteInStorage } from "../Storage";
 
 const notes = createSlice({
-  name: 'notes',
+  name: "notes",
   initialState: {
     data: getAllNotes(),
   },
@@ -20,8 +20,8 @@ const notes = createSlice({
       removeNoteFromStorage(action.payload);
       state.data = getAllNotes();
     },
-  }
-})
+  },
+});
 
 export const { addNote, updateNote, removeNote } = notes.actions;
 

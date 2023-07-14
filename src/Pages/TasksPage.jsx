@@ -17,11 +17,7 @@ export default function TasksPage() {
 function TasksList({ tasks }) {
   return (
     <div className="shadow-sm my-4 bg-white rounded">
-      {tasks.length ? (
-        tasks.map((task) => <Task key={task.id} task={task} />)
-      ) : (
-        <h3 className="text-center py-5">ليس لديك مهام اليوم</h3>
-      )}
+      {tasks.length ? tasks.map((task) => <Task key={task.id} task={task} />) : <h3 className="text-center py-5">ليس لديك اى مهام</h3>}
     </div>
   );
 }
