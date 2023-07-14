@@ -3,6 +3,7 @@ import { removeTask, updateTask } from "../../Redux/tasksSlice";
 import { FadeIn } from "../Utils/Fade";
 import { useDispatch } from "react-redux";
 import { formatDateAndTime } from "../../utils";
+import checkedSound from "./../../Sounds/checked.mp3";
 
 let uncheckedStyle = "fa-regular fa-circle fa-xl cursor-pointer";
 let checkedStyle = "fa-solid fa-circle-check fa-xl cursor-pointer";
@@ -15,6 +16,8 @@ export default function Task({ task }) {
   let [titleStyle, setTitleStyle] = useState("");
 
   let card = useRef(0);
+
+  const checkedAudio = new Audio(checkedSound);
 
   function checkIfChecked() {
     if (task.checked) {
@@ -45,7 +48,10 @@ export default function Task({ task }) {
 
   function handleUpdateChecked() {
     if (task.checked) dispatch(updateTask({ id: task.id, notify: task.notify, checked: false }));
-    else dispatch(updateTask({ id: task.id, notify: task.notify, checked: true }));
+    else {
+      dispatch(updateTask({ id: task.id, notify: task.notify, checked: true }));
+      checkedAudio.play();
+    } 
   }
 
   function handleUpdateNotify() {

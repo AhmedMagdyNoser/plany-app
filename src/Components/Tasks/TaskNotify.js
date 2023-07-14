@@ -1,5 +1,8 @@
 import { store } from "../../Redux/store";
 import { addNotification } from "../../Redux/notificationsSlice";
+import notificationsSound from "./../../Sounds/notification.mp3";
+
+const notificationsAudio = new Audio(notificationsSound);
 
 export function setNotificationReminder(id, reminderDate) {
   reminderDate = new Date(reminderDate);
@@ -16,5 +19,6 @@ export function sendNotification(id) {
   const [task] = store.getState().tasks.data.filter((task) => task.id === id);
   if (task.notify === true) {
     store.dispatch(addNotification(task));
-  } 
+    notificationsAudio.play();
+  }
 }
