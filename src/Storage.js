@@ -85,3 +85,25 @@ export function getNote(id) {
 export function getAllNotes() {
   return JSON.parse(localStorage.getItem("notes"));
 }
+
+// ========================== Notifications ==========================
+
+export function addNotificationToStorage(notification) {
+  // get the old set and add the new one to them
+  let allNotifications = getAllNotifications();
+  allNotifications.push(notification);
+  // set the new set to the local storage again
+  localStorage.setItem("notifications", JSON.stringify(allNotifications));
+}
+
+export function removeNotificationFromStorage(id) {
+  // get the old set and remove the unwanted notification from it
+  let allNotifications = getAllNotifications();
+  let filteredNotifications = allNotifications.filter((notification) => notification.id !== id);
+  // set the new set to the local storage again
+  localStorage.setItem("notifications", JSON.stringify(filteredNotifications));
+}
+
+export function getAllNotifications() {
+  return JSON.parse(localStorage.getItem("notifications"));
+}
