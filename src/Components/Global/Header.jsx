@@ -21,11 +21,11 @@ export default function Header() {
           </div>
           <div className="flex-center gap-4">
             <i
-              className={"fa-regular fa-bell text-white cursor-pointer " + (notifications.length && "fa-solid")}
+              className={"fa-regular fa-bell text-white cursor-pointer " + (notifications?.length && "fa-solid")}
               style={{ fontSize: "1.5rem", position: "relative" }}
               onClick={() => setIsNotiAreaOpened(true)}
             >
-              {notifications.length ? (
+              {notifications?.length ? (
                 <i
                   className="fa-solid fa-circle fa-2xs text-danger"
                   style={{ position: "absolute", top: "5px", left: "8px", scale: "0.75" }}

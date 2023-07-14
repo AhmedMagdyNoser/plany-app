@@ -8,7 +8,7 @@ export default function TasksPage() {
 
   return (
     <div className="container my-5">
-      <h3>لديك {tasks.length} من المهام فى قائمتك</h3>
+      <h3>لديك {tasks?.length} من المهام فى قائمتك</h3>
       <TasksList tasks={tasks} />
       <AddTask />
     </div>
@@ -17,7 +17,7 @@ export default function TasksPage() {
 
 function TasksList({ tasks }) {
   return (
-    <div className="shadow-sm my-4 bg-white rounded">{tasks.length ? tasks.map((task) => <Task key={task.id} task={task} />) : <NoTasks />}</div>
+    <div className="shadow-sm my-4 bg-white rounded">{tasks?.length ? tasks.map((task) => <Task key={task.id} task={task} />) : <NoTasks />}</div>
   );
 }
 

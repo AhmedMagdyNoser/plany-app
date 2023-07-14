@@ -7,7 +7,7 @@ export default function NotesPage() {
 
   return (
     <div className="container list my-4">
-      {notes.length ? notes.map((note) => <Note key={note.id} note={note} />) : null}
+      {notes?.length ? notes.map((note) => <Note key={note.id} note={note} />) : null}
       <AddNote />
     </div>
   );

@@ -17,7 +17,7 @@ export default function NotiArea({ isOpened, setIsOpened }) {
         <i onClick={() => setIsOpened(false)} className="fa-solid fa-xmark gray-hover p-2 rounded cursor-pointer"></i>
       </div>
       <div className="d-flex flex-column overflow-auto h-100">
-        {notifications.length ? (
+        {notifications?.length ? (
           notifications.map((notification) => <Notification key={notification.id} notification={notification} />)
         ) : (
           <NoNotification />
