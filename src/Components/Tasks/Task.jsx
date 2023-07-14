@@ -83,18 +83,6 @@ export default function Task({ task }) {
             className="fa-solid fa-trash-can fs-5 opacity-hover cursor-pointer"
           ></i>
         </div>
-
-        <style>
-          {`
-            @keyframes fade-out {
-              from {
-                opacity: 1;
-              } to {
-                opacity: 0;
-              }
-            }
-          `}
-        </style>
       </div>
     </FadeIn>
   );
