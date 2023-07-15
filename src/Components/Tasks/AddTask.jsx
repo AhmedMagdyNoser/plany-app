@@ -53,7 +53,7 @@ export default function AddTask() {
         title: formData.get("title"),
         time: settingTimeMode ? formData.get("time") : null,
         isNotificationOn: settingTimeMode ? isNotificationOn : null,
-        isNotified: false,
+        isNotified: settingTimeMode ? false : null,
       })
     );
     settingTimeMode && setTaskReminderNotification(id, formData.get("time"));

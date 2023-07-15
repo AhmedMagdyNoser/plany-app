@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addTaskToStorage, updateTaskInStorage, removeTaskFromStorage, getAllTasks } from "../Storage";
+import { addTaskToStorage, updateTaskInStorage, removeTaskFromStorage, getAllTasks, setIsTaskNotifiedInStorage } from "../Storage";
 
 const tasks = createSlice({
   name: "tasks",
@@ -16,6 +16,11 @@ const tasks = createSlice({
       updateTaskInStorage(id, isNotificationOn, isChecked);
       state.data = getAllTasks();
     },
+    setIsNotified: (state, action) => {
+      const { id, isNotified } = action.payload;
+      setIsTaskNotifiedInStorage(id, isNotified);
+      state.data = getAllTasks();
+    },
     removeTask: (state, action) => {
       removeTaskFromStorage(action.payload);
       state.data = getAllTasks();
@@ -23,6 +28,6 @@ const tasks = createSlice({
   },
 });
 
-export const { addTask, updateTask, removeTask } = tasks.actions;
+export const { addTask, updateTask, setIsNotified, removeTask } = tasks.actions;
 
 export default tasks.reducer;
