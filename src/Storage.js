@@ -1,5 +1,7 @@
 // ========================== Tasks ==========================
 
+import { formatedCurrentDate } from "./utils";
+
 export function addTaskToStorage(task) {
   // get the old set and add the new one to them
   let allTasks = getAllTasks();
@@ -16,9 +18,9 @@ export function updateTaskInStorage(id, isNotificationOn, isChecked) {
   // update the task
   let updatedTask;
   if (isChecked && isNotificationOn) {
-    updatedTask = { ...allTasks[indexOfTask], isNotificationOn: false, isChecked, };
+    updatedTask = { ...allTasks[indexOfTask], isNotificationOn: false, isChecked };
   } else {
-    updatedTask = { ...allTasks[indexOfTask], isNotificationOn, isChecked, };
+    updatedTask = { ...allTasks[indexOfTask], isNotificationOn, isChecked };
   }
   allTasks[indexOfTask] = updatedTask;
   // set the new set to the local storage again
@@ -57,7 +59,7 @@ export function updateNoteInStorage(id, updatedFields) {
     const updatedNote = {
       ...allNotes[noteIndex],
       ...updatedFields,
-      date: new Date().toLocaleDateString("ar-US", { month: "long", day: "numeric", year: "numeric" }),
+      time: formatedCurrentDate("ar"),
     };
     // update the note in the array
     allNotes[noteIndex] = updatedNote;

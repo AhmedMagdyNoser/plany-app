@@ -10,6 +10,14 @@ export function formatDate(date) {
   });
 }
 
+export function formatedCurrentDate(language) {
+  return new Date().toLocaleDateString(`${language}-US`, {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
+}
+
 export function formatDateAndTime(dateAndTime) {
   return new Date(dateAndTime).toLocaleDateString("ar-US", {
     month: "long",

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addNote } from "../../Redux/notesSlice";
-import { randomDigits } from "../../utils";
+import { FormatedNowDate, formatDate, formatedCurrentDate, randomDigits } from "../../utils";
 import { FadeIn } from "../Utils/Fade";
 
 export default function AddNote() {
@@ -35,17 +35,12 @@ function NewNotePopup({ isOpened, setIsOpened }) {
   function handleSubmit(e) {
     e.preventDefault();
     let formData = new FormData(e.target);
-    const formattedDate = new Date().toLocaleDateString("ar-US", {
-      month: "long",
-      day: "numeric",
-      year: "numeric",
-    });
     dispatch(
       addNote({
         id: randomDigits(9),
         title: formData.get("title"),
         description: formData.get("description"),
-        date: formattedDate,
+        time: formatedCurrentDate("ar"),
       })
     );
     e.target.reset();

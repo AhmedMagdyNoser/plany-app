@@ -97,7 +97,7 @@ export default function NoteDetailsPage() {
           </form>
         )}
         <span className="text-muted d-block mt-2">
-          تاريخ اخر تعديل: <b>{note.date}</b>
+          تاريخ اخر تعديل: <b>{note.time}</b>
         </span>
       </div>
     </div>
