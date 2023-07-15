@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addTask } from "../../Redux/tasksSlice";
 import { randomDigits } from "../../utils";
-import { setNotificationReminder } from "./TaskNotify";
+import { setTaskReminderNotification } from "../Notifications/AddNotification";
 
 export default function AddTask() {
   const dispatch = useDispatch();
@@ -43,7 +43,7 @@ export default function AddTask() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    let id = randomDigits(9)
+    let id = randomDigits(9);
     let formData = new FormData(e.target);
     if (!formValidation(formData)) return;
     dispatch(
@@ -56,7 +56,7 @@ export default function AddTask() {
         isNotified: false,
       })
     );
-    settingTimeMode && setNotificationReminder(id, formData.get("time"));
+    settingTimeMode && setTaskReminderNotification(id, formData.get("time"));
     e.target.reset();
     setSettingTimeMode(false);
   }

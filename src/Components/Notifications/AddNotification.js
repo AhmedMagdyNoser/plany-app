@@ -1,24 +1,27 @@
 import { store } from "../../Redux/store";
 import { addNotification } from "../../Redux/notificationsSlice";
 import notificationsSound from "./../../Sounds/notification.mp3";
+import { randomDigits } from "../../utils";
 
 const notificationsAudio = new Audio(notificationsSound);
 
-export function setNotificationReminder(id, reminderDate) {
-  reminderDate = new Date(reminderDate);
-  let currentDate = new Date();
-  let timeDifference = reminderDate - currentDate;
-
+export function setTaskReminderNotification(id, reminderDate) {
+  const timeDifference = new Date(reminderDate) - new Date();
   setTimeout(function () {
     sendNotification(id);
   }, timeDifference);
 }
 
 export function sendNotification(id) {
-  // Getting the required task from the store
   const [task] = store.getState().tasks.data.filter((task) => task.id === id);
   if (task.isNotificationOn === true) {
-    store.dispatch(addNotification(task));
+    const notification = {
+      id: randomDigits(9),
+      title: task.title,
+      time: task.time,
+      type: "task",
+    };
+    store.dispatch(addNotification(notification));
     notificationsAudio.play();
   }
 }
