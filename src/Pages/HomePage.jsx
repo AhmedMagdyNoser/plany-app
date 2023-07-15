@@ -3,7 +3,7 @@ import { FadeIn } from "../Components/Utils/Fade";
 
 export default function HomePage() {
   return (
-    <FadeIn time="0.5s">
+    <FadeIn milliSeconds="1000">
       <div className="container py-5 flex-center flex-column gap-4">
         <h1 className="text-center text-dark py-4 border-bottom">اجعل حياتك أكثر تنظيما وفعالية</h1>
         <p className="text-center text-muted" style={{ width: "500px", maxWidth: "100%" }}>

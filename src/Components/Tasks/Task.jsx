@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { removeTask, updateTask } from "../../Redux/tasksSlice";
-import { FadeIn } from "../Utils/Fade";
+import { FadeIn, RemoveWithFadeOut } from "../Utils/Fade";
 import { useDispatch } from "react-redux";
 import { formatDateAndTime } from "../../utils";
 import checkedSound from "./../../Sounds/checked.mp3";
@@ -46,6 +46,10 @@ export default function Task({ task }) {
     }
   }
 
+  function handleRemoveTask() {
+    dispatch(removeTask(task.id));
+  }
+
   function handleUpdateChecked() {
     if (task.isChecked) dispatch(updateTask({ id: task.id, isNotificationOn: task.isNotificationOn, isChecked: false }));
     else {
@@ -60,13 +64,13 @@ export default function Task({ task }) {
   }
 
   return (
-    <FadeIn time="1s">
+    <FadeIn milliSeconds="1000">
       <div ref={card} className="py-3 px-4 flex-center justify-content-between border-bottom gray-hover">
         <div className="flex-center">
           <i onClick={handleUpdateChecked} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className={iconStyle}></i>
           <div className="px-3">
             <p className={"my-1 fw-bold trancate-1 " + titleStyle}>{task.title}</p>
-            {task.time && <small className="text-muted trancate-1">{formatDateAndTime(task.time, 'ar')}</small>}
+            {task.time && <small className="text-muted trancate-1">{formatDateAndTime(task.time, "ar")}</small>}
           </div>
         </div>
 
@@ -79,17 +83,9 @@ export default function Task({ task }) {
               }
             ></i>
           )}
-          <i
-            onClick={() => {
-              // we can simply dispatch(removeTask(task.id)); but let's add animation
-              setTimeout(() => {
-                dispatch(removeTask(task.id));
-              }, 250);
-              card.current.style.animation = "fade-out 350ms";
-              card.current.style.opacity = "0";
-            }}
-            className="fa-solid fa-trash-can fs-5 opacity-hover cursor-pointer"
-          ></i>
+          <RemoveWithFadeOut milliSeconds="250" fadeOutElement={card.current} removeFunction={handleRemoveTask}>
+            <i className="fa-solid fa-trash-can fs-5 opacity-hover cursor-pointer"></i>
+          </RemoveWithFadeOut>
         </div>
       </div>
     </FadeIn>

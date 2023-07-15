@@ -4,7 +4,7 @@ import { FadeIn } from "../Utils/Fade";
 
 export default function Note({ note }) {
   return (
-    <FadeIn time="1s" className="d-flex">
+    <FadeIn milliSeconds="1000" className="d-flex">
       <div className="bg-white w-100 px-4 py-3 rounded shadow-sm d-flex flex-column justify-content-between">
         <Link to={`/notes/${note.id}`} className="text-decoration-none">
           <h4>{note.title}</h4>

@@ -1,15 +1,19 @@
 import { useRef } from "react";
 import { useDispatch } from "react-redux";
-import { FadeIn } from "../Utils/Fade";
 import { formatDateAndTime } from "../../utils";
+import { FadeIn, RemoveWithFadeOut } from "../Utils/Fade";
 import { removeNotification } from "../../Redux/notificationsSlice";
 
 export default function Notification({ notification }) {
   const dispatch = useDispatch();
   const card = useRef(0);
 
+  function handleRemoveNotification() {
+    dispatch(removeNotification(notification.id));
+  }
+
   return (
-    <FadeIn time="1s">
+    <FadeIn milliSeconds="1000">
       <div ref={card} className="gray-hover border-bottom p-3 d-flex flex-column gap-2">
         <header className="flex-center justify-content-between">
           <div className="flex-center gap-2 text-muted">
@@ -29,17 +33,9 @@ export default function Notification({ notification }) {
             ) : null}
           </div>
           <div>
-            <i
-              onClick={() => {
-                // we can simply dispatch(removeNotification(notification.id)); but let's add animation
-                setTimeout(() => {
-                  dispatch(removeNotification(notification.id));
-                }, 250);
-                card.current.style.animation = "fade-out 350ms";
-                card.current.style.opacity = "0";
-              }}
-              className="fa-solid fa-trash-can fs-5 mx-3 opacity-hover cursor-pointer"
-            ></i>
+          <RemoveWithFadeOut milliSeconds="250" fadeOutElement={card.current} removeFunction={handleRemoveNotification}>
+            <i className="fa-solid fa-trash-can fs-5 mx-3 opacity-hover cursor-pointer"></i>
+          </RemoveWithFadeOut>
           </div>
         </div>
       </div>

@@ -8,7 +8,7 @@ export default function AddNote() {
   const [isNotePopupOpened, setIsNotePopupOpened] = useState(false);
 
   return (
-    <FadeIn time="1s">
+    <FadeIn milliSeconds="1000">
       <div
         onClick={() => setIsNotePopupOpened(true)}
         className="opacity-hover p-5 text-primary bg-white rounded shadow-sm flex-center flex-column cursor-pointer"

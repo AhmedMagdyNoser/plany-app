@@ -27,7 +27,7 @@ export default function NotiArea({ isOpened, setIsOpened }) {
 
 function NoNotification() {
   return (
-    <FadeIn time="1s" className="flex-center h-75 text-muted flex-column gap-3">
+    <FadeIn milliSeconds="1000" className="flex-center h-75 text-muted flex-column gap-3">
       <i className="fa-brands fa-pagelines gray-hover p-3 rounded" style={{ fontSize: "6.5rem" }}></i>
       <p>يبدو أنه لا توجد إشعارات الان</p>
     </FadeIn>
