@@ -16,7 +16,20 @@ export function updateTaskInStorage(id, isNotificationOn, isChecked) {
   // find the index of the required task you want to update
   const index = findIndexById(allTasks, id);
   // create a new task with the updated fields (+ if the task is checked then the isNotificationOn should be false)
-  const updatedTask = { ...allTasks[index], isNotificationOn: isChecked ? false : isNotificationOn, isChecked };
+  const updatedTask = { ...allTasks[index], isNotificationOn: isChecked && isNotificationOn ? false : isNotificationOn, isChecked };
+  // update the array with the new task
+  allTasks[index] = updatedTask;
+  // set the new set to the local storage again
+  localStorage.setItem("tasks", JSON.stringify(allTasks));
+}
+
+export function setIsTaskNotifiedInStorage(id, isNotified) {
+  // get the old set
+  const allTasks = getAllTasks();
+  // find the index of the required task you want to update
+  const index = findIndexById(allTasks, id);
+  // create a new task with the updated fields
+  const updatedTask = { ...allTasks[index], isNotified };
   // update the array with the new task
   allTasks[index] = updatedTask;
   // set the new set to the local storage again
