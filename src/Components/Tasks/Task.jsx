@@ -20,7 +20,7 @@ export default function Task({ task }) {
   const checkedAudio = new Audio(checkedSound);
 
   function checkIfChecked() {
-    if (task.checked) {
+    if (task.isChecked) {
       setIconStyle(checkedStyle);
       setTitleStyle("text-decoration-line-through");
     } else {
@@ -32,14 +32,14 @@ export default function Task({ task }) {
   useEffect(() => {
     checkIfChecked();
     // eslint-disable-next-line
-  }, [task.checked]);
+  }, [task.isChecked]);
 
   function handleMouseEnter() {
     setIconStyle(hoverStyle);
   }
 
   function handleMouseLeave() {
-    if (task.checked) {
+    if (task.isChecked) {
       setIconStyle(checkedStyle);
     } else {
       setIconStyle(uncheckedStyle);
@@ -47,16 +47,16 @@ export default function Task({ task }) {
   }
 
   function handleUpdateChecked() {
-    if (task.checked) dispatch(updateTask({ id: task.id, notify: task.notify, checked: false }));
+    if (task.isChecked) dispatch(updateTask({ id: task.id, isNotificationOn: task.isNotificationOn, isChecked: false }));
     else {
-      dispatch(updateTask({ id: task.id, notify: task.notify, checked: true }));
+      dispatch(updateTask({ id: task.id, isNotificationOn: task.isNotificationOn, isChecked: true }));
       checkedAudio.play();
-    } 
+    }
   }
 
-  function handleUpdateNotify() {
-    if (task.notify) dispatch(updateTask({ id: task.id, notify: false, checked: task.checked }));
-    else dispatch(updateTask({ id: task.id, notify: true, checked: task.checked }));
+  function handleIsNotificationOn() {
+    if (task.isNotificationOn) dispatch(updateTask({ id: task.id, isNotificationOn: false, isChecked: task.isChecked }));
+    else dispatch(updateTask({ id: task.id, isNotificationOn: true, isChecked: task.isChecked }));
   }
 
   return (
@@ -65,16 +65,18 @@ export default function Task({ task }) {
         <div className="flex-center">
           <i onClick={handleUpdateChecked} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className={iconStyle}></i>
           <div className="px-3">
-            <p className={"my-1 fw-bold trancate-1 " + titleStyle}>{task.name}</p>
+            <p className={"my-1 fw-bold trancate-1 " + titleStyle}>{task.title}</p>
             {task.time && <small className="text-muted trancate-1">{formatDateAndTime(task.time)}</small>}
           </div>
         </div>
 
         <div className="flex-center gap-4 mx-2">
-          {task.notify !== null && (
+          {task.isNotificationOn !== null && (
             <i
-              onClick={handleUpdateNotify}
-              className={(task.notify ? "fa-solid fa-bell text-primary" : "fa-regular fa-bell-slash") + " fs-5 opacity-hover cursor-pointer"}
+              onClick={handleIsNotificationOn}
+              className={
+                (task.isNotificationOn ? "fa-solid fa-bell text-primary" : "fa-regular fa-bell-slash") + " fs-5 opacity-hover cursor-pointer"
+              }
             ></i>
           )}
           <i

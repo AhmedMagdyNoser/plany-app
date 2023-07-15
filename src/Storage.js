@@ -8,17 +8,17 @@ export function addTaskToStorage(task) {
   localStorage.setItem("tasks", JSON.stringify(allTasks));
 }
 
-export function updateTaskInStorage(id, notify, checked) {
+export function updateTaskInStorage(id, isNotificationOn, isChecked) {
   // get the old set
   let allTasks = getAllTasks();
   // find the task you want to update
   let indexOfTask = allTasks.findIndex((task) => task.id === id);
   // update the task
   let updatedTask;
-  if (checked === true && notify === true) {
-    updatedTask = { ...allTasks[indexOfTask], notify: false, checked: checked };
+  if (isChecked && isNotificationOn) {
+    updatedTask = { ...allTasks[indexOfTask], isNotificationOn: false, isChecked, };
   } else {
-    updatedTask = { ...allTasks[indexOfTask], notify: notify, checked: checked };
+    updatedTask = { ...allTasks[indexOfTask], isNotificationOn, isChecked, };
   }
   allTasks[indexOfTask] = updatedTask;
   // set the new set to the local storage again

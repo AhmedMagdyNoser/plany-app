@@ -22,7 +22,7 @@ export default function AddTask() {
   }
 
   function formValidation(formData) {
-    if (!formData.get("name")) {
+    if (!formData.get("title")) {
       setInvlidName("من فضلك ادخل اسما للمهمة");
       return false;
     } else {
@@ -48,11 +48,12 @@ export default function AddTask() {
     if (!formValidation(formData)) return;
     dispatch(
       addTask({
-        checked: false,
         id: id,
-        name: formData.get("name"),
+        isChecked: false,
+        title: formData.get("title"),
         time: settingTimeMode ? formData.get("time") : null,
-        notify: settingTimeMode ? isNotificationOn : null,
+        isNotificationOn: settingTimeMode ? isNotificationOn : null,
+        isNotified: false,
       })
     );
     settingTimeMode && setNotificationReminder(id, formData.get("time"));
@@ -65,7 +66,7 @@ export default function AddTask() {
       {/* Task Name */}
       <div className={"p-2 gap-2 rounded flex-center bg-white" + (invalidName && " border-danger border")}>
         <i className="fa-solid fa-plus me-3"></i>
-        <input name="name" type="text" placeholder="اضف مهمة جديدة" autoComplete="off" className="w-100 py-2 border-0" />
+        <input name="title" type="text" placeholder="اضف مهمة جديدة" autoComplete="off" className="w-100 py-2 border-0" />
         <div className="flex-center gap-2 py-2 px-3 rounded gray-hover cursor-pointer text-secondary" onClick={handleSettingTimeMode}>
           <span className="text-nowrap">{settingTimeMode ? "إلغاء" : "اضف ميعادا"}</span>
           <i className={(settingTimeMode ? "fa-spin text-primary" : "fa-regular") + " fa-solid fa-clock"}></i>

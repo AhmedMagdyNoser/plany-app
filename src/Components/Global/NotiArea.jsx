@@ -45,9 +45,9 @@ function Notification({ notification }) {
         </div>
         <div className="flex-center">
           <div>
-            <h5 className="m-0 text-dark fw-bold mb-2">{notification.name}</h5>
+            <h5 className="m-0 text-dark fw-bold mb-2">{notification.title}</h5>
             <small className="text-muted">
-              هل قمت بتنفيذ مهمة <span className="fw-bold">{notification.name}</span> ؟ يرجى التحقق من قائمة المهام الخاصة بك وإكمال المهمة في
+              هل قمت بتنفيذ مهمة <span className="fw-bold">{notification.title}</span> ؟ يرجى التحقق من قائمة المهام الخاصة بك وإكمال المهمة في
               أقرب وقت ممكن.
             </small>
           </div>

@@ -17,7 +17,7 @@ export function setNotificationReminder(id, reminderDate) {
 export function sendNotification(id) {
   // Getting the required task from the store
   const [task] = store.getState().tasks.data.filter((task) => task.id === id);
-  if (task.notify === true) {
+  if (task.isNotificationOn === true) {
     store.dispatch(addNotification(task));
     notificationsAudio.play();
   }
