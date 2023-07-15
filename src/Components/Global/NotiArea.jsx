@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { formatDateAndTimeEn } from "../../utils";
+import { formatDateAndTime, formatedCurrentDateAndTime } from "../../utils";
 import { removeNotification } from "../../Redux/notificationsSlice";
 import { useRef } from "react";
 import { FadeIn } from "../Utils/Fade";
@@ -39,8 +39,8 @@ function Notification({ notification }) {
             <i className="fa-solid fa-message"></i>
             <span>قائمة المهام</span>
           </div>
-          <small dir="ltr" className="text-muted fw-bold m-0">
-            {formatDateAndTimeEn(notification.time)}
+          <small className="text-muted fw-bold m-0">
+            {formatDateAndTime(notification.time, 'ar')}
           </small>
         </div>
         <div className="flex-center">

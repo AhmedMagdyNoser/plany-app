@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addNote } from "../../Redux/notesSlice";
-import { FormatedNowDate, formatDate, formatedCurrentDate, randomDigits } from "../../utils";
+import { formatedCurrentDate, randomDigits } from "../../utils";
 import { FadeIn } from "../Utils/Fade";
 
 export default function AddNote() {

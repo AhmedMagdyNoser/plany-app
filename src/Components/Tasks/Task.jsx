@@ -66,7 +66,7 @@ export default function Task({ task }) {
           <i onClick={handleUpdateChecked} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className={iconStyle}></i>
           <div className="px-3">
             <p className={"my-1 fw-bold trancate-1 " + titleStyle}>{task.title}</p>
-            {task.time && <small className="text-muted trancate-1">{formatDateAndTime(task.time)}</small>}
+            {task.time && <small className="text-muted trancate-1">{formatDateAndTime(task.time, 'ar')}</small>}
           </div>
         </div>
 
