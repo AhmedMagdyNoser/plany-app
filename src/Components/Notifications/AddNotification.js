@@ -1,7 +1,7 @@
 import { store } from "../../Redux/store";
 import { addNotification } from "../../Redux/notificationsSlice";
 import notificationsSound from "./../../Sounds/notification.mp3";
-import { randomDigits } from "../../utils";
+import { findObjectById, randomDigits } from "../../utils";
 
 const notificationsAudio = new Audio(notificationsSound);
 
@@ -13,7 +13,7 @@ export function setTaskReminderNotification(id, reminderDate) {
 }
 
 export function sendNotification(id) {
-  const [task] = store.getState().tasks.data.filter((task) => task.id === id);
+  const task = findObjectById(store.getState().tasks.data, id)
   if (task.isNotificationOn === true) {
     const notification = {
       id: randomDigits(9),

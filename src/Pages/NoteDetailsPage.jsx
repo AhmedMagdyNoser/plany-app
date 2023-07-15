@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import { removeNote, updateNote } from "../Redux/notesSlice";
-import ConfirmBox from "../Components/Global/ConfirmBox";
+import ConfirmBox from "../Components/Utils/ConfirmBox";
+import { findObjectById } from "../utils";
 
 export default function NoteDetailsPage() {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ export default function NoteDetailsPage() {
 
   // Getting the required note from the store
   const notes = useSelector((store) => store.notes.data);
-  const [note] = notes.filter((note) => note.id === id);
+  const note = findObjectById(notes, id)
 
   let [editingMode, setEditingMode] = useState(false);
 
