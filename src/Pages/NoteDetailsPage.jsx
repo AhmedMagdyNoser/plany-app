@@ -53,7 +53,7 @@ export default function NoteDetailsPage() {
       <div className="container">
         {!editingMode ? (
           <>
-            <div className="border-bottom pb-3 mb-3 d-flex justify-content-between ">
+            <header className="border-bottom pb-3 mb-3 d-flex justify-content-between ">
               <h1 className="m-0 trancate-1">{note.title}</h1>
               <div className="d-flex gap-2">
                 <button onClick={() => setEditingMode(true)} className="btn btn-primary">
@@ -63,7 +63,7 @@ export default function NoteDetailsPage() {
                   حذف
                 </button>
               </div>
-            </div>
+            </header>
             <ReactMarkdown className="lh-lg">{note.description}</ReactMarkdown>
             <ConfirmBox
               isOpened={isRemoveBoxOpened}

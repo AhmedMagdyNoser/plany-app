@@ -51,10 +51,10 @@ function NewNotePopup({ isOpened, setIsOpened }) {
     <>
       <div className="screen-overlay check-screen flex-center">
         <div className="check-box content bg-white rounded shadow-lg">
-          <div className="d-flex align-items-center justify-content-between gap-5 py-3 px-4 border-bottom">
+          <header className="d-flex align-items-center justify-content-between gap-5 py-3 px-4 border-bottom">
             <h4 className="m-0">اضف ملاحظة جديدة</h4>
             <i onClick={() => setIsOpened(false)} className="fa-solid fa-xmark gray-hover rounded p-2 cursor-pointer"></i>
-          </div>
+          </header>
 
           <form onSubmit={handleSubmit} className="d-flex flex-column p-4 gap-3">
             <input name="title" type="text" required ref={titleInput} placeholder="العنوان" className="form-control shadow-none" />

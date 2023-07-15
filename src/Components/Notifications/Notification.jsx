@@ -11,13 +11,13 @@ export default function Notification({ notification }) {
   return (
     <FadeIn time="1s">
       <div ref={card} className="gray-hover border-bottom p-3 d-flex flex-column gap-2">
-        <div className="flex-center justify-content-between">
+        <header className="flex-center justify-content-between">
           <div className="flex-center gap-2 text-muted">
             <i className="fa-solid fa-message"></i>
             <span>{notification.type === "task" ? "قائمة المهام" : "مجهول"}</span>
           </div>
           <small className="text-muted fw-bold m-0">{formatDateAndTime(notification.time, "ar")}</small>
-        </div>
+        </header>
         <div className="flex-center justify-content-between">
           <div>
             <h5 className="m-0 text-dark fw-bold mb-2">{notification.title}</h5>

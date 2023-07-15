@@ -10,9 +10,9 @@ export default function Note({ note }) {
           <h4>{note.title}</h4>
           <ReactMarkdown className="text-muted trancate-7 mb-2">{note.description}</ReactMarkdown>
         </Link>
-        <div className="text-muted d-flex justify-content-between align-items-center pt-3">
+        <footer className="text-muted d-flex justify-content-between align-items-center pt-3">
           <span>{note.time}</span>
-        </div>
+        </footer>
       </div>
     </FadeIn>
   );
