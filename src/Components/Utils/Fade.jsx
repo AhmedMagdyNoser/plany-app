@@ -5,8 +5,8 @@ export function FadeIn({ children, time, className }) {
 
   function showIfOnScreen() {
     if (myElement.current && window.pageYOffset + window.innerHeight > myElement.current.offsetTop) {
-      // when scrolling into an element
-      myElement.current.style.animation = `fade-in ${time}`; // fade-in is defined in css below
+      // When scrolling into an element
+      myElement.current.style.animation = `fade-in ${time}`; // fade-in animation should be defined in CSS
       myElement.current.style.opacity = `1`;
     }
   }
@@ -21,17 +21,17 @@ export function FadeIn({ children, time, className }) {
   return (
     <div ref={myElement} style={{ opacity: "0" }} className={className}>
       {children}
-      <style>
-        {`
-          @keyframes fade-in {
-            from {
-              opacity: 0;
-            } to {
-              opacity: 1;
-            }
-          }
-        `}
-      </style>
     </div>
   );
 }
+
+/*
+  // Add the animation to your CSS
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    } to {
+      opacity: 1;
+    }
+  }
+*/

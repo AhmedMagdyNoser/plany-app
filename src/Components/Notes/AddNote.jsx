@@ -11,14 +11,13 @@ export default function AddNote() {
     <FadeIn time="1s">
       <div
         onClick={() => setIsNotePopupOpened(true)}
-        className="add p-5 text-primary bg-white rounded shadow-sm flex-center flex-column cursor-pointer"
+        className="opacity-hover p-5 text-primary bg-white rounded shadow-sm flex-center flex-column cursor-pointer"
       >
         <div className="border border-primary rounded-circle flex-center" style={{ width: "85px", height: "85px" }}>
           <i className="fa-solid fa-plus fs-2"></i>
         </div>
         <p className="m-0 mt-3">ملاحظة جديدة</p>
       </div>
-      <style>{` .add:hover {  opacity: 0.75; } `}</style>
       <NewNotePopup isOpened={isNotePopupOpened} setIsOpened={setIsNotePopupOpened} />
     </FadeIn>
   );
