@@ -56,10 +56,10 @@ export default function NoteDetailsPage() {
             <header className="border-bottom pb-3 mb-3 d-flex justify-content-between ">
               <h1 className="m-0 trancate-1">{note.title}</h1>
               <div className="d-flex gap-2">
-                <button onClick={() => setEditingMode(true)} className="btn btn-primary">
+                <button tabIndex={isRemoveBoxOpened && -1} onClick={() => setEditingMode(true)} className="btn btn-primary">
                   تعديل
                 </button>
-                <button onClick={() => setIsRemoveBoxOpened(true)} className="btn btn-primary">
+                <button tabIndex={isRemoveBoxOpened && -1} onClick={() => setIsRemoveBoxOpened(true)} className="btn btn-primary">
                   حذف
                 </button>
               </div>
