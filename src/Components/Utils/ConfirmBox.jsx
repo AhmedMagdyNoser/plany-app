@@ -14,7 +14,9 @@ export default function ConfirmBox({ isOpened, setIsOpened, action, message, con
     confirmButton.current.focus();
   }, [isOpened]);
 
-  window.addEventListener("keydown", (e) => {
+  document.addEventListener("keydown", controlKeydown);
+
+  function controlKeydown(e) {
     if (e.key === "Escape") {
       setIsOpened(false);
     } else if (e.key === "ArrowRight") {
@@ -22,7 +24,7 @@ export default function ConfirmBox({ isOpened, setIsOpened, action, message, con
     } else if (e.key === "ArrowLeft") {
       discardButton.current.focus();
     }
-  });
+  }
 
   return (
     <div className="screen-overlay check-screen flex-center">
@@ -31,11 +33,11 @@ export default function ConfirmBox({ isOpened, setIsOpened, action, message, con
           <span className="fs-1 fw-bold text-warning mb-3 circle flex-center border border-warning">!</span>
           <p className="border-bottom pb-2 text-center">{message}</p>
           <div className="d-flex gap-2 w-100">
-            <button tabIndex={!isOpened && -1} ref={confirmButton} onClick={handleAction} className="btn btn-outline-danger flex-fill fw-bold">
+            <button tabIndex={isOpened ? 1 : -1} ref={confirmButton} onClick={handleAction} className="btn btn-outline-danger flex-fill fw-bold">
               {confirmButtonTitle}
             </button>
             <button
-              tabIndex={!isOpened && -1}
+              tabIndex={isOpened ? 1 : -1}
               ref={discardButton}
               onClick={() => setIsOpened(false)}
               className="btn btn-outline-secondary flex-fill fw-bold"

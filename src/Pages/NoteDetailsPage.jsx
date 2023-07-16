@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import { removeNote, updateNote } from "../Redux/notesSlice";
 import ConfirmBox from "../Components/Utils/ConfirmBox";
+import { FadeIn } from "../Components/Utils/Fade";
 import { findObjectById } from "../utils";
 
 export default function NoteDetailsPage() {
@@ -16,7 +17,7 @@ export default function NoteDetailsPage() {
 
   // Getting the required note from the store
   const notes = useSelector((store) => store.notes.data);
-  const note = findObjectById(notes, id)
+  const note = findObjectById(notes, id);
 
   let [editingMode, setEditingMode] = useState(false);
 
@@ -49,17 +50,17 @@ export default function NoteDetailsPage() {
   }
 
   return note ? (
-    <div className="py-5">
+    <div className={"py-5 " + (!editingMode && "bg-white")}>
       <div className="container">
         {!editingMode ? (
-          <>
+          <FadeIn milliSeconds={500}>
             <header className="border-bottom pb-3 mb-3 d-flex justify-content-between ">
               <h1 className="m-0 trancate-1">{note.title}</h1>
               <div className="d-flex gap-2">
-                <button tabIndex={isRemoveBoxOpened && -1} onClick={() => setEditingMode(true)} className="btn btn-primary">
+                <button tabIndex={isRemoveBoxOpened ? -1 : 1} onClick={() => setEditingMode(true)} className="btn btn-primary">
                   تعديل
                 </button>
-                <button tabIndex={isRemoveBoxOpened && -1} onClick={() => setIsRemoveBoxOpened(true)} className="btn btn-primary">
+                <button tabIndex={isRemoveBoxOpened ? -1 : 1} onClick={() => setIsRemoveBoxOpened(true)} className="btn btn-primary">
                   حذف
                 </button>
               </div>
@@ -73,7 +74,7 @@ export default function NoteDetailsPage() {
               confirmButtonTitle="حذف"
               discardButtonTitle="إلغاء"
             />
-          </>
+          </FadeIn>
         ) : (
           <form onSubmit={handleUpdate} className="d-flex flex-column gap-2">
             <input

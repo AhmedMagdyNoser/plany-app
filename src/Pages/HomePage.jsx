@@ -22,7 +22,9 @@ function HomeButton({ title, path, iconClass }) {
   const navigate = useNavigate();
   return (
     <div
+      tabIndex={1}
       onClick={() => navigate(path)}
+      onKeyDown={(e) => e.key === "Enter" && navigate(path)}
       className="border-bottom flex-center flex-column text-dark gap-4 p-5 rounded opacity-hover cursor-pointer"
       style={{ background: "#eee" }}
     >

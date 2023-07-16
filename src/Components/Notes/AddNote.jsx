@@ -31,6 +31,10 @@ function NewNotePopup({ isOpened, setIsOpened }) {
     isOpened && titleInput.current.focus();
   }, [isOpened]);
 
+  window.addEventListener("keydown", (e) => {
+    e.key === "Escape" && setIsOpened(false);
+  });
+
   function handleSubmit(e) {
     e.preventDefault();
     let formData = new FormData(e.target);
@@ -56,9 +60,24 @@ function NewNotePopup({ isOpened, setIsOpened }) {
           </header>
 
           <form onSubmit={handleSubmit} className="d-flex flex-column p-4 gap-3">
-            <input name="title" type="text" required ref={titleInput} placeholder="العنوان" className="form-control shadow-none" />
-            <textarea name="description" rows={10} required placeholder="المحتوى" className="form-control shadow-none" />
-            <input type="submit" value="اضف" className="btn btn-primary" />
+            <input
+              name="title"
+              type="text"
+              required
+              ref={titleInput}
+              placeholder="العنوان"
+              tabIndex={isOpened ? 1 : -1}
+              className="form-control shadow-none"
+            />
+            <textarea
+              name="description"
+              rows={10}
+              required
+              placeholder="المحتوى"
+              tabIndex={isOpened ? 1 : -1}
+              className="form-control shadow-none"
+            />
+            <input type="submit" value="اضف" tabIndex={isOpened ? 1 : -1} className="btn btn-primary" />
           </form>
         </div>
       </div>
