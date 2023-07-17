@@ -21,12 +21,20 @@ export default function ConfirmBox({ setIsOpened, action, message, confirmButton
     box.current.style.scale = `0`;
   }
 
+  function handleClickOutside(event) {
+    if (box.current && !box.current.contains(event.target)) {
+      handleClose();
+    }
+  }
+
   useEffect(() => {
     confirmButton.current.focus();
     document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("mousedown", handleClickOutside);
     // Cleanup function
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("mousedown", handleClickOutside);
     }; // The cleanup function is executed when the component unmounts.
     // eslint-disable-next-line
   }, []);

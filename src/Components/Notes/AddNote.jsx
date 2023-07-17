@@ -40,6 +40,12 @@ function NewNotePopup({ setIsOpened, animationTime }) {
     box.current.style.scale = `0`;
   }
 
+  function handleClickOutside(event) {
+    if (box.current && !box.current.contains(event.target)) {
+      handleClose();
+    }
+  }
+
   function handleEscapeKey(e) {
     e.key === "Escape" && handleClose();
   }
@@ -47,9 +53,11 @@ function NewNotePopup({ setIsOpened, animationTime }) {
   useEffect(() => {
     titleInput.current.focus();
     document.addEventListener("keydown", handleEscapeKey);
+    document.addEventListener("mousedown", handleClickOutside);
     // Cleanup function
     return () => {
       document.removeEventListener("keydown", handleEscapeKey);
+      document.removeEventListener("mousedown", handleClickOutside);
     }; // The cleanup function is executed when isOpened becomes false or when the component unmounts.
     // eslint-disable-next-line
   }, []);

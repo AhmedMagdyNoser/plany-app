@@ -79,7 +79,7 @@ export default function NoteDetailsPage() {
                 message="هل انت متأكد من الحذف؟"
                 confirmButtonTitle="حذف"
                 discardButtonTitle="إلغاء"
-                animationTime={200}
+                animationTime={250}
               />
             )}
           </FadeIn>
