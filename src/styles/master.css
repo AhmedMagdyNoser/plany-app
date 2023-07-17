@@ -56,12 +56,21 @@ body {
 }
 
 .opacity-hover {
-  opacity: 0.85;
+  opacity: 0.75;
   transition: 250ms;
 }
 
 .opacity-hover:hover {
   opacity: 1;
+}
+
+.reverse-opacity-hover {
+  opacity: 1;
+  transition: 250ms;
+}
+
+.reverse-opacity-hover:hover {
+  opacity: 0.75;
 }
 
 .flex-center {

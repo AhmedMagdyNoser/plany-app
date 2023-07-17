@@ -11,7 +11,8 @@ export default function AddNote() {
     <FadeIn milliSeconds="1000">
       <div
         onClick={() => setIsNotePopupOpened(true)}
-        className="opacity-hover p-5 text-primary bg-white rounded shadow-sm flex-center flex-column cursor-pointer"
+        style={{ transition: "50ms" }}
+        className="p-5 text-primary bg-white rounded shadow-sm flex-center flex-column reverse-opacity-hover cursor-pointer"
       >
         <div className="border border-primary rounded-circle flex-center" style={{ width: "85px", height: "85px" }}>
           <i className="fa-solid fa-plus fs-2"></i>
