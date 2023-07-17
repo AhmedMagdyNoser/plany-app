@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
@@ -23,11 +23,17 @@ export default function NoteDetailsPage() {
 
   const [isRemoveBoxOpened, setIsRemoveBoxOpened] = useState(false);
 
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Delete") {
-      setIsRemoveBoxOpened(true);
-    }
-  });
+  function handleDeleteKey(e) {
+    e.key === "Delete" && setIsRemoveBoxOpened(true);
+  }
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleDeleteKey);
+    // Cleanup function
+    return () => {
+      document.removeEventListener("keydown", handleDeleteKey);
+    }; // The cleanup function is executed when the component unmounts.
+  }, []);
 
   function handleUpdate(e) {
     e.preventDefault();

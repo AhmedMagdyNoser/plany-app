@@ -27,13 +27,21 @@ function NewNotePopup({ isOpened, setIsOpened }) {
   let dispatch = useDispatch();
   let titleInput = useRef(null);
 
-  useEffect(() => {
-    isOpened && titleInput.current.focus();
-  }, [isOpened]);
-
-  window.addEventListener("keydown", (e) => {
+  function handleEscapeKey(e) {
     e.key === "Escape" && setIsOpened(false);
-  });
+  }
+  
+  useEffect(() => {
+    if (isOpened) {
+      titleInput.current.focus();
+      document.addEventListener("keydown", handleEscapeKey);
+    }
+    // Cleanup function
+    return () => {
+      document.removeEventListener("keydown", handleEscapeKey);
+    }; // The cleanup function is executed when isOpened becomes false or when the component unmounts.
+    // eslint-disable-next-line
+  }, [isOpened]);
 
   function handleSubmit(e) {
     e.preventDefault();

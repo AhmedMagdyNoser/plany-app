@@ -11,12 +11,15 @@ export function FadeIn({ children, milliSeconds, className }) {
     }
   }
 
-  window.addEventListener("scroll", () => {
+  useEffect(() => {
     showIfOnScreen();
-  });
-
-  // eslint-disable-next-line
-  useEffect(() => showIfOnScreen(), []);
+    document.addEventListener("scroll", showIfOnScreen);
+    // Cleanup function
+    return () => {
+      document.removeEventListener("scroll", showIfOnScreen);
+    }; // The cleanup function is executed when the component unmounts.
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <div ref={myElement} style={{ opacity: "0" }} className={className}>

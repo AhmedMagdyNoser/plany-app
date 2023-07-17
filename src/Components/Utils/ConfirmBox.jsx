@@ -1,9 +1,8 @@
-import { useRef } from "react";
-import { useEffect } from "react";
+import { useRef, useEffect } from "react";
 
 export default function ConfirmBox({ isOpened, setIsOpened, action, message, confirmButtonTitle, discardButtonTitle }) {
-  let confirmButton = useRef(null);
-  let discardButton = useRef(null);
+  const confirmButtonRef = useRef(null);
+  const discardButtonRef = useRef(null);
 
   function handleAction() {
     action();
@@ -11,18 +10,24 @@ export default function ConfirmBox({ isOpened, setIsOpened, action, message, con
   }
 
   useEffect(() => {
-    confirmButton.current.focus();
+    if (isOpened) {
+      confirmButtonRef.current.focus();
+      document.addEventListener("keydown", handleKeyDown);
+    }
+    // Cleanup function
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    }; // The cleanup function is executed when isOpened becomes false or when the component unmounts.
+    // eslint-disable-next-line
   }, [isOpened]);
 
-  document.addEventListener("keydown", controlKeydown);
-
-  function controlKeydown(e) {
+  function handleKeyDown(e) {
     if (e.key === "Escape") {
       setIsOpened(false);
     } else if (e.key === "ArrowRight") {
-      confirmButton.current.focus();
+      confirmButtonRef.current.focus();
     } else if (e.key === "ArrowLeft") {
-      discardButton.current.focus();
+      discardButtonRef.current.focus();
     }
   }
 
@@ -33,12 +38,17 @@ export default function ConfirmBox({ isOpened, setIsOpened, action, message, con
           <span className="fs-1 fw-bold text-warning mb-3 circle flex-center border border-warning">!</span>
           <p className="border-bottom pb-2 text-center">{message}</p>
           <div className="d-flex gap-2 w-100">
-            <button tabIndex={isOpened ? 1 : -1} ref={confirmButton} onClick={handleAction} className="btn btn-outline-danger flex-fill fw-bold">
+            <button
+              tabIndex={isOpened ? 1 : -1}
+              ref={confirmButtonRef}
+              onClick={handleAction}
+              className="btn btn-outline-danger flex-fill fw-bold"
+            >
               {confirmButtonTitle}
             </button>
             <button
               tabIndex={isOpened ? 1 : -1}
-              ref={discardButton}
+              ref={discardButtonRef}
               onClick={() => setIsOpened(false)}
               className="btn btn-outline-secondary flex-fill fw-bold"
             >
