@@ -8,16 +8,16 @@ export default function ConfirmBox({ setIsOpened, action, message, confirmButton
 
   function handleConfirm() {
     action();
-    setIsOpened(false);
+    handleClose();
   }
 
   function handleClose() {
     setTimeout(() => {
       setIsOpened(false);
     }, animationTime);
-    screen.current.style.animation = `fade-out ${+animationTime +100}ms`;
+    screen.current.style.animation = `fade-out ${+animationTime + 100}ms`;
     screen.current.style.opacity = `0`;
-    box.current.style.animation = `popdown ${+animationTime +100}ms cubic-bezier(0.4, 0, 0.2, 1)`;
+    box.current.style.animation = `popdown ${+animationTime + 100}ms cubic-bezier(0.4, 0, 0.2, 1)`;
     box.current.style.scale = `0`;
   }
 

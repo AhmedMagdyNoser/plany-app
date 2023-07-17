@@ -18,30 +18,40 @@ export default function AddNote() {
         </div>
         <p className="m-0 mt-3">ملاحظة جديدة</p>
       </div>
-      <NewNotePopup isOpened={isNotePopupOpened} setIsOpened={setIsNotePopupOpened} />
+      {isNotePopupOpened && <NewNotePopup setIsOpened={setIsNotePopupOpened} animationTime={250} />}
     </FadeIn>
   );
 }
 
-function NewNotePopup({ isOpened, setIsOpened }) {
-  let dispatch = useDispatch();
-  let titleInput = useRef(null);
+function NewNotePopup({ setIsOpened, animationTime }) {
+  const dispatch = useDispatch();
+  const screen = useRef(null);
+  const box = useRef(null);
+  const titleInput = useRef(null);
+
+  function handleClose() {
+    setTimeout(() => {
+      setIsOpened(false);
+    }, animationTime);
+    screen.current.style.animation = `fade-out ${+animationTime + 100}ms`;
+    screen.current.style.opacity = `0`;
+    box.current.style.animation = `popdown ${+animationTime + 100}ms cubic-bezier(0.4, 0, 0.2, 1)`;
+    box.current.style.scale = `0`;
+  }
 
   function handleEscapeKey(e) {
-    e.key === "Escape" && setIsOpened(false);
+    e.key === "Escape" && handleClose();
   }
-  
+
   useEffect(() => {
-    if (isOpened) {
-      titleInput.current.focus();
-      document.addEventListener("keydown", handleEscapeKey);
-    }
+    titleInput.current.focus();
+    document.addEventListener("keydown", handleEscapeKey);
     // Cleanup function
     return () => {
       document.removeEventListener("keydown", handleEscapeKey);
     }; // The cleanup function is executed when isOpened becomes false or when the component unmounts.
     // eslint-disable-next-line
-  }, [isOpened]);
+  }, []);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -55,53 +65,56 @@ function NewNotePopup({ isOpened, setIsOpened }) {
       })
     );
     e.target.reset();
-    setIsOpened(false);
+    handleClose();
   }
 
   return (
     <>
-      <div className="screen-overlay check-screen flex-center">
-        <div className="check-box content bg-white rounded shadow-lg">
+      <div ref={screen} className="screen flex-center">
+        {/* The Box */}
+        <div ref={box} className="box content bg-white rounded shadow-lg">
           <header className="d-flex align-items-center justify-content-between gap-5 py-3 px-4 border-bottom">
             <h4 className="m-0">اضف ملاحظة جديدة</h4>
-            <i onClick={() => setIsOpened(false)} className="fa-solid fa-xmark gray-hover rounded p-2 cursor-pointer"></i>
+            <i onClick={handleClose} className="fa-solid fa-xmark gray-hover rounded p-2 cursor-pointer"></i>
           </header>
 
           <form onSubmit={handleSubmit} className="d-flex flex-column p-4 gap-3">
-            <input
-              name="title"
-              type="text"
-              required
-              ref={titleInput}
-              placeholder="العنوان"
-              tabIndex={isOpened ? 1 : -1}
-              className="form-control shadow-none"
-            />
-            <textarea
-              name="description"
-              rows={10}
-              required
-              placeholder="المحتوى"
-              tabIndex={isOpened ? 1 : -1}
-              className="form-control shadow-none"
-            />
-            <input type="submit" value="اضف" tabIndex={isOpened ? 1 : -1} className="btn btn-primary" />
+            <input name="title" type="text" required ref={titleInput} placeholder="العنوان" className="form-control shadow-none" />
+            <textarea name="description" rows={10} required placeholder="المحتوى" className="form-control shadow-none" />
+            <input type="submit" value="اضف" className="btn btn-primary" />
           </form>
         </div>
       </div>
 
       <style>
         {`
-        .check-screen {
-          ${isOpened ? "pointer-events: auto; opacity: 1;" : "pointer-events: none; opacity: 0;"}
+        .screen {
+          background: #0005;
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100vw;
+          height: 100vh;
+          animation: fade-in  ${animationTime}ms;
         }
-        .check-box {
-          transition: 0.25s ease-in-out; 
-          ${isOpened ? "scale: 1; opacity: 1;" : "scale: 0; opacity: 0;"}
+        .box {
+          animation: popup ${animationTime}ms;
         }
         .content {
           width: 500px;
           max-width: 95%;
+        }
+        @keyframes fade-in {
+          from { opacity: 0; } to { opacity: 1; }
+        }
+        @keyframes fade-out {
+          from { opacity: 1; } to { opacity: 0; }
+        }
+        @keyframes popup {
+          from { scale: 0; } to { scale: 1; }
+        }
+        @keyframes popdown {
+          from { scale: 1; } to { scale: 0; }
         }
       `}
       </style>
