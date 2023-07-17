@@ -72,14 +72,16 @@ export default function NoteDetailsPage() {
               </div>
             </header>
             <ReactMarkdown className="lh-lg">{note.description}</ReactMarkdown>
-            <ConfirmBox
-              isOpened={isRemoveBoxOpened}
-              setIsOpened={setIsRemoveBoxOpened}
-              action={handleRemove}
-              message="هل انت متأكد من الحذف؟"
-              confirmButtonTitle="حذف"
-              discardButtonTitle="إلغاء"
-            />
+            {isRemoveBoxOpened && (
+              <ConfirmBox
+                setIsOpened={setIsRemoveBoxOpened}
+                action={handleRemove}
+                message="هل انت متأكد من الحذف؟"
+                confirmButtonTitle="حذف"
+                discardButtonTitle="إلغاء"
+                animationTime={250}
+              />
+            )}
           </FadeIn>
         ) : (
           <form onSubmit={handleUpdate} className="d-flex flex-column gap-2">
