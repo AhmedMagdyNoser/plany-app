@@ -2,7 +2,7 @@
 
 body {
   font-family: "Almarai", sans-serif;
-  background-color: #f5f5f9;
+  background-color: #f5f5fa;
 }
 
 /* =========================== Scrollbar =========================== */
@@ -53,6 +53,14 @@ body {
 
 .gray-hover:hover {
   background-color: #f0f0f0 !important;
+}
+
+.dark-hover {
+  transition: 250ms;
+}
+
+.dark-hover:hover {
+  background-color: #333 !important;
 }
 
 .opacity-hover {

@@ -25,7 +25,7 @@ function NoTasks() {
   return (
     <FadeIn milliSeconds="1000" className="flex-center text-muted flex-column gap-3 py-5">
       <i className="fa-solid fa-seedling" style={{ fontSize: "4.5rem" }}></i>
-      <p>ليس لديك اى مهام</p>
+      <p className="m-0">ليس لديك اى مهام</p>
     </FadeIn>
   );
 }
