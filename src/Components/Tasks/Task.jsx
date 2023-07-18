@@ -15,7 +15,7 @@ export default function Task({ task }) {
   let [iconStyle, setIconStyle] = useState("");
   let [titleStyle, setTitleStyle] = useState("");
 
-  let card = useRef(0);
+  const card = useRef(0);
 
   const checkedAudio = new Audio(checkedSound);
 

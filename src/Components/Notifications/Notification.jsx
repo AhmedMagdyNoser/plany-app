@@ -1,16 +1,21 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { formatDateAndTime } from "../../utils";
 import { FadeIn, RemoveWithFadeOut } from "../Utils/Fade";
 import { removeNotification } from "../../Redux/notificationsSlice";
 
 export default function Notification({ notification }) {
-  const dispatch = useDispatch();
   const card = useRef(0);
+  const dispatch = useDispatch();
+  const [isCardDefined, setIsCardDefined] = useState(false);
 
   function handleRemoveNotification() {
     dispatch(removeNotification(notification.id));
   }
+
+  useEffect(() => {
+    card.current && setIsCardDefined(true);
+  }, []);
 
   return (
     <FadeIn milliSeconds="1000">
@@ -33,9 +38,11 @@ export default function Notification({ notification }) {
             ) : null}
           </div>
           <div>
-          <RemoveWithFadeOut milliSeconds="250" fadeOutElement={card.current} removeFunction={handleRemoveNotification}>
-            <i className="fa-solid fa-trash-can fs-5 mx-3 opacity-hover cursor-pointer"></i>
-          </RemoveWithFadeOut>
+            {isCardDefined && (
+              <RemoveWithFadeOut milliSeconds="250" fadeOutElement={card.current} removeFunction={handleRemoveNotification} className="mx-3">
+                <i className="fa-solid fa-trash-can fs-5 opacity-hover cursor-pointer"></i>
+              </RemoveWithFadeOut>
+            )}
           </div>
         </div>
       </div>
