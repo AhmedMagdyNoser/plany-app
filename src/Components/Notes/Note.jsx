@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import { FadeIn } from "../Utils/Fade";
+import { formatDate } from "../../utils";
 
 export default function Note({ note, isNotePopupOpened }) {
   return (
@@ -16,7 +17,7 @@ export default function Note({ note, isNotePopupOpened }) {
           <ReactMarkdown className="text-muted trancate-7 mb-2">{note.description}</ReactMarkdown>
         </div>
         <footer className="text-muted d-flex justify-content-between align-items-center pt-3">
-          <span>{note.time}</span>
+          <span>{formatDate(note.time, 'ar')}</span>
         </footer>
       </Link>
     </FadeIn>

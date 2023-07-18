@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
+import { randomDigits } from "../../utils";
 import { addNote } from "../../Redux/notesSlice";
-import { formatedCurrentDate, randomDigits } from "../../utils";
 
 export default function AddNote({ setIsOpened, animationTime }) {
   const dispatch = useDispatch();
@@ -17,7 +17,7 @@ export default function AddNote({ setIsOpened, animationTime }) {
         id: randomDigits(9),
         title: formData.get("title"),
         description: formData.get("description"),
-        time: formatedCurrentDate("ar"),
+        time: new Date().toISOString(),
       })
     );
     e.target.reset();
