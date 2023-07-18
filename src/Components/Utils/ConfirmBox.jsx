@@ -78,7 +78,7 @@ export default function ConfirmBox({ setIsOpened, action, message, confirmButton
             left: 0;
             width: 100vw;
             height: 100vh;
-            animation: fade-in  ${animationTime}ms;
+            animation: fade-in ${animationTime}ms;
           }
           @keyframes fade-in {
             from { opacity: 0; } to { opacity: 1; }

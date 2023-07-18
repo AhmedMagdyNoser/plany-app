@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom";
-import NavMenu from "./NavMenu";
 import { useState } from "react";
-import NotiArea from "./NotiArea";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import NavMenu from "./NavMenu";
+import NotiArea from "./NotiArea";
 
 export default function Header() {
   const notifications = useSelector((store) => store.notifications.data);
@@ -36,16 +36,17 @@ export default function Header() {
           </div>
         </div>
       </header>
-      <NavMenu isOpened={isNavMenuOpened} setIsOpened={setIsNavMenuOpened} />
-      <NotiArea isOpened={isNotiAreaOpened} setIsOpened={setIsNotiAreaOpened} />
+      {isNavMenuOpened && <NavMenu setIsOpened={setIsNavMenuOpened} animationTime={350} />}
+      {isNotiAreaOpened && <NotiArea setIsOpened={setIsNotiAreaOpened} animationTime={350} />}
     </>
   );
 }
 
-function HeaderButton({ children, onClick, className, style }) {
+function HeaderButton({ children, tabIndex, onClick, className, style }) {
   return (
     <button
       onClick={onClick}
+      tabIndex={tabIndex}
       className={className + " text-white p-2 opacity-hover rounded dark-hover"}
       style={{ ...style, background: "none", border: "none", fontSize: "1.5rem" }}
     >
