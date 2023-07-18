@@ -1,30 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { addNote } from "../../Redux/notesSlice";
 import { formatedCurrentDate, randomDigits } from "../../utils";
-import { FadeIn } from "../Utils/Fade";
 
-export default function AddNote() {
-  const [isNotePopupOpened, setIsNotePopupOpened] = useState(false);
-
-  return (
-    <FadeIn milliSeconds="1000">
-      <div
-        onClick={() => setIsNotePopupOpened(true)}
-        className="p-5 text-primary bg-white rounded shadow-sm flex-center flex-column reverse-opacity-hover cursor-pointer"
-        style={{ transition: "50ms" }}
-      >
-        <div className="border border-primary rounded-circle flex-center" style={{ width: "85px", height: "85px" }}>
-          <i className="fa-solid fa-plus fs-3"></i>
-        </div>
-        <p className="m-0 mt-3">ملاحظة جديدة</p>
-      </div>
-      {isNotePopupOpened && <NewNotePopup setIsOpened={setIsNotePopupOpened} animationTime={350} />}
-    </FadeIn>
-  );
-}
-
-function NewNotePopup({ setIsOpened, animationTime }) {
+export default function AddNote({ setIsOpened, animationTime }) {
   const dispatch = useDispatch();
   const screen = useRef(null);
   const box = useRef(null);

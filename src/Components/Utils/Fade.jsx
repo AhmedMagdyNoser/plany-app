@@ -1,13 +1,13 @@
 import { useEffect, useRef } from "react";
 
-export function FadeIn({ children, milliSeconds, className }) {
-  let myElement = useRef(0);
+export function FadeIn({ children, milliSeconds, className, style }) {
+  let element = useRef(0);
 
   function showIfOnScreen() {
-    if (myElement.current && window.pageYOffset + window.innerHeight > myElement.current.offsetTop) {
+    if (element.current && window.pageYOffset + window.innerHeight > element.current.offsetTop) {
       // When scrolling into an element
-      myElement.current.style.animation = `fade-in ${milliSeconds}ms`; // fade-in animation should be defined in CSS
-      myElement.current.style.opacity = `1`;
+      element.current.style.animation = `fade-in ${milliSeconds}ms`; // fade-in animation should be defined in CSS
+      element.current.style.opacity = `1`;
     }
   }
 
@@ -22,7 +22,7 @@ export function FadeIn({ children, milliSeconds, className }) {
   }, []);
 
   return (
-    <div ref={myElement} style={{ opacity: "0" }} className={className}>
+    <div ref={element} style={{ opacity: "0", ...style }} className={className}>
       {children}
     </div>
   );

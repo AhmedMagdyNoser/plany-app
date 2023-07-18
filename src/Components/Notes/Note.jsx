@@ -2,14 +2,14 @@ import { Link } from "react-router-dom";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import { FadeIn } from "../Utils/Fade";
 
-export default function Note({ note }) {
+export default function Note({ note, isNotePopupOpened }) {
   return (
-    <FadeIn milliSeconds="1000" className="d-flex">
+    <FadeIn milliSeconds={500} className="d-flex">
       <Link
-        tabIndex={-1}
         to={`/notes/${note.id}`}
-        style={{transition: '50ms'}}
+        style={{ transition: "50ms" }}
         className="bg-white text-decoration-none reverse-opacity-hover w-100 px-4 py-3 rounded shadow-sm d-flex flex-column justify-content-between"
+        tabIndex={isNotePopupOpened ? -1 : 1}
       >
         <div>
           <h4>{note.title}</h4>
