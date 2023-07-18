@@ -36,7 +36,7 @@ export default function NavMenu({ setIsOpened, animationTime }) {
   }, []);
 
   return (
-    <div ref={box} className="window bg-white shadow">
+    <div ref={box} className="box bg-white shadow">
       <header style={{ background: "#f8f8f8" }} className="border-bottom p-3 flex-center justify-content-between">
         <span className="d-flex gap-2 align-items-center">
           <i className="fa-solid fa-bars"></i>
@@ -54,7 +54,7 @@ export default function NavMenu({ setIsOpened, animationTime }) {
 
       <style>
         {`
-        .window {
+        .box {
           position: fixed;
           top: 0;
           left: 0;
