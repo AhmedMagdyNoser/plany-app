@@ -11,15 +11,15 @@ export default function AddNote() {
     <FadeIn milliSeconds="1000">
       <div
         onClick={() => setIsNotePopupOpened(true)}
-        style={{ transition: "50ms" }}
         className="p-5 text-primary bg-white rounded shadow-sm flex-center flex-column reverse-opacity-hover cursor-pointer"
+        style={{ transition: "50ms" }}
       >
         <div className="border border-primary rounded-circle flex-center" style={{ width: "85px", height: "85px" }}>
-          <i className="fa-solid fa-plus fs-2"></i>
+          <i className="fa-solid fa-plus fs-3"></i>
         </div>
         <p className="m-0 mt-3">ملاحظة جديدة</p>
       </div>
-      {isNotePopupOpened && <NewNotePopup setIsOpened={setIsNotePopupOpened} animationTime={250} />}
+      {isNotePopupOpened && <NewNotePopup setIsOpened={setIsNotePopupOpened} animationTime={350} />}
     </FadeIn>
   );
 }
@@ -29,38 +29,6 @@ function NewNotePopup({ setIsOpened, animationTime }) {
   const screen = useRef(null);
   const box = useRef(null);
   const titleInput = useRef(null);
-
-  function handleClose() {
-    setTimeout(() => {
-      setIsOpened(false);
-    }, animationTime);
-    screen.current.style.animation = `fade-out ${+animationTime + 100}ms`;
-    screen.current.style.opacity = `0`;
-    box.current.style.animation = `popdown ${+animationTime + 100}ms cubic-bezier(0.4, 0, 0.2, 1)`;
-    box.current.style.scale = `0`;
-  }
-
-  function handleClickOutside(event) {
-    if (box.current && !box.current.contains(event.target)) {
-      handleClose();
-    }
-  }
-
-  function handleEscapeKey(e) {
-    e.key === "Escape" && handleClose();
-  }
-
-  useEffect(() => {
-    titleInput.current.focus();
-    document.addEventListener("keydown", handleEscapeKey);
-    document.addEventListener("mousedown", handleClickOutside);
-    // Cleanup function
-    return () => {
-      document.removeEventListener("keydown", handleEscapeKey);
-      document.removeEventListener("mousedown", handleClickOutside);
-    }; // The cleanup function is executed when isOpened becomes false or when the component unmounts.
-    // eslint-disable-next-line
-  }, []);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -77,11 +45,47 @@ function NewNotePopup({ setIsOpened, animationTime }) {
     handleClose();
   }
 
+  function handleClose() {
+    setTimeout(() => {
+      setIsOpened(false);
+    }, animationTime);
+    screen.current.style.animation = `fade-out ${+animationTime}ms`;
+    screen.current.style.opacity = `0`;
+    box.current.style.animation = `popdown ${+animationTime}ms`;
+    box.current.style.scale = `0`;
+  }
+
+  function handleClickOutside(event) {
+    if (box.current && !box.current.contains(event.target)) {
+      handleClose();
+    }
+  }
+
+  function handleEscapeKey(event) {
+    event.key === "Escape" && handleClose();
+  }
+
+  useEffect(() => {
+    titleInput.current.focus();
+    document.addEventListener("keydown", handleEscapeKey);
+    document.addEventListener("mousedown", handleClickOutside);
+    // Cleanup function
+    return () => {
+      document.removeEventListener("keydown", handleEscapeKey);
+      document.removeEventListener("mousedown", handleClickOutside);
+    }; // The cleanup function is executed the component unmounts.
+    // eslint-disable-next-line
+  }, []);
+
   return (
     <>
       <div ref={screen} className="screen flex-center">
         {/* The Box */}
-        <div ref={box} className="box content bg-white rounded shadow-lg">
+        <div
+          ref={box}
+          className="bg-white rounded shadow-lg"
+          style={{ width: "500px", maxWidth: "100%", animation: `popup ${animationTime}ms` }}
+        >
           <header className="d-flex align-items-center justify-content-between gap-5 py-3 px-4 border-bottom">
             <h4 className="m-0">اضف ملاحظة جديدة</h4>
             <i onClick={handleClose} className="fa-solid fa-xmark gray-hover rounded p-2 cursor-pointer"></i>
@@ -104,14 +108,7 @@ function NewNotePopup({ setIsOpened, animationTime }) {
           left: 0;
           width: 100vw;
           height: 100vh;
-          animation: fade-in  ${animationTime}ms;
-        }
-        .box {
-          animation: popup ${animationTime}ms;
-        }
-        .content {
-          width: 500px;
-          max-width: 95%;
+          animation: fade-in ${animationTime}ms;
         }
         @keyframes fade-in {
           from { opacity: 0; } to { opacity: 1; }

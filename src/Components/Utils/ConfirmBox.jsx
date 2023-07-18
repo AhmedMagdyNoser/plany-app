@@ -15,15 +15,25 @@ export default function ConfirmBox({ setIsOpened, action, message, confirmButton
     setTimeout(() => {
       setIsOpened(false);
     }, animationTime);
-    screen.current.style.animation = `fade-out ${+animationTime + 100}ms`;
+    screen.current.style.animation = `fade-out ${+animationTime}ms`;
     screen.current.style.opacity = `0`;
-    box.current.style.animation = `popdown ${+animationTime + 100}ms cubic-bezier(0.4, 0, 0.2, 1)`;
+    box.current.style.animation = `popdown ${+animationTime}ms`;
     box.current.style.scale = `0`;
   }
 
   function handleClickOutside(event) {
     if (box.current && !box.current.contains(event.target)) {
       handleClose();
+    }
+  }
+
+  function handleKeyDown(event) {
+    if (event.key === "Escape") {
+      handleClose();
+    } else if (event.key === "ArrowRight") {
+      confirmButton.current.focus();
+    } else if (event.key === "ArrowLeft") {
+      discardButton.current.focus();
     }
   }
 
@@ -39,31 +49,23 @@ export default function ConfirmBox({ setIsOpened, action, message, confirmButton
     // eslint-disable-next-line
   }, []);
 
-  function handleKeyDown(e) {
-    if (e.key === "Escape") {
-      handleClose();
-    } else if (e.key === "ArrowRight") {
-      confirmButton.current.focus();
-    } else if (e.key === "ArrowLeft") {
-      discardButton.current.focus();
-    }
-  }
-
   return (
     <div ref={screen} className="screen flex-center">
       {/* The Box */}
-      <div ref={box} className="box border bg-white px-5 py-4 rounded-3 shadow-sm">
-        <div className="content flex-center flex-column">
-          <i className="fa-solid fa-circle-exclamation text-warning py-3" style={{ fontSize: "4.5rem" }}></i>
-          <p className="border-bottom pb-2 text-center">{message}</p>
-          <div className="d-flex gap-2 w-100">
-            <button ref={confirmButton} onClick={handleConfirm} className="btn btn-outline-danger flex-fill fw-bold">
-              {confirmButtonTitle}
-            </button>
-            <button ref={discardButton} onClick={handleClose} className="btn btn-outline-secondary flex-fill fw-bold">
-              {discardButtonTitle}
-            </button>
-          </div>
+      <div
+        ref={box}
+        className="flex-center flex-column bg-white px-5 py-4 rounded-3 shadow-lg"
+        style={{ width: "350px", maxWidth: "100%", animation: `popup ${animationTime}ms` }}
+      >
+        <i className="fa-solid fa-circle-exclamation text-warning py-3" style={{ fontSize: "4.5rem" }}></i>
+        <p className="border-bottom pb-2 text-center">{message}</p>
+        <div className="d-flex gap-2 w-100">
+          <button ref={confirmButton} onClick={handleConfirm} className="btn btn-outline-danger flex-fill fw-bold">
+            {confirmButtonTitle}
+          </button>
+          <button ref={discardButton} onClick={handleClose} className="btn btn-outline-secondary flex-fill fw-bold">
+            {discardButtonTitle}
+          </button>
         </div>
       </div>
 
@@ -77,14 +79,6 @@ export default function ConfirmBox({ setIsOpened, action, message, confirmButton
             width: 100vw;
             height: 100vh;
             animation: fade-in  ${animationTime}ms;
-          }
-          .box {
-            animation: popup ${animationTime}ms;
-          }
-          .content {
-            width: 100%;
-            min-width: 175px;
-            max-width: 350px;
           }
           @keyframes fade-in {
             from { opacity: 0; } to { opacity: 1; }
