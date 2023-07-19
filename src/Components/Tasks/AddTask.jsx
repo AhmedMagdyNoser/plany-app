@@ -1,27 +1,27 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addTask } from "../../Redux/tasksSlice";
 import Datetime from "react-datetime";
 import "../../styles/react-datetime.css";
 import PopupBox from "../Utils/PopupBox";
-import { FadeIn } from "../Utils/Fade";
 import { formatDateAndTime, randomDigits } from "../../utils";
 import { setTaskReminderNotification } from "../Notifications/AddNotification";
 
 export default function AddTask() {
   const dispatch = useDispatch();
 
+  const [taskTitle, setTaskTitle] = useState("");
+  const [taskTime, setTaskTime] = useState(new Date());
   const [settingTimeMode, setSettingTimeMode] = useState(false);
   const [settingTimeWindow, setSettingTimeWindow] = useState(false);
   const [isNotificationOn, setIsNotificationOn] = useState(false);
 
   const [validationMessage, setValidationMessage] = useState("");
-  const [invalidTime, setInvlidTime] = useState("");
 
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const inputRef = useRef();
 
   function handleDateChange(date) {
-    setSelectedDate(date);
+    setTaskTime(date);
   }
 
   function handleSettingTimeMode() {
@@ -29,6 +29,7 @@ export default function AddTask() {
       setSettingTimeMode(false);
     } else {
       setSettingTimeMode(true);
+      setSettingTimeWindow(true);
     }
   }
 
@@ -36,21 +37,22 @@ export default function AddTask() {
     isNotificationOn ? setIsNotificationOn(false) : setIsNotificationOn(true);
   }
 
-  function formValidation(formData) {
-    if (!formData.get("title")) {
-      setValidationMessage("من فضلك ادخل اسما للمهمة");
+  function formValidation() {
+    if (!taskTitle) {
+      setValidationMessage("من فضلك ادخل اسما للمهمة !");
+      inputRef.current.focus();
       return false;
     } else {
       setValidationMessage("");
     }
     if (settingTimeMode) {
-      const userDateTime = new Date(formData.get("time"));
+      const userDateTime = new Date(taskTime);
       const currentDateTime = new Date();
-      if (formData.get("time").length === 0 || userDateTime < currentDateTime) {
-        setInvlidTime("من فضلك ادخل وقتا فى المستقبل");
+      if (taskTime.length === 0 || userDateTime < currentDateTime) {
+        setValidationMessage("من فضلك ادخل وقتا فى المستقبل !");
         return false;
       } else {
-        setInvlidTime("");
+        setValidationMessage("");
       }
     }
     return true;
@@ -59,37 +61,40 @@ export default function AddTask() {
   function handleSubmit(e) {
     e.preventDefault();
     let id = randomDigits(9);
-    let formData = new FormData(e.target);
-    if (!formValidation(formData)) return;
+    if (!formValidation()) return;
     dispatch(
       addTask({
         id: id,
         isChecked: false,
-        title: formData.get("title"),
-        time: settingTimeMode ? formData.get("time") : null,
+        title: taskTitle,
+        time: settingTimeMode ? taskTime.toISOString() : null,
         isNotificationOn: settingTimeMode ? isNotificationOn : null,
         isNotified: settingTimeMode ? false : null,
       })
     );
-    settingTimeMode && setTaskReminderNotification(id, formData.get("time"));
+    settingTimeMode && setTaskReminderNotification(id, taskTime);
     e.target.reset();
+    setTaskTitle("");
     setSettingTimeMode(false);
+    setIsNotificationOn(false);
   }
 
   return (
     <form onSubmit={handleSubmit} className="d-flex flex-column gap-2">
-      <div
-        className={
-          "d-flex align-items-stretch justify-content-between flex-wrap gap-2 bg-white rounded p-2" +
-          (validationMessage && " border-bottom border-danger")
-        }
-      >
-        <div className="flex-center" style={{ flexGrow: "5" }}>
+      <div className={"d-flex align-items-stretch justify-content-between flex-wrap gap-2 bg-white rounded p-2"}>
+        <div className="flex-center" style={{ flexGrow: "10" }}>
           <i className="fa-solid fa-plus mx-2"></i>
-          <input name="title" type="text" placeholder="اضف مهمة جديدة" autoComplete="off" className="rounded flex-grow-1 py-2 border-0" />
+          <input
+            type="text"
+            ref={inputRef}
+            placeholder="اضف مهمة جديدة"
+            onChange={(e) => setTaskTitle(e.target.value)}
+            className="flex-grow-1 py-2 border-0"
+            autoComplete="off"
+          />
         </div>
 
-        <div className="d-flex justify-content-end gap-2" style={{ flexGrow: "1", minHeight: "40px" }}>
+        <div className="d-flex justify-content-end gap-2 flex-wrap" style={{ flexGrow: "1" }}>
           {settingTimeMode && (
             <>
               {/* Notification Mode */}
@@ -98,13 +103,13 @@ export default function AddTask() {
               </FormButton>
               {/* Selected Time */}
               <FormButton className="flex-center flex-grow-1 gap-2" onClick={() => setSettingTimeWindow(true)}>
-                <span className="text-nowrap">{formatDateAndTime(selectedDate.toISOString(), "ar")}</span>
+                <span className="text-nowrap">{formatDateAndTime(taskTime.toISOString(), "ar")}</span>
               </FormButton>
             </>
           )}
           {/* Time Mode */}
           <FormButton className="flex-center gap-2" onClick={handleSettingTimeMode}>
-            <i className={(settingTimeMode ? "text-primary" : "fa-regular") + " fa-solid fa-clock"}></i>
+            <i className={(settingTimeMode && "text-primary") + " fa-solid fa-clock"}></i>
           </FormButton>
         </div>
       </div>
@@ -126,7 +131,7 @@ export default function AddTask() {
           animationTime={350}
         >
           <div className="rounded overflow-hidden">
-            <Datetime input={false} onChange={handleDateChange} initialValue={selectedDate} />
+            <Datetime input={false} onChange={handleDateChange} initialValue={taskTime} />
           </div>
         </PopupBox>
       )}
@@ -138,7 +143,12 @@ export default function AddTask() {
 
 function FormButton({ children, className, onClick }) {
   return (
-    <button type="button" className={"text-muted bg-light gray-hover border-0 rounded px-3 " + className} onClick={onClick}>
+    <button
+      type="button"
+      style={{ minHeight: "40px" }}
+      className={"text-muted bg-light gray-hover border-0 rounded px-3 " + className}
+      onClick={onClick}
+    >
       {children}
     </button>
   );

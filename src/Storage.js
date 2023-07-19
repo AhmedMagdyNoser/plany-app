@@ -1,4 +1,4 @@
-import { excludeObjectById, findIndexById, formatedCurrentDate } from "./utils";
+import { excludeObjectById, findIndexById } from "./utils";
 
 // ========================== Tasks ==========================
 
