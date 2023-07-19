@@ -63,7 +63,7 @@ export function updateNoteInStorage(id, updatedFields) {
   // find the index of the required note you want to update
   const index = findIndexById(allNotes, id);
   // create a new note with the updated fields
-  const updatedNote = { ...allNotes[index], ...updatedFields, time: formatedCurrentDate("ar") };
+  const updatedNote = { ...allNotes[index], ...updatedFields, time: new Date().toISOString() };
   // update the array with the new note
   allNotes[index] = updatedNote;
   // set the new set to the local storage again

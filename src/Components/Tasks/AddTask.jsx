@@ -104,7 +104,6 @@ export default function AddTask() {
           )}
           {/* Time Mode */}
           <FormButton className="flex-center gap-2" onClick={handleSettingTimeMode}>
-            {!settingTimeMode && <span className="text-nowrap">اضف ميعادا</span>}
             <i className={(settingTimeMode ? "text-primary" : "fa-regular") + " fa-solid fa-clock"}></i>
           </FormButton>
         </div>
@@ -120,7 +119,7 @@ export default function AddTask() {
       {settingTimeWindow && (
         <PopupBox
           setIsOpened={setSettingTimeWindow}
-          style={{ width: "450px", maxWidth: "100%" }}
+          style={{ width: "450px", maxWidth: "100%", margin: "10px" }}
           className="p-2 rounded bg-white"
           buttonTitle="ادخل"
           buttonClass="btn btn-primary w-100 mt-2"

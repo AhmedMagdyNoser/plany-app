@@ -5,7 +5,7 @@ import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import { removeNote, updateNote } from "../Redux/notesSlice";
 import ConfirmBox from "../Components/Utils/ConfirmBox";
 import { FadeIn } from "../Components/Utils/Fade";
-import { findObjectById } from "../utils";
+import { findObjectById, formatDateAndTime } from "../utils";
 
 export default function NoteDetailsPage() {
   const navigate = useNavigate();
@@ -107,7 +107,7 @@ export default function NoteDetailsPage() {
           </form>
         )}
         <span className="text-muted d-block mt-2">
-          تاريخ اخر تعديل: <b>{note.time}</b>
+          تاريخ اخر تعديل: <b>{formatDateAndTime(note.time, 'ar')}</b>
         </span>
       </div>
     </div>
