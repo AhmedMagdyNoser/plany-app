@@ -107,11 +107,21 @@ export default function NoteDetailsPage() {
           </form>
         )}
         <span className="text-muted d-block mt-2">
-          تاريخ اخر تعديل: <b>{formatDateAndTime(note.time, 'ar')}</b>
+          تاريخ اخر تعديل: <b>{formatDateAndTime(note.time, "ar")}</b>
         </span>
       </div>
     </div>
   ) : (
-    <h2 className="container my-5 text-center">خطأ</h2>
+    <div className="container my-5 text-center">
+      <FadeIn milliSeconds={500}>
+        <img
+          src={require("../Imgs/no-results.png")}
+          alt="No Results"
+          className="my-5"
+          style={{ opacity: "0.75", width: "300px", maxWidth: "75%" }}
+        />
+      </FadeIn>
+      <h4 className="lh-lg text-muted">للأسف لم يتم العثور على ما تبحث عنه.</h4>
+    </div>
   );
 }
