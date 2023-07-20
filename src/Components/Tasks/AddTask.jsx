@@ -89,6 +89,7 @@ export default function AddTask() {
             ref={inputRef}
             placeholder="اضف مهمة جديدة"
             onChange={(e) => setTaskTitle(e.target.value)}
+            tabIndex={settingTimeWindow ? -1 : 1}
             className="flex-grow-1 py-2 border-0"
             autoComplete="off"
           />
@@ -98,17 +99,21 @@ export default function AddTask() {
           {settingTimeMode && (
             <>
               {/* Notification Mode */}
-              <FormButton onClick={handleNotificationMode}>
+              <FormButton onClick={handleNotificationMode} tabIndex={settingTimeWindow ? -1 : 1}>
                 <i className={isNotificationOn ? "fa-solid fa-bell text-primary" : "fa-regular fa-bell-slash"}></i>
               </FormButton>
               {/* Selected Time */}
-              <FormButton className="flex-center flex-grow-1 gap-2" onClick={() => setSettingTimeWindow(true)}>
+              <FormButton
+                onClick={() => setSettingTimeWindow(true)}
+                tabIndex={settingTimeWindow ? -1 : 1}
+                className="flex-center flex-grow-1 gap-2"
+              >
                 <span className="text-nowrap">{formatDateAndTime(taskTime.toISOString(), "ar")}</span>
               </FormButton>
             </>
           )}
           {/* Time Mode */}
-          <FormButton className="flex-center gap-2" onClick={handleSettingTimeMode}>
+          <FormButton tabIndex={settingTimeWindow ? -1 : 1} className="flex-center gap-2" onClick={handleSettingTimeMode}>
             <i className={(settingTimeMode && "text-primary") + " fa-solid fa-clock"}></i>
           </FormButton>
         </div>
@@ -136,17 +141,18 @@ export default function AddTask() {
         </PopupBox>
       )}
 
-      <input type="submit" className="btn btn-primary w-100" value="أضف" />
+      <input type="submit" className="btn btn-primary w-100" value="أضف" tabIndex={settingTimeWindow ? -1 : 1} />
     </form>
   );
 }
 
-function FormButton({ children, className, onClick }) {
+function FormButton({ children, className, onClick, tabIndex }) {
   return (
     <button
       type="button"
       style={{ minHeight: "40px" }}
       className={"text-muted bg-light gray-hover border-0 rounded px-3 " + className}
+      tabIndex={tabIndex}
       onClick={onClick}
     >
       {children}
