@@ -6,20 +6,24 @@ import { findObjectById, randomDigits } from "../../utils";
 
 const notificationsAudio = new Audio(notificationsSound);
 
+// Maximum delay time is around 2^31 milliseconds, which is approximately 24.8 days.
+
 export function setTaskReminderNotification(id, reminderDate) {
   const timeDifference = new Date(reminderDate) - new Date();
-  setTimeout(function () {
-    sendNotificationNow(id);
-  }, timeDifference);
+  if (timeDifference < 2147483647) {
+    setTimeout(function () {
+      sendNotificationNow(id);
+    }, timeDifference);
+  }
 }
 
 export function remindNotNotifiedTasks() {
   getNotNotifiedTasks().forEach((task) => {
     const timeDifference = new Date(task.time) - new Date();
     if (timeDifference > 0) {
-      setTaskReminderNotification(task.id, task.time)
+      setTaskReminderNotification(task.id, task.time);
     } else {
-      sendNotificationNow(task.id)
+      sendNotificationNow(task.id);
     }
   });
 }
