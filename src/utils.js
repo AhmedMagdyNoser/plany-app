@@ -49,3 +49,9 @@ export function formatedCurrentDateAndTime(language) {
     minute: "numeric",
   });
 }
+
+export function checkIfOnScreen(element) {
+  if (element && window.pageYOffset + window.innerHeight > element.offsetTop) {
+    return true
+  }
+}

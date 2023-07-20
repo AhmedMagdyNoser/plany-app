@@ -3,10 +3,10 @@ import { FadeIn } from "../Utils/Fade";
 
 export default function MainSection() {
   return (
-    <FadeIn milliSeconds="1000">
-      <div className="container py-5 flex-center flex-column gap-4 border-bottom">
-        <h1 className="text-center text-dark py-4 border-bottom">اجعل حياتك أكثر تنظيما وفعالية</h1>
-        <p className="text-center text-muted" style={{ width: "500px", maxWidth: "90%" }}>
+    <FadeIn milliSeconds="1000" className="container py-5">
+      <div className="py-5 flex-center flex-column gap-4 text-center">
+        <h2 className="text-dark pb-4 border-bottom">اجعل حياتك أكثر تنظيما وفعالية</h2>
+        <p className="text-muted" style={{ width: "500px", maxWidth: "90%" }}>
           باستخدام الأدوات المناسبة لتحقيق النجاح ، قم بزيادة إنتاجيتك إلى الحد الأقصى ، حدد بسهولة أولويات المهام وقم بتعيين التذكيرات.
         </p>
         <nav className="flex-center flex-wrap gap-3">
