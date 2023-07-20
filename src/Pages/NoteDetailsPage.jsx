@@ -118,10 +118,10 @@ export default function NoteDetailsPage() {
           src={require("../Imgs/no-results.png")}
           alt="No Results"
           className="my-5"
-          style={{ opacity: "0.75", width: "300px", maxWidth: "75%" }}
+          style={{ opacity: "0.75", width: "300px", maxWidth: "65%" }}
         />
+        <h4 className="lh-lg text-muted">للأسف لم يتم العثور على ما تبحث عنه.</h4>
       </FadeIn>
-      <h4 className="lh-lg text-muted">للأسف لم يتم العثور على ما تبحث عنه.</h4>
     </div>
   );
 }
