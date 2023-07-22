@@ -50,8 +50,9 @@ export function formatedCurrentDateAndTime(language) {
   });
 }
 
-export function checkIfOnScreen(element) {
-  if (element && window.pageYOffset + window.innerHeight > element.offsetTop) {
-    return true
+export function checkIfOnScreen(element, ratio) {
+  const distanceFromTop = element.getBoundingClientRect().top + window.pageYOffset;
+  if (element && window.pageYOffset + window.innerHeight * (ratio | 1) > distanceFromTop) {
+    return true;
   }
 }
