@@ -6,6 +6,7 @@ import { removeNote, updateNote } from "../Redux/notesSlice";
 import ConfirmBox from "../Components/Utils/ConfirmBox";
 import { FadeIn } from "../Components/Utils/Fade";
 import { findObjectById, formatDateAndTime } from "../utils";
+import error from "../Imgs/error.svg";
 
 export default function NoteDetailsPage() {
   const navigate = useNavigate();
@@ -114,12 +115,7 @@ export default function NoteDetailsPage() {
   ) : (
     <div className="container my-5 text-center">
       <FadeIn milliSeconds={500}>
-        <img
-          src={require("../Imgs/no-results.png")}
-          alt="No Results"
-          className="my-5"
-          style={{ opacity: "0.75", width: "300px", maxWidth: "65%" }}
-        />
+        <img src={error} alt="No Results" style={{ opacity: "0.75", width: "300px", maxWidth: "65%" }} />
         <h4 className="lh-lg text-muted">للأسف لم يتم العثور على ما تبحث عنه.</h4>
       </FadeIn>
     </div>

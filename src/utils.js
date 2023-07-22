@@ -50,9 +50,13 @@ export function formatedCurrentDateAndTime(language) {
   });
 }
 
+export function getDistanceFromTop(element) {
+  return element.getBoundingClientRect().top + window.pageYOffset;
+}
+
 export function checkIfOnScreen(element, ratio) {
-  const distanceFromTop = element.getBoundingClientRect().top + window.pageYOffset;
-  if (element && window.pageYOffset + window.innerHeight * (ratio | 1) > distanceFromTop) {
+  // const distanceFromTop = element.getBoundingClientRect().top + window.pageYOffset;
+  if (element && window.pageYOffset + window.innerHeight * (ratio || 1) > getDistanceFromTop(element)) {
     return true;
   }
 }

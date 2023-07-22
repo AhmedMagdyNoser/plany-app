@@ -7,7 +7,7 @@ export default function FeaturesSection() {
   let sectionRef = useRef();
 
   function animateSection() {
-    if (checkIfOnScreen(sectionRef.current)) {
+    if (checkIfOnScreen(sectionRef.current, 0.92)) {
       sectionRef.current.style.transform = "translateY(0)";
     }
   }
@@ -21,7 +21,7 @@ export default function FeaturesSection() {
   }, []);
 
   return (
-    <div ref={sectionRef} className="bg-light py-5" style={{ transform: "translateY(100px)", transition: TRANSITION }}>
+    <section ref={sectionRef} className="bg-light py-5" style={{ transform: "translateY(100px)", transition: TRANSITION }}>
       <div className="container py-5">
         <h2 className="text-center mb-5">لماذا نحن؟</h2>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, auto))", gap: "25px" }}>
@@ -42,7 +42,7 @@ export default function FeaturesSection() {
           />
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 
@@ -50,7 +50,7 @@ function Feature({ iconClass, title, description }) {
   let iconRef = useRef();
 
   function animateOnScroll() {
-    if (checkIfOnScreen(iconRef.current)) {
+    if (checkIfOnScreen(iconRef.current, 0.92)) {
       iconRef.current.style.scale = "1";
       iconRef.current.firstElementChild.style.transform = "rotate(0)";
     }
