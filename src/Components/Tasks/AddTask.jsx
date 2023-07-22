@@ -131,8 +131,8 @@ export default function AddTask() {
           setIsOpened={setSettingTimeWindow}
           style={{ width: "450px", maxWidth: "100%", margin: "10px" }}
           className="p-2 rounded bg-white"
-          buttonTitle="ادخل"
-          buttonClass="btn btn-primary w-100 mt-2"
+          cancelButtonTitle="موافق"
+          cancelButtonClass="btn btn-primary w-100 mt-2"
           animationTime={350}
         >
           <div className="rounded overflow-hidden">

@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import { removeNote, updateNote } from "../Redux/notesSlice";
-import ConfirmBox from "../Components/Utils/ConfirmBox";
-import { FadeIn } from "../Components/Utils/Fade";
 import { findObjectById, formatDateAndTime } from "../utils";
-import error from "../Imgs/error.svg";
+import { FadeIn } from "../Components/Utils/Fade";
+import PopupBox from "../Components/Utils/PopupBox";
+import PageNotFound from "./PageNotFound";
 
 export default function NoteDetailsPage() {
   const navigate = useNavigate();
@@ -28,14 +28,6 @@ export default function NoteDetailsPage() {
     e.key === "Delete" && setIsRemoveBoxOpened(true);
   }
 
-  useEffect(() => {
-    document.addEventListener("keydown", handleDeleteKey);
-    // Cleanup function
-    return () => {
-      document.removeEventListener("keydown", handleDeleteKey);
-    }; // The cleanup function is executed when the component unmounts.
-  }, []);
-
   function handleUpdate(e) {
     e.preventDefault();
     let formData = new FormData(e.target);
@@ -56,6 +48,13 @@ export default function NoteDetailsPage() {
     navigate("/notes");
   }
 
+  useEffect(() => {
+    document.addEventListener("keydown", handleDeleteKey);
+    return () => {
+      document.removeEventListener("keydown", handleDeleteKey);
+    };
+  }, []);
+
   return note ? (
     <div className={"py-5 " + (!editingMode && "bg-white")}>
       <div className="container">
@@ -74,14 +73,20 @@ export default function NoteDetailsPage() {
             </header>
             <ReactMarkdown className="lh-lg">{note.description}</ReactMarkdown>
             {isRemoveBoxOpened && (
-              <ConfirmBox
+              <PopupBox
                 setIsOpened={setIsRemoveBoxOpened}
-                action={handleRemove}
-                message="هل انت متأكد من الحذف؟"
+                className="flex-center flex-column bg-white p-4 rounded-3 shadow-lg"
+                style={{ width: "350px" }}
+                confirmAction={handleRemove}
                 confirmButtonTitle="حذف"
-                discardButtonTitle="إلغاء"
+                confirmButtonClass="btn btn-outline-danger flex-fill fw-bold"
+                cancelButtonTitle="إلغاء"
+                cancelButtonClass="btn btn-outline-secondary flex-fill fw-bold"
                 animationTime={250}
-              />
+              >
+                <i className="fa-solid fa-circle-exclamation text-warning py-3" style={{ fontSize: "4.5rem" }}></i>
+                <p className="border-bottom pb-2 text-center">هل انت متأكد من الحذف؟</p>
+              </PopupBox>
             )}
           </FadeIn>
         ) : (
@@ -113,11 +118,6 @@ export default function NoteDetailsPage() {
       </div>
     </div>
   ) : (
-    <div className="container my-5 text-center">
-      <FadeIn milliSeconds={500}>
-        <img src={error} alt="No Results" style={{ opacity: "0.75", width: "300px", maxWidth: "65%" }} />
-        <h4 className="lh-lg text-muted">للأسف لم يتم العثور على ما تبحث عنه.</h4>
-      </FadeIn>
-    </div>
+    <PageNotFound />
   );
 }

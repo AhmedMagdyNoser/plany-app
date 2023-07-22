@@ -5,6 +5,7 @@ import { addNote } from "../../Redux/notesSlice";
 
 export default function AddNote({ setIsOpened, animationTime }) {
   const dispatch = useDispatch();
+
   const screen = useRef(null);
   const box = useRef(null);
   const titleInput = useRef(null);
@@ -48,11 +49,10 @@ export default function AddNote({ setIsOpened, animationTime }) {
     titleInput.current.focus();
     document.addEventListener("keydown", handleEscapeKey);
     document.addEventListener("mousedown", handleClickOutside);
-    // Cleanup function
     return () => {
       document.removeEventListener("keydown", handleEscapeKey);
       document.removeEventListener("mousedown", handleClickOutside);
-    }; // The cleanup function is executed the component unmounts.
+    };
     // eslint-disable-next-line
   }, []);
 

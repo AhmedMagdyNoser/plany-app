@@ -1,8 +1,26 @@
 import { useRef, useEffect } from "react";
 
-export default function PopupBox({ children, setIsOpened, buttonClass, buttonTitle, style, className, animationTime }) {
+export default function PopupBox({
+  children,
+  setIsOpened,
+  className,
+  style,
+  confirmAction,
+  confirmButtonTitle,
+  confirmButtonClass,
+  cancelButtonTitle,
+  cancelButtonClass,
+  animationTime,
+}) {
   const screen = useRef(null);
   const box = useRef(null);
+  const confirmButtonRef = useRef(null);
+  const cancelButtonRef = useRef(null);
+
+  function handleConfirm() {
+    confirmAction();
+    handleClose();
+  }
 
   function handleClose() {
     setTimeout(() => {
@@ -20,17 +38,24 @@ export default function PopupBox({ children, setIsOpened, buttonClass, buttonTit
     }
   }
 
-  function handleEscapeKey(event) {
+  function handleKeyDown(event) {
     if (event.key === "Escape") {
       handleClose();
+    } else if (confirmButtonTitle && cancelButtonTitle) {
+      if (event.key === "ArrowRight") {
+        confirmButtonRef.current.focus();
+      } else if (event.key === "ArrowLeft") {
+        cancelButtonRef.current.focus();
+      }
     }
   }
 
   useEffect(() => {
-    document.addEventListener("keydown", handleEscapeKey);
+    confirmButtonRef.current && confirmButtonRef.current.focus();
+    document.addEventListener("keydown", handleKeyDown);
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener("keydown", handleEscapeKey);
+      document.removeEventListener("keydown", handleKeyDown);
       document.removeEventListener("mousedown", handleClickOutside);
     };
     // eslint-disable-next-line
@@ -38,9 +63,20 @@ export default function PopupBox({ children, setIsOpened, buttonClass, buttonTit
 
   return (
     <div ref={screen} className="screen flex-center">
-      <div ref={box} className={className} style={{ ...style, maxWidth: "100%", animation: `popup ${animationTime}ms` }}>
+      <div ref={box} className={className} style={{ maxWidth: "100%", animation: `popup ${animationTime}ms`, ...style }}>
         {children}
-        <button type="button" className={buttonClass} onClick={handleClose}>{buttonTitle}</button>
+        <div className="d-flex gap-2 w-100">
+          {confirmButtonTitle && (
+            <button type="button" ref={confirmButtonRef} onClick={handleConfirm} className={confirmButtonClass}>
+              {confirmButtonTitle}
+            </button>
+          )}
+          {cancelButtonTitle && (
+            <button type="button" ref={cancelButtonRef} onClick={handleClose} className={cancelButtonClass}>
+              {cancelButtonTitle}
+            </button>
+          )}
+        </div>
       </div>
 
       <style>
