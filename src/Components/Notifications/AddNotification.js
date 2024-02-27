@@ -18,7 +18,7 @@ export function setTaskReminderNotification(id, reminderDate) {
 }
 
 export function remindNotNotifiedTasks() {
-  getNotNotifiedTasks().forEach((task) => {
+  getNotNotifiedTasks()?.forEach((task) => {
     const timeDifference = new Date(task.time) - new Date();
     if (timeDifference > 0) {
       setTaskReminderNotification(task.id, task.time);
@@ -44,5 +44,5 @@ export function sendNotificationNow(id) {
 }
 
 export function getNotNotifiedTasks() {
-  return store.getState().tasks.data.filter((task) => task.isNotified === false);
+  return store.getState().tasks?.data?.filter((task) => task.isNotified === false);
 }
