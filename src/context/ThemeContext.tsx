@@ -3,9 +3,9 @@ import { ColorTheme, ThemeContextProps } from "@/types/theme";
 
 const initialTheme: ColorTheme = "light";
 
-export const ThemeContext = createContext<ThemeContextProps | null>(null);
+export const ThemeContext = createContext<ThemeContextProps>({ theme: initialTheme, toggleTheme: () => {} });
 
-export function ThemeProvider({ children }: { children: ReactNode }): JSX.Element {
+function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<ColorTheme>("light");
 
   useEffect(() => {
@@ -28,3 +28,5 @@ export function ThemeProvider({ children }: { children: ReactNode }): JSX.Elemen
 
   return <ThemeContext.Provider value={{ theme, toggleTheme }}>{children}</ThemeContext.Provider>;
 }
+
+export default ThemeProvider;
