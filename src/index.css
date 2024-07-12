@@ -1,3 +1,47 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-bold capitalize text-l-txt dark:text-d-txt;
+  }
+  h1 {
+    @apply text-2xl sm:text-3xl;
+  }
+  h2 {
+    @apply text-xl sm:text-2xl;
+  }
+  h3 {
+    @apply text-lg sm:text-xl;
+  }
+  p {
+    @apply text-xs text-l-txt-semi dark:text-d-txt-semi sm:text-sm;
+  }
+}
+
+@layer components {
+  .btn-padding {
+    @apply px-5 py-2;
+  }
+  .btn-a {
+    @apply btn-padding rounded-md bg-primary text-white transition-colors hover:bg-primary-semi;
+  }
+  .btn-b {
+    @apply btn-padding bg-l-bg-5 hover:bg-l-bg-6 dark:hover:bg-d-bg-6 dark:bg-d-bg-5 rounded-md text-primary transition-colors;
+  }
+  .btn-c {
+    @apply btn-padding hover:bg-l-bg-4 dark:hover:bg-d-bg-4 rounded-md bg-l-bg-3 text-l-txt-semi transition-colors dark:bg-d-bg-3 dark:text-d-txt;
+  }
+  .btn-d {
+    @apply btn-padding rounded-md text-l-txt-semi transition-colors hover:bg-l-bg-3 dark:text-d-txt-semi dark:hover:bg-d-bg-3;
+  }
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+}

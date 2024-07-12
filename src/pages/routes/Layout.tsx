@@ -3,9 +3,11 @@ import Header from "@/components/global/Header";
 
 function Layout() {
   return (
-    <div>
+    <div className="bg-l-bg-1 dark:bg-d-bg-1 min-h-screen transition-colors">
       <Header />
-      <Outlet />
+      <div className="container p-4">
+        <Outlet />
+      </div>
     </div>
   );
 }
