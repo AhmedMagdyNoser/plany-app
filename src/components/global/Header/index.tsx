@@ -1,29 +1,45 @@
 import { Link } from "react-router-dom";
 import { paths } from "@/utils/constants";
+import useUser from "@/hooks/useUser";
 import ToggleThemeButton from "./ToggleThemeButton";
 
 function Header() {
-  const auth = false; // testing
+  const { user } = useUser();
 
   return (
-    <header className="flex justify-between bg-gray-100 p-4 text-gray-800 dark:bg-gray-800 dark:text-gray-100">
-      <Link to="/">Plany</Link>
-      <nav className="flex gap-2">
-        {auth ? (
-          <>
-            <Link to={paths.tasks}>Tasks</Link>
-            <Link to={paths.notes}>Notes</Link>
-            <Link to={paths.contact}>Profile</Link>
-            <ToggleThemeButton />
-          </>
-        ) : (
-          <>
-            <ToggleThemeButton />
-            <Link to={paths.login}>Login</Link>
-            <Link to={paths.register}>Register</Link>
-          </>
-        )}
-      </nav>
+    <header className="shadow">
+      <div className="container flex items-center justify-between p-4">
+        <Link to="/" className="text-xl font-bold text-l-txt dark:text-d-txt">
+          Plany
+        </Link>
+        <nav className="flex gap-2 font-semibold">
+          {user ? (
+            <>
+              <Link to={paths.tasks} className="btn-d">
+                Tasks
+              </Link>
+              <Link to={paths.notes} className="btn-d">
+                Notes
+              </Link>
+              <ToggleThemeButton />
+              <Link to={paths.contact} className="btn-d">
+                Profile
+              </Link>
+            </>
+          ) : (
+            <>
+              <ToggleThemeButton />
+              <div className="bg-l-bg-4 dark:bg-d-bg-4 my-2 w-[2px]"></div>
+              <Link to={paths.login} className="btn-d">
+                Login
+              </Link>
+              <Link to={paths.register} className="btn-a">
+                Start for free
+              </Link>
+            </>
+          )}
+        </nav>
+      </div>
     </header>
   );
 }
