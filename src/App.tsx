@@ -12,7 +12,8 @@ import Tasks from "@/pages/inner/Tasks";
 import Notes from "@/pages/inner/Notes";
 import Contact from "@/pages/inner/Contact";
 import Note from "@/pages/inner/Note";
-import NotFound from "./pages/routes/NotFound";
+import NotFound from "@/pages/routes/NotFound";
+import AuthGaurd from "@/pages/routes/AuthGaurd";
 
 function App() {
   return (
@@ -22,18 +23,22 @@ function App() {
           <Route index element={<Home />} />
 
           {/* Outer Pages */}
-          <Route path={paths.login} element={<Login />} />
-          <Route path={paths.register} element={<Register />} />
-          <Route path={paths.forgotPassword} element={<ForgotPassword />} />
-          <Route path={paths.verifyCode} element={<VerifyCode />} />
-          <Route path={paths.resetPassword} element={<ResetPassword />} />
+          <Route element={<AuthGaurd requireLoggedIn={false} />}>
+            <Route path={paths.login} element={<Login />} />
+            <Route path={paths.register} element={<Register />} />
+            <Route path={paths.forgotPassword} element={<ForgotPassword />} />
+            <Route path={paths.verifyCode} element={<VerifyCode />} />
+            <Route path={paths.resetPassword} element={<ResetPassword />} />
+          </Route>
 
           {/* Inner Pages */}
-          <Route path={paths.profile} element={<Profile />} />
-          <Route path={paths.tasks} element={<Tasks />} />
-          <Route path={paths.notes} element={<Notes />} />
-          <Route path={paths.notes + "/:id"} element={<Note />} />
-          <Route path={paths.contact} element={<Contact />} />
+          <Route element={<AuthGaurd requireLoggedIn={true} />}>
+            <Route path={paths.profile} element={<Profile />} />
+            <Route path={paths.tasks} element={<Tasks />} />
+            <Route path={paths.notes} element={<Notes />} />
+            <Route path={paths.notes + "/:id"} element={<Note />} />
+            <Route path={paths.contact} element={<Contact />} />
+          </Route>
 
           {/* Catch All */}
           <Route path="*" element={<NotFound />} />
