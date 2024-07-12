@@ -1,3 +1,5 @@
+export const appName = "Plany";
+
 export const paths = {
   login: "login",
   register: "register",
