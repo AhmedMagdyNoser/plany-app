@@ -11,3 +11,5 @@ export const paths = {
   notes: "notes", // + /:id for a single note
   contact: "contact",
 };
+
+export const globalErrorMessage = "Something went wrong. Please try again later.";
