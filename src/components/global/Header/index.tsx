@@ -22,7 +22,7 @@ function Header() {
                 Notes
               </Link>
               <ToggleThemeButton />
-              <Link to={paths.contact} className="btn-d">
+              <Link to={paths.profile} className="btn-d">
                 Profile
               </Link>
             </>
