@@ -31,9 +31,9 @@ module.exports = {
             semi: "#B8C5D5", // paragraphs
           },
           bg: {
-            1: "#0a0c19", // Almost black
-            2: "#111827", // A little lighter
-            3: "#1f2937", // A little lighter
+            1: "#0a0c12", // Almost black
+            2: "#0e1521", // A little lighter
+            3: "#1f2935", // A little lighter
             4: "#283042", // A little lighter
             5: "#1E293B", // A dark version of the primary color
             6: "#283550", // A very dark version of the primary color

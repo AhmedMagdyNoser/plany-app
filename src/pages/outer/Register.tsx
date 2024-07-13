@@ -1,3 +1,4 @@
+import InputField from "@/components/ui/InputField";
 import useDocumentTitle from "@/hooks/useDocumentTitle";
 import useUser from "@/hooks/useUser";
 import { apiRequest } from "@/utils/api";
@@ -14,14 +15,13 @@ function Register() {
   const [lastName, setLastName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [confirmPassword, setConfirmPassword] = useState<string>("");
 
   const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (firstName && lastName && email && password && confirmPassword) {
+    if (firstName && lastName && email && password) {
       try {
         setError("");
         setLoading(true);
@@ -44,18 +44,12 @@ function Register() {
   return (
     <div>
       <h1>Register</h1>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-2">
-        <input type="text" placeholder="First Name" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
-        <input type="text" placeholder="Last Name" value={lastName} onChange={(e) => setLastName(e.target.value)} />
-        <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-        <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        <input
-          type="password"
-          placeholder="Confirm Password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-        />
-        <button type="submit" disabled={!firstName || !lastName || !email || !password || !confirmPassword || loading}>
+      <form onSubmit={handleSubmit} className="flex flex-col gap-2" autoComplete="off">
+        <InputField.FirstName value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+        <InputField.LastName value={lastName} onChange={(e) => setLastName(e.target.value)} />
+        <InputField.Email value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="off" />
+        <InputField.Password value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="new-password" />
+        <button type="submit" disabled={!firstName || !lastName || !email || !password || loading}>
           {loading ? "Loading..." : "Register"}
         </button>
         {error && <p>{error}</p>}

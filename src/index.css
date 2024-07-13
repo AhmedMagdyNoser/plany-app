@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 @layer base {
+  body {
+    @apply text-sm;
+  }
   h1,
   h2,
   h3,
@@ -33,10 +36,10 @@
     @apply btn-padding rounded-md bg-primary text-white transition-colors hover:bg-primary-semi;
   }
   .btn-b {
-    @apply btn-padding bg-l-bg-5 hover:bg-l-bg-6 dark:hover:bg-d-bg-6 dark:bg-d-bg-5 rounded-md text-primary transition-colors;
+    @apply btn-padding rounded-md bg-l-bg-5 text-primary transition-colors hover:bg-l-bg-6 dark:bg-d-bg-5 dark:hover:bg-d-bg-6;
   }
   .btn-c {
-    @apply btn-padding hover:bg-l-bg-4 dark:hover:bg-d-bg-4 rounded-md bg-l-bg-3 text-l-txt-semi transition-colors dark:bg-d-bg-3 dark:text-d-txt;
+    @apply btn-padding rounded-md bg-l-bg-3 text-l-txt-semi transition-colors hover:bg-l-bg-4 dark:bg-d-bg-3 dark:text-d-txt dark:hover:bg-d-bg-4;
   }
   .btn-d {
     @apply btn-padding rounded-md text-l-txt-semi transition-colors hover:bg-l-bg-3 dark:text-d-txt-semi dark:hover:bg-d-bg-3;
@@ -44,4 +47,10 @@
   .flex-center {
     @apply flex items-center justify-center;
   }
+}
+
+/* Change the input autofill background color */
+input:-webkit-autofill {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: #858595;
 }

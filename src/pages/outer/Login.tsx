@@ -4,6 +4,7 @@ import { apiRequest } from "@/utils/api";
 import { appName, globalErrorMessage } from "@/utils/constants";
 import useDocumentTitle from "@/hooks/useDocumentTitle";
 import useUser from "@/hooks/useUser";
+import InputField from "@/components/ui/InputField";
 
 function Login() {
   useDocumentTitle(`Login | ${appName}`);
@@ -43,9 +44,16 @@ function Login() {
   return (
     <div>
       <h1>Login</h1>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-2">
-        <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-        <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+      <form onSubmit={handleSubmit} className="flex flex-col gap-2" autoComplete="false">
+        <input className="hidden" autoComplete="false" />
+        <InputField value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" autoComplete="off" />
+        <InputField
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Password"
+          type="password"
+          autoComplete="new-password"
+        />
         <label>
           <input type="checkbox" checked={remember} onChange={(e) => setRemember(e.target.checked)} />
           Remember me
