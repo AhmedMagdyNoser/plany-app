@@ -2,9 +2,11 @@ import { useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import { apiRequest } from "@/utils/api";
 import { appName, globalErrorMessage } from "@/utils/constants";
-import useDocumentTitle from "@/hooks/useDocumentTitle";
+import { Link } from "react-router-dom";
 import useUser from "@/hooks/useUser";
+import useDocumentTitle from "@/hooks/useDocumentTitle";
 import InputField from "@/components/ui/InputField";
+import Alert from "@/components/ui/Alert";
 
 function Login() {
   useDocumentTitle(`Login | ${appName}`);
@@ -42,9 +44,9 @@ function Login() {
   }
 
   return (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-2" autoComplete="false">
+    <div className="mx-auto mb-20 flex w-[385px] max-w-full flex-1 flex-col justify-center gap-6">
+      <h1 className="text-center">Welcome back!</h1>
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4" autoComplete="false">
         <input className="hidden" autoComplete="false" />
         <InputField value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" autoComplete="off" />
         <InputField
@@ -58,10 +60,16 @@ function Login() {
           <input type="checkbox" checked={remember} onChange={(e) => setRemember(e.target.checked)} />
           Remember me
         </label>
-        <button type="submit" disabled={!email || !password || loading}>
+        {error && <Alert.Error message={error} />}
+        <button type="submit" disabled={!email || !password || loading} className="btn-a font-bold uppercase">
           {loading ? "Loading..." : "Login"}
         </button>
-        {error && <p>{error}</p>}
+        <p className="flex justify-center gap-1">
+          Don't have an account?
+          <Link to="/register" className="font-semibold text-primary hover:text-primary-semi">
+            Register
+          </Link>
+        </p>
       </form>
     </div>
   );
