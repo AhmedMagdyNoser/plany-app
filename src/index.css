@@ -33,16 +33,16 @@
     @apply px-5 py-2;
   }
   .btn-a {
-    @apply btn-padding rounded-md bg-primary text-white transition-colors hover:bg-primary-semi;
+    @apply btn-padding rounded-xl bg-primary text-white transition-colors hover:bg-primary-semi;
   }
   .btn-b {
-    @apply btn-padding rounded-md bg-l-bg-5 text-primary transition-colors hover:bg-l-bg-6 dark:bg-d-bg-5 dark:hover:bg-d-bg-6;
+    @apply btn-padding rounded-xl bg-l-bg-5 text-primary transition-colors hover:bg-l-bg-6 dark:bg-d-bg-5 dark:hover:bg-d-bg-6;
   }
   .btn-c {
-    @apply btn-padding rounded-md bg-l-bg-3 text-l-txt-semi transition-colors hover:bg-l-bg-4 dark:bg-d-bg-3 dark:text-d-txt dark:hover:bg-d-bg-4;
+    @apply btn-padding rounded-xl bg-l-bg-3 text-l-txt-semi transition-colors hover:bg-l-bg-4 dark:bg-d-bg-3 dark:text-d-txt dark:hover:bg-d-bg-4;
   }
   .btn-d {
-    @apply btn-padding rounded-md text-l-txt-semi transition-colors hover:bg-l-bg-3 dark:text-d-txt-semi dark:hover:bg-d-bg-3;
+    @apply btn-padding rounded-xl text-l-txt-semi transition-colors hover:bg-l-bg-3 dark:text-d-txt-semi dark:hover:bg-d-bg-3;
   }
   .flex-center {
     @apply flex items-center justify-center;
@@ -52,5 +52,5 @@
 /* Change the input autofill background color */
 input:-webkit-autofill {
   -webkit-background-clip: text;
-  -webkit-text-fill-color: #858595;
+  -webkit-text-fill-color: #808085;
 }
