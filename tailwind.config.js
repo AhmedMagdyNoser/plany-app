@@ -47,8 +47,8 @@ module.exports = {
             6: "#283550", // A very dark version of the primary color
           },
           red: {
-            DEFAULT: "#ee5656",
-            semi: "#350a0a",
+            DEFAULT: "#ff5050",
+            semi: "#351010",
           },
           green: {
             DEFAULT: "#22c55e",

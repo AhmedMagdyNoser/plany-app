@@ -46,11 +46,16 @@ function Login() {
   }
 
   return (
-    <div className="mx-auto mb-20 flex w-[385px] max-w-full flex-1 flex-col justify-center gap-6">
+    <div className="mx-auto mb-[100px] flex w-[385px] max-w-full flex-1 flex-col justify-center gap-6 p-4">
       <h1 className="text-center">Welcome back!</h1>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4" autoComplete="false">
-        <input className="hidden" autoComplete="false" />
-        <InputField value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" autoComplete="off" />
+        <InputField
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Email"
+          autoComplete="off"
+          autoFocus
+        />
         <InputField
           value={password}
           onChange={(e) => setPassword(e.target.value)}
@@ -67,7 +72,7 @@ function Login() {
         >
           {loading ? <SVGIcon.Spinner size={20} /> : "Login"}
         </button>
-        <p className="flex justify-center gap-1">
+        <p className="flex items-center justify-center gap-1">
           Don't have an account?
           <Link to="/register" className="link font-semibold">
             Register

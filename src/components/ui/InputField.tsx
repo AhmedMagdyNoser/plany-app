@@ -13,7 +13,9 @@ export default function InputField({ value, validation, instructions, className 
     <div className="w-full">
       <div className="rounded-primary bg-2 brdr-3 flex items-center overflow-hidden border">
         <input
-          className={"txt flex-1 bg-inherit p-3 font-semibold outline-none placeholder:font-normal " + className}
+          className={
+            "txt placeholder:txt-semi flex-1 bg-inherit p-3 font-semibold outline-none placeholder:font-normal " + className
+          }
           value={value}
           size={1}
           {...rest}
