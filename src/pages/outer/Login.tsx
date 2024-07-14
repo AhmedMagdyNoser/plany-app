@@ -8,6 +8,7 @@ import useDocumentTitle from "@/hooks/useDocumentTitle";
 import InputField from "@/components/ui/InputField";
 import Alert from "@/components/ui/Alert";
 import Checkbox from "@/components/ui/Checkbox";
+import SVGIcon from "@/components/icons/SVGIcon";
 
 function Login() {
   useDocumentTitle(`Login | ${appName}`);
@@ -59,8 +60,12 @@ function Login() {
         />
         <Checkbox label="Remember me" checked={remember} onClick={() => setRemember(!remember)} />
         {error && <Alert.Error message={error} />}
-        <button type="submit" disabled={!email || !password || loading} className="btn-a font-semibold uppercase">
-          {loading ? "Loading..." : "Login"}
+        <button
+          type="submit"
+          disabled={!email || !password || loading}
+          className="btn-a flex-center font-semibold uppercase"
+        >
+          {loading ? <SVGIcon.Spinner size={20} /> : "Login"}
         </button>
         <p className="flex justify-center gap-1">
           Don't have an account?
