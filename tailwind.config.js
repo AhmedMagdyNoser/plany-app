@@ -23,6 +23,14 @@ module.exports = {
             5: "#EAF5FF", // A light version of the primary color
             6: "#d2ecff", // A very light version of the primary color
           },
+          red: {
+            DEFAULT: "#ef4444",
+            semi: "#fee2e2",
+          },
+          green: {
+            DEFAULT: "#20c055",
+            semi: "#dcfce7",
+          },
         },
         // for dark mode
         d: {
@@ -37,6 +45,14 @@ module.exports = {
             4: "#283042", // A little lighter
             5: "#1E293B", // A dark version of the primary color
             6: "#283550", // A very dark version of the primary color
+          },
+          red: {
+            DEFAULT: "#ee5656",
+            semi: "#350a0a",
+          },
+          green: {
+            DEFAULT: "#22c55e",
+            semi: "#052e16",
           },
         },
       },

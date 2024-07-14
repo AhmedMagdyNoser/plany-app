@@ -69,7 +69,7 @@ function Login() {
         </button>
         <p className="flex justify-center gap-1">
           Don't have an account?
-          <Link to="/register" className="font-semibold text-primary hover:text-primary-semi">
+          <Link to="/register" className="link font-semibold">
             Register
           </Link>
         </p>

@@ -7,7 +7,7 @@
     @apply text-sm selection:bg-primary selection:text-white;
   }
   body {
-    @apply bg-1 txt-semi;
+    @apply bg-1 txt-semi transition-colors;
   }
   h1,
   h2,
@@ -33,16 +33,19 @@
 
 @layer components {
   .btn-a {
-    @apply btn-styles bg-primary text-white hover:bg-primary-semi disabled:bg-primary-semi;
+    @apply btn-styles bg-primary text-white hover:bg-primary-semi disabled:opacity-75 disabled:hover:bg-primary;
   }
   .btn-b {
-    @apply btn-styles bg-5 hover:bg-6 text-primary;
+    @apply btn-styles bg-5 hover:bg-6 disabled:hover:bg-5 text-primary disabled:opacity-75;
   }
   .btn-c {
     @apply btn-styles txt-semi bg-3 hover:bg-4;
   }
   .btn-d {
     @apply btn-styles txt-semi hover:bg-3;
+  }
+  .link {
+    @apply text-primary transition-colors hover:text-primary-semi;
   }
 }
 
@@ -55,6 +58,12 @@
   }
   .txt-semi {
     @apply text-l-txt-semi dark:text-d-txt-semi;
+  }
+  .txt-red {
+    @apply text-l-red dark:text-d-red;
+  }
+  .txt-green {
+    @apply text-l-green dark:text-d-green;
   }
   .bg-1 {
     @apply bg-l-bg-1 dark:bg-d-bg-1;
@@ -73,6 +82,30 @@
   }
   .bg-6 {
     @apply bg-l-bg-6 dark:bg-d-bg-6;
+  }
+  .bg-red {
+    @apply bg-l-red dark:bg-d-red;
+  }
+  .bg-red-semi {
+    @apply bg-l-red-semi dark:bg-d-red-semi;
+  }
+  .bg-green {
+    @apply bg-l-green dark:bg-d-green;
+  }
+  .bg-green-semi {
+    @apply bg-l-green-semi dark:bg-d-green-semi;
+  }
+  .brdr-1 {
+    @apply border-l-bg-1 dark:border-d-bg-1;
+  }
+  .brdr-2 {
+    @apply border-l-bg-2 dark:border-d-bg-2;
+  }
+  .brdr-3 {
+    @apply border-l-bg-3 dark:border-d-bg-3;
+  }
+  .brdr-4 {
+    @apply border-l-bg-4 dark:border-d-bg-4;
   }
   .flex-center {
     @apply flex items-center justify-center;
