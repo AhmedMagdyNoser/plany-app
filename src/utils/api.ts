@@ -7,7 +7,7 @@ export async function apiRequest(url: string, options: RequestInit = {}): Promis
     return await response.text();
   } catch (error) {
     if (error instanceof TypeError && error.message === "Failed to fetch")
-      throw "Oops! We’re having trouble reaching our servers."; // Network error
-    throw (error as Error).message || "`apiRequest` helper function error.";
+      throw "Oops! We’re having trouble reaching our servers.";
+    throw (error as TypeError).message || error || "`apiRequest` helper function error.";
   }
 }
