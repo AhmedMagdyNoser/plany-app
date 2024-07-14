@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 @layer base {
-  body {
-    @apply text-sm;
+  * {
+    @apply text-sm selection:bg-primary selection:text-white;
   }
   h1,
   h2,
