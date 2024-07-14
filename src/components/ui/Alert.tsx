@@ -8,7 +8,7 @@ type AlertProps = {
 
 export default function Alert({ Icon, message, colors = "bg-gray-100 text-gray-500" }: AlertProps) {
   return (
-    <div className={`animate-fade-in flex items-center gap-2 rounded-xl px-4 py-3 ${colors}`}>
+    <div className={`animate-fade-in rounded-primary flex items-center gap-2 px-4 py-3 ${colors}`}>
       {Icon && <Icon size={14} />}
       <div>{message}</div>
     </div>

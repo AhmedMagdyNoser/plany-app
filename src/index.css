@@ -6,13 +6,16 @@
   * {
     @apply text-sm selection:bg-primary selection:text-white;
   }
+  body {
+    @apply bg-1 txt-semi;
+  }
   h1,
   h2,
   h3,
   h4,
   h5,
   h6 {
-    @apply font-bold capitalize text-l-txt dark:text-d-txt;
+    @apply txt font-bold capitalize;
   }
   h1 {
     @apply text-2xl sm:text-3xl;
@@ -24,30 +27,65 @@
     @apply text-lg sm:text-xl;
   }
   p {
-    @apply text-xs text-l-txt-semi dark:text-d-txt-semi sm:text-sm;
+    @apply txt-semi text-xs sm:text-sm;
   }
 }
 
 @layer components {
-  .btn-padding {
-    @apply px-5 py-2;
-  }
   .btn-a {
-    @apply btn-padding rounded-xl bg-primary text-white transition-colors hover:bg-primary-semi disabled:bg-primary-semi;
+    @apply btn-styles bg-primary text-white hover:bg-primary-semi disabled:bg-primary-semi;
   }
   .btn-b {
-    @apply btn-padding rounded-xl bg-l-bg-5 text-primary transition-colors hover:bg-l-bg-6 dark:bg-d-bg-5 dark:hover:bg-d-bg-6;
+    @apply btn-styles bg-5 hover:bg-6 text-primary;
   }
   .btn-c {
-    @apply btn-padding rounded-xl bg-l-bg-3 text-l-txt-semi transition-colors hover:bg-l-bg-4 dark:bg-d-bg-3 dark:text-d-txt dark:hover:bg-d-bg-4;
+    @apply btn-styles txt-semi bg-3 hover:bg-4;
   }
   .btn-d {
-    @apply btn-padding rounded-xl text-l-txt-semi transition-colors hover:bg-l-bg-3 dark:text-d-txt-semi dark:hover:bg-d-bg-3;
+    @apply btn-styles txt-semi hover:bg-3;
+  }
+}
+
+@layer utilities {
+  .rounded-primary {
+    @apply rounded-xl;
+  }
+  .txt {
+    @apply text-l-txt dark:text-d-txt;
+  }
+  .txt-semi {
+    @apply text-l-txt-semi dark:text-d-txt-semi;
+  }
+  .bg-1 {
+    @apply bg-l-bg-1 dark:bg-d-bg-1;
+  }
+  .bg-2 {
+    @apply bg-l-bg-2 dark:bg-d-bg-2;
+  }
+  .bg-3 {
+    @apply bg-l-bg-3 dark:bg-d-bg-3;
+  }
+  .bg-4 {
+    @apply bg-l-bg-4 dark:bg-d-bg-4;
+  }
+  .bg-5 {
+    @apply bg-l-bg-5 dark:bg-d-bg-5;
+  }
+  .bg-6 {
+    @apply bg-l-bg-6 dark:bg-d-bg-6;
   }
   .flex-center {
     @apply flex items-center justify-center;
   }
+  .btn-padding {
+    @apply px-5 py-2;
+  }
+  .btn-styles {
+    @apply btn-padding rounded-primary transition-colors;
+  }
 }
+
+/* Animations */
 
 @keyframes fade-in {
   0% {

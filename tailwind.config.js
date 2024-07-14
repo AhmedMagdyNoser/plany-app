@@ -28,7 +28,7 @@ module.exports = {
         d: {
           txt: {
             DEFAULT: "#EFf5f8", // headings
-            semi: "#B8C5D5", // paragraphs
+            semi: "#C5CFD5", // paragraphs
           },
           bg: {
             1: "#0a0c12", // Almost black

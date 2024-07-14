@@ -9,7 +9,7 @@ function Header() {
   return (
     <header className="shadow">
       <div className="container flex items-center justify-between p-4">
-        <Link to="/" className="text-xl font-bold text-l-txt dark:text-d-txt">
+        <Link to="/" className="txt text-xl font-bold">
           Plany
         </Link>
         <nav className="flex items-center gap-2 font-semibold">
@@ -29,7 +29,7 @@ function Header() {
           ) : (
             <>
               <ToggleThemeButton />
-              <div className="h-[20px] w-[2px] bg-l-bg-4 dark:bg-d-bg-4"></div>
+              <div className="bg-4 h-[20px] w-[2px]"></div>
               <Link to={paths.login} className="btn-d">
                 Login
               </Link>
