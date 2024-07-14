@@ -12,7 +12,7 @@ function Header() {
         <Link to="/" className="text-xl font-bold text-l-txt dark:text-d-txt">
           Plany
         </Link>
-        <nav className="flex gap-2 font-semibold">
+        <nav className="flex items-center gap-2 font-semibold">
           {user ? (
             <>
               <Link to={paths.tasks} className="btn-d">
@@ -29,7 +29,7 @@ function Header() {
           ) : (
             <>
               <ToggleThemeButton />
-              <div className="bg-l-bg-4 dark:bg-d-bg-4 my-2 w-[2px]"></div>
+              <div className="h-[20px] w-[2px] bg-l-bg-4 dark:bg-d-bg-4"></div>
               <Link to={paths.login} className="btn-d">
                 Login
               </Link>
