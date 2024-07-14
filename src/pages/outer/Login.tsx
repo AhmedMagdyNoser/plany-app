@@ -61,7 +61,7 @@ function Login() {
           Remember me
         </label>
         {error && <Alert.Error message={error} />}
-        <button type="submit" disabled={!email || !password || loading} className="btn-a font-bold uppercase">
+        <button type="submit" disabled={!email || !password || loading} className="btn-a font-semibold uppercase">
           {loading ? "Loading..." : "Login"}
         </button>
         <p className="flex justify-center gap-1">

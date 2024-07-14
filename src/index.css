@@ -33,7 +33,7 @@
     @apply px-5 py-2;
   }
   .btn-a {
-    @apply btn-padding rounded-xl bg-primary text-white transition-colors hover:bg-primary-semi;
+    @apply btn-padding rounded-xl bg-primary text-white transition-colors hover:bg-primary-semi disabled:bg-primary-semi;
   }
   .btn-b {
     @apply btn-padding rounded-xl bg-l-bg-5 text-primary transition-colors hover:bg-l-bg-6 dark:bg-d-bg-5 dark:hover:bg-d-bg-6;
