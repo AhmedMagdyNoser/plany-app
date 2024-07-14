@@ -38,3 +38,19 @@ SVGIcon.DarkMode = function DarkMode({ className, size }: SVGIconProps) {
     </SVGIcon>
   );
 };
+
+SVGIcon.EmptySquare = function EmptySquare({ className, size }: SVGIconProps) {
+  return (
+    <SVGIcon className={className} size={size} viewBox="0 0 448 512">
+      <path d="M384 80c8.8 0 16 7.2 16 16V416c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V96c0-8.8 7.2-16 16-16H384zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64z"></path>
+    </SVGIcon>
+  );
+};
+
+SVGIcon.CheckedSquare = function CheckedSquare({ className, size }: SVGIconProps) {
+  return (
+    <SVGIcon className={className} size={size} viewBox="0 0 448 512">
+      <path d="M400 480H48c-26.51 0-48-21.49-48-48V80c0-26.51 21.49-48 48-48h352c26.51 0 48 21.49 48 48v352c0 26.51-21.49 48-48 48zm-204.686-98.059l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.248-16.379-6.249-22.628 0L184 302.745l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.25 16.379 6.25 22.628.001z"></path>
+    </SVGIcon>
+  );
+};

@@ -7,6 +7,7 @@ import useUser from "@/hooks/useUser";
 import useDocumentTitle from "@/hooks/useDocumentTitle";
 import InputField from "@/components/ui/InputField";
 import Alert from "@/components/ui/Alert";
+import Checkbox from "@/components/ui/Checkbox";
 
 function Login() {
   useDocumentTitle(`Login | ${appName}`);
@@ -56,10 +57,7 @@ function Login() {
           type="password"
           autoComplete="new-password"
         />
-        <label>
-          <input type="checkbox" checked={remember} onChange={(e) => setRemember(e.target.checked)} />
-          Remember me
-        </label>
+        <Checkbox label="Remember me" checked={remember} onClick={() => setRemember(!remember)} />
         {error && <Alert.Error message={error} />}
         <button type="submit" disabled={!email || !password || loading} className="btn-a font-semibold uppercase">
           {loading ? "Loading..." : "Login"}
