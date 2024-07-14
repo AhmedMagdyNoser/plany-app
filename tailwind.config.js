@@ -40,6 +40,9 @@ module.exports = {
           },
         },
       },
+      animation: {
+        "fade-in": "fade-in 0.35s ease-in-out",
+      },
     },
   },
 };
