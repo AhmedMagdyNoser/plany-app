@@ -23,7 +23,12 @@ export default function InputField({ value, validation, instructions, className 
         />
       </div>
 
-      {validation && value && !validation.test(value as string) && <div className="py-1 text-red-500">{instructions}</div>}
+      {validation && value && !validation.test(value as string) && (
+        <div className="flex flex-col gap-1 py-2">
+          <div className="animate-progress h-[3px] rounded bg-red-500"></div>
+          <div className="animate-fade-in text-red-500">{instructions}</div>
+        </div>
+      )}
     </div>
   );
 }
