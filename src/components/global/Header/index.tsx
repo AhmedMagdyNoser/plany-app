@@ -22,8 +22,8 @@ function Header() {
                 Notes
               </Link>
               <ToggleThemeButton />
-              <Link to={paths.profile} className="btn-d">
-                Profile
+              <Link to={paths.profile} className="transition-opacity hover:opacity-85">
+                <img src={user.imgUrl} alt={user.firstName} className="h-10 w-10 rounded-full" />
               </Link>
             </>
           ) : (
