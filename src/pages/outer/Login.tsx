@@ -19,28 +19,28 @@ function Login() {
   const [password, setPassword] = useState<string>("");
   const [remember, setRemember] = useState<boolean>(true);
 
-  const { loading, setLoading, error, setError } = useFetchingStatus();
+  const requiredFields = { email, password };
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    handleFormSubmission(e, !!email && !!password, setLoading, setError, async () => {
-      const at = await apiRequest("auth/login", {
-        method: "POST",
-        credentials: "include",
-        body: JSON.stringify({ email, password }),
-      });
-      setUser(getUserFromAccessToken(at));
-      remember && localStorage.setItem("remember", "true");
-    });
-  }
+  const { loading, setLoading, error, setError } = useFetchingStatus();
 
   return (
     <AuthForm
       title="Welcome back!"
       submitLabel="Login"
       leave={{ to: "/register", label: "Register", hint: "Don't have an account?" }}
-      handleSubmit={handleSubmit}
-      error={error}
       loading={loading}
+      error={error}
+      handleSubmit={(event) => {
+        handleFormSubmission(event, requiredFields, setLoading, setError, async () => {
+          const at = await apiRequest("auth/login", {
+            method: "POST",
+            credentials: "include",
+            body: JSON.stringify({ email, password }),
+          });
+          setUser(getUserFromAccessToken(at));
+          remember && localStorage.setItem("remember", "true");
+        });
+      }}
     >
       <InputField
         value={email}

@@ -19,28 +19,28 @@ function Register() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const { loading, setLoading, error, setError } = useFetchingStatus();
+  const requiredFields = { firstName, lastName, email, password };
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    handleFormSubmission(e, !!firstName && !!lastName && !!email && !!password, setLoading, setError, async () => {
-      const at = await apiRequest("auth/register", {
-        method: "POST",
-        credentials: "include",
-        body: JSON.stringify({ firstName, lastName, email, password }),
-      });
-      setUser(getUserFromAccessToken(at));
-      localStorage.setItem("remember", "true");
-    });
-  }
+  const { loading, setLoading, error, setError } = useFetchingStatus();
 
   return (
     <AuthForm
       title="Create new account"
       submitLabel="Register"
       leave={{ to: "/login", label: "Login", hint: "Already have an account?" }}
-      handleSubmit={handleSubmit}
-      error={error}
       loading={loading}
+      error={error}
+      handleSubmit={(event) => {
+        handleFormSubmission(event, requiredFields, setLoading, setError, async () => {
+          const at = await apiRequest("auth/register", {
+            method: "POST",
+            credentials: "include",
+            body: JSON.stringify({ firstName, lastName, email, password }),
+          });
+          setUser(getUserFromAccessToken(at));
+          localStorage.setItem("remember", "true");
+        });
+      }}
     >
       <InputField.FirstName value={firstName} onChange={(e) => setFirstName(e.target.value)} autoFocus />
       <InputField.LastName value={lastName} onChange={(e) => setLastName(e.target.value)} />

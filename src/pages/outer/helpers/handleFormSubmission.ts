@@ -1,20 +1,21 @@
 import { globalErrorMessage } from "@/utils/constants";
+import { areFieldsFilled } from "@/utils/helpers";
 
 export default async function handleFormSubmission(
   e: React.FormEvent<HTMLFormElement>,
-  areRequiredFilled: boolean,
+  requiredFields: Record<string, string>,
   setLoading: (loading: boolean) => void,
   setError: (error: string) => void,
   callback: () => Promise<void>,
 ): Promise<void> {
   e.preventDefault();
-  if (areRequiredFilled) {
+  if (areFieldsFilled(requiredFields)) {
     try {
       setError("");
       setLoading(true);
       await callback();
     } catch (error) {
-      console.log('%cError from handleFormSubmission', 'color: red; font-weight: bold;', error);
+      console.log("%cError from handleFormSubmission", "color: red; font-weight: bold;", error);
       setError((error as string) || globalErrorMessage);
     } finally {
       setLoading(false);
