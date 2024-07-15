@@ -11,17 +11,15 @@ type InputFieldProps = React.InputHTMLAttributes<HTMLInputElement> & InputFieldE
 export default function InputField({ value, validation, instructions, className = "", ...rest }: InputFieldProps) {
   return (
     <div className="w-full">
-      <div className="rounded-primary bg-basic-2 brdr-basic-3 flex items-center overflow-hidden border">
-        <input
-          className={
-            "txt-basic-h placeholder:txt-basic-p flex-1 bg-inherit p-3 font-semibold outline-none placeholder:font-normal " +
-            className
-          }
-          value={value}
-          size={1}
-          {...rest}
-        />
-      </div>
+      <input
+        className={
+          "rounded-primary bg-basic-2 brdr-basic-3 txt-basic-h placeholder:txt-basic-p w-full border p-3 font-semibold outline-none placeholder:font-normal " +
+          className
+        }
+        value={value}
+        size={1}
+        {...rest}
+      />
 
       {validation && value && !validation.test(value as string) && (
         <div className="flex flex-col gap-1 py-2">
