@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { jwtDecode } from "jwt-decode";
 import { apiRequest } from "@/utils/api";
 import { appName } from "@/utils/constants";
-import useUser from "@/hooks/useUser";
+import { getUserFromAccessToken } from "@/utils/helpers";
 import useDocumentTitle from "@/hooks/useDocumentTitle";
 import useFetchingStatus from "@/hooks/useFetchingStatus";
+import useUser from "@/hooks/useUser";
 import InputField from "@/components/ui/InputField";
 import Checkbox from "@/components/ui/Checkbox";
 import AuthForm from "./components/AuthForm";
@@ -23,12 +23,12 @@ function Login() {
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     handleFormSubmission(e, !!email && !!password, setLoading, setError, async () => {
-      const res = await apiRequest("auth/login", {
+      const at = await apiRequest("auth/login", {
         method: "POST",
         credentials: "include",
         body: JSON.stringify({ email, password }),
       });
-      setUser({ ...(jwtDecode(res) as any).user, accessToken: res });
+      setUser(getUserFromAccessToken(at));
       remember && localStorage.setItem("remember", "true");
     });
   }

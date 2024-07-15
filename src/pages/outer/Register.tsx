@@ -1,11 +1,11 @@
-import InputField from "@/components/ui/InputField";
+import { useState } from "react";
+import { appName } from "@/utils/constants";
+import { apiRequest } from "@/utils/api";
+import { getUserFromAccessToken } from "@/utils/helpers";
 import useDocumentTitle from "@/hooks/useDocumentTitle";
 import useFetchingStatus from "@/hooks/useFetchingStatus";
 import useUser from "@/hooks/useUser";
-import { apiRequest } from "@/utils/api";
-import { appName } from "@/utils/constants";
-import { jwtDecode } from "jwt-decode";
-import { useState } from "react";
+import InputField from "@/components/ui/InputField";
 import AuthForm from "./components/AuthForm";
 import handleFormSubmission from "./helpers/handleFormSubmission";
 
@@ -23,12 +23,12 @@ function Register() {
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     handleFormSubmission(e, !!firstName && !!lastName && !!email && !!password, setLoading, setError, async () => {
-      const res = await apiRequest("auth/register", {
+      const at = await apiRequest("auth/register", {
         method: "POST",
         credentials: "include",
         body: JSON.stringify({ firstName, lastName, email, password }),
       });
-      setUser({ ...(jwtDecode(res) as any).user, accessToken: res });
+      setUser(getUserFromAccessToken(at));
       localStorage.setItem("remember", "true");
     });
   }
