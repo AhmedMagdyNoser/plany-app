@@ -1,13 +1,12 @@
 import { useState } from "react";
-import { appName } from "@/utils/constants";
 import { apiRequest } from "@/utils/api";
-import { getUserFromAccessToken, remeberUser } from "@/utils/helpers";
+import { appName } from "@/utils/constants";
+import { handleFormSubmission, getUserFromAccessToken, remeberUser } from "@/utils/helpers";
 import useDocumentTitle from "@/hooks/useDocumentTitle";
 import useFetchingStatus from "@/hooks/useFetchingStatus";
 import useUser from "@/hooks/useUser";
 import InputField from "@/components/ui/InputField";
 import AuthForm from "./components/AuthForm";
-import handleFormSubmission from "./helpers/handleFormSubmission";
 
 function Register() {
   useDocumentTitle(`Register | ${appName}`);

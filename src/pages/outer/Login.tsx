@@ -1,14 +1,13 @@
 import { useState } from "react";
 import { apiRequest } from "@/utils/api";
 import { appName } from "@/utils/constants";
-import { getUserFromAccessToken, remeberUser } from "@/utils/helpers";
+import { handleFormSubmission, getUserFromAccessToken, remeberUser } from "@/utils/helpers";
 import useDocumentTitle from "@/hooks/useDocumentTitle";
 import useFetchingStatus from "@/hooks/useFetchingStatus";
 import useUser from "@/hooks/useUser";
 import InputField from "@/components/ui/InputField";
 import Checkbox from "@/components/ui/Checkbox";
 import AuthForm from "./components/AuthForm";
-import handleFormSubmission from "./helpers/handleFormSubmission";
 
 function Login() {
   useDocumentTitle(`Login | ${appName}`);
