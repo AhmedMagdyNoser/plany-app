@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { appName } from "@/utils/constants";
 import { apiRequest } from "@/utils/api";
-import { getUserFromAccessToken } from "@/utils/helpers";
+import { getUserFromAccessToken, remeberUser } from "@/utils/helpers";
 import useDocumentTitle from "@/hooks/useDocumentTitle";
 import useFetchingStatus from "@/hooks/useFetchingStatus";
 import useUser from "@/hooks/useUser";
@@ -38,7 +38,7 @@ function Register() {
             body: JSON.stringify({ firstName, lastName, email, password }),
           });
           setUser(getUserFromAccessToken(at));
-          localStorage.setItem("remember", "true");
+          remeberUser();
         });
       }}
     >

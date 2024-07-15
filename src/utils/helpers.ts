@@ -7,3 +7,11 @@ export function getUserFromAccessToken(accessToken: string) {
 export function areFieldsFilled(data: Record<string, string>) {
   return Object.values(data).every((value) => value !== "");
 }
+
+export function remeberUser() {
+  localStorage.setItem("remember", "true");
+}
+
+export function forgetUser() {
+  localStorage.removeItem("remember");
+}
