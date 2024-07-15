@@ -4,6 +4,7 @@ import { apiRequest } from "@/utils/api";
 import { appName } from "@/utils/constants";
 import useUser from "@/hooks/useUser";
 import useDocumentTitle from "@/hooks/useDocumentTitle";
+import useFetchingStatus from "@/hooks/useFetchingStatus";
 import InputField from "@/components/ui/InputField";
 import Checkbox from "@/components/ui/Checkbox";
 import AuthForm from "./components/AuthForm";
@@ -18,8 +19,7 @@ function Login() {
   const [password, setPassword] = useState<string>("");
   const [remember, setRemember] = useState<boolean>(true);
 
-  const [error, setError] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(false);
+  const { loading, setLoading, error, setError } = useFetchingStatus();
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     handleFormSubmission(e, !!email && !!password, setLoading, setError, async () => {
@@ -50,10 +50,10 @@ function Login() {
         autoFocus
       />
       <InputField
+        type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         placeholder="Password"
-        type="password"
         autoComplete="new-password"
       />
       <Checkbox label="Remember me" checked={remember} onClick={() => setRemember(!remember)} />

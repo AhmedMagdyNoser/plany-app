@@ -1,5 +1,6 @@
 import InputField from "@/components/ui/InputField";
 import useDocumentTitle from "@/hooks/useDocumentTitle";
+import useFetchingStatus from "@/hooks/useFetchingStatus";
 import useUser from "@/hooks/useUser";
 import { apiRequest } from "@/utils/api";
 import { appName } from "@/utils/constants";
@@ -18,8 +19,7 @@ function Register() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const [error, setError] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(false);
+  const { loading, setLoading, error, setError } = useFetchingStatus();
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     handleFormSubmission(e, !!firstName && !!lastName && !!email && !!password, setLoading, setError, async () => {
