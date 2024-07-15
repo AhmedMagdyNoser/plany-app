@@ -5,6 +5,10 @@ export function getUserFromAccessToken(accessToken: string) {
   return { ...(jwtDecode(accessToken) as any).user, accessToken };
 }
 
+export function hasCompleteData(data: Record<string, string>) {
+  return Object.values(data).every((value) => value !== "");
+}
+
 export async function handleFormSubmission(
   event: React.FormEvent<HTMLFormElement>,
   requiredFields: Record<string, string>,
@@ -14,7 +18,7 @@ export async function handleFormSubmission(
 ): Promise<void> {
   event.preventDefault();
   // Check if all required fields are provided
-  if (!Object.values(requiredFields).every((value) => value !== "")) {
+  if (!hasCompleteData(requiredFields)) {
     setError("Please fill out all the fields");
   } else {
     try {

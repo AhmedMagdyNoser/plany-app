@@ -27,9 +27,10 @@ function Login() {
       title="Welcome back!"
       submitLabel="Login"
       leave={{ to: "/register", label: "Register", hint: "Don't have an account?" }}
+      requiredFields={requiredFields}
       loading={loading}
       error={error}
-      handleSubmit={(event) => {
+      onSubmit={(event) => {
         handleFormSubmission(event, requiredFields, setLoading, setError, async () => {
           const at = await apiRequest("auth/login", {
             method: "POST",

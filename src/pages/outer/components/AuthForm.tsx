@@ -1,24 +1,30 @@
+import { Link } from "react-router-dom";
+import { hasCompleteData } from "@/utils/helpers";
 import SVGIcon from "@/components/icons/SVGIcon";
 import Alert from "@/components/ui/Alert";
-import { Link } from "react-router-dom";
 
 type AuthFormProps = {
+  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   title: string;
   submitLabel: string;
   leave?: { to: string; label: string; hint: string };
-  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  requiredFields?: Record<string, string>;
   error: string;
   loading: boolean;
   children: React.ReactNode;
 };
 
-function AuthForm({ title, submitLabel, leave, handleSubmit, error, loading, children }: AuthFormProps) {
+function AuthForm({ onSubmit, title, submitLabel, leave, requiredFields, error, loading, children }: AuthFormProps) {
   return (
-    <div className="mx-auto w-[385px] max-w-full px-4 py-[100px]">
+    <div className="mx-auto w-[385px] max-w-full px-4 py-[75px]">
       <h1 className="mb-6 text-center">{title}</h1>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <form onSubmit={onSubmit} className="flex flex-col gap-4">
         {children}
-        <button type="submit" disabled={loading} className="btn-primary flex-center h-[39px] font-semibold uppercase">
+        <button
+          type="submit"
+          disabled={(requiredFields && !hasCompleteData(requiredFields)) || loading}
+          className="btn-primary flex-center h-[39px] font-semibold uppercase"
+        >
           {loading ? <SVGIcon.Spinner size={20} /> : submitLabel}
         </button>
         {error && <Alert.Error message={error} />}

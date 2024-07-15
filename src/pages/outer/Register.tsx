@@ -27,9 +27,10 @@ function Register() {
       title="Create new account"
       submitLabel="Register"
       leave={{ to: "/login", label: "Login", hint: "Already have an account?" }}
+      requiredFields={requiredFields}
       loading={loading}
       error={error}
-      handleSubmit={(event) => {
+      onSubmit={(event) => {
         handleFormSubmission(event, requiredFields, setLoading, setError, async () => {
           const at = await apiRequest("auth/register", {
             method: "POST",
