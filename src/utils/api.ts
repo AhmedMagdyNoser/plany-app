@@ -6,6 +6,7 @@ export async function apiRequest(url: string, options: RequestInit = {}): Promis
     if (!response.ok) throw await response.text();
     return await response.text();
   } catch (error) {
+    console.log("%cError from `apiRequest` helper function", "color: red; font-weight: bold;", error);
     if (error instanceof TypeError && error.message === "Failed to fetch")
       throw "Oops! We’re having trouble reaching our servers.";
     throw (error as TypeError).message || error || "`apiRequest` helper function error.";

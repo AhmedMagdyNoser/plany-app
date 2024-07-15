@@ -14,6 +14,7 @@ export default async function handleFormSubmission(
       setLoading(true);
       await callback();
     } catch (error) {
+      console.log('%cError from handleFormSubmission', 'color: red; font-weight: bold;', error);
       setError((error as string) || globalErrorMessage);
     } finally {
       setLoading(false);
