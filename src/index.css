@@ -2,12 +2,107 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  /* Basic colors configuration will be a little bit different from other colors */
+
+  /* Text Colors */
+  .txt-basic-h {
+    @apply text-gray-800 dark:text-gray-100;
+  }
+  .txt-basic-p {
+    @apply text-gray-600 dark:text-gray-400;
+  }
+  .txt-primary {
+    @apply text-blue-500;
+  }
+  .txt-red {
+    @apply text-red-500;
+  }
+  .txt-green {
+    @apply text-emerald-500;
+  }
+  .txt-orange {
+    @apply text-orange-500;
+  }
+
+  /* Background Colors */
+  .bg-basic-1 {
+    @apply bg-gray-50 dark:bg-gray-950;
+  }
+  .bg-basic-2 {
+    @apply bg-gray-100 dark:bg-gray-900;
+  }
+  .bg-basic-3 {
+    @apply bg-gray-200 dark:bg-gray-800;
+  }
+  .bg-primary {
+    @apply bg-blue-500;
+  }
+  .bg-red {
+    @apply bg-red-500;
+  }
+  .bg-green {
+    @apply bg-emerald-500;
+  }
+  .bg-orange {
+    @apply bg-orange-500;
+  }
+
+  /* Blocks Colors */
+  .light-basic-block {
+    @apply bg-gray-200 text-gray-600 dark:bg-gray-800 dark:text-gray-50;
+  }
+  .light-primary-block {
+    @apply bg-blue-50 text-blue-600 dark:bg-blue-950 dark:text-blue-50;
+  }
+  .light-red-block {
+    @apply bg-red-50 text-red-600 dark:bg-red-950 dark:text-red-50;
+  }
+  .light-green-block {
+    @apply bg-emerald-50 text-emerald-600 dark:bg-emerald-950 dark:text-emerald-50;
+  }
+  .light-orange-block {
+    @apply bg-orange-50 text-orange-600 dark:bg-orange-950 dark:text-orange-50;
+  }
+
+  /* Border Colors */
+  .brdr-basic-1 {
+    @apply border-gray-50 dark:border-gray-950;
+  }
+  .brdr-basic-2 {
+    @apply border-gray-100 dark:border-gray-900;
+  }
+  .brdr-basic-3 {
+    @apply border-gray-200 dark:border-gray-800;
+  }
+  .brdr-basic-4 {
+    @apply border-gray-300 dark:border-gray-700;
+  }
+  .brdr-basic-5 {
+    @apply border-gray-400 dark:border-gray-600;
+  }
+
+  /* Other Utilities */
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+  .rounded-primary {
+    @apply rounded-xl;
+  }
+  .btn-padding {
+    @apply px-5 py-2;
+  }
+  .btn-styles {
+    @apply btn-padding rounded-primary transition-colors;
+  }
+}
+
 @layer base {
   * {
     @apply text-sm selection:bg-primary selection:text-white;
   }
   body {
-    @apply bg-1 txt-semi transition-colors;
+    @apply bg-basic-1 txt-basic-p transition-colors;
   }
   h1,
   h2,
@@ -15,7 +110,7 @@
   h4,
   h5,
   h6 {
-    @apply txt font-bold capitalize;
+    @apply txt-basic-h font-bold capitalize;
   }
   h1 {
     @apply text-2xl sm:text-3xl;
@@ -27,94 +122,46 @@
     @apply text-lg sm:text-xl;
   }
   p {
-    @apply txt-semi text-xs sm:text-sm;
+    @apply txt-basic-p text-xs sm:text-sm;
   }
 }
 
 @layer components {
-  .btn-a {
-    @apply btn-styles bg-primary text-white hover:bg-primary-semi disabled:opacity-75 disabled:hover:bg-primary;
+  /* Buttons */
+  .btn-basic {
+    @apply btn-styles bg-gray-200 text-gray-600 hover:bg-gray-300 disabled:opacity-75 disabled:hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 disabled:dark:hover:bg-gray-800;
   }
-  .btn-b {
-    @apply btn-styles bg-5 hover:bg-6 disabled:hover:bg-5 text-primary disabled:opacity-75;
+  .btn-basic-light {
+    @apply btn-styles text-gray-600 hover:bg-gray-100 disabled:opacity-75 disabled:hover:bg-transparent dark:text-gray-300 dark:hover:bg-gray-900 disabled:dark:hover:bg-transparent;
   }
-  .btn-c {
-    @apply btn-styles txt-semi bg-3 hover:bg-4;
+  .btn-primary {
+    @apply btn-styles bg-primary text-white hover:bg-blue-600 disabled:opacity-75 disabled:hover:bg-primary;
   }
-  .btn-d {
-    @apply btn-styles txt-semi hover:bg-3;
+  .btn-primary-light {
+    @apply btn-styles light-primary-block disabled:hover:light-primary-block hover:bg-blue-100 disabled:opacity-75 dark:hover:bg-blue-900;
   }
-  .link {
-    @apply text-primary transition-colors hover:text-primary-semi;
+  .btn-red {
+    @apply btn-styles bg-red disabled:hover:bg-red text-white hover:bg-red-600 disabled:opacity-75;
   }
-}
+  .btn-red-light {
+    @apply btn-styles light-red-block disabled:hover:light-red-block hover:bg-red-100 disabled:opacity-75 dark:hover:bg-red-900;
+  }
+  .btn-green {
+    @apply btn-styles bg-green disabled:hover:bg-green text-white hover:bg-emerald-600 disabled:opacity-75;
+  }
+  .btn-green-light {
+    @apply btn-styles light-green-block disabled:hover:light-green-block hover:bg-emerald-100 disabled:opacity-75 dark:hover:bg-emerald-900;
+  }
+  .btn-orange {
+    @apply btn-styles bg-orange disabled:hover:bg-orange text-white hover:bg-orange-600 disabled:opacity-75;
+  }
+  .btn-orange-light {
+    @apply btn-styles light-orange-block disabled:hover:light-orange-block hover:bg-orange-100 disabled:opacity-75 dark:hover:bg-orange-900;
+  }
 
-@layer utilities {
-  .rounded-primary {
-    @apply rounded-xl;
-  }
-  .txt {
-    @apply text-l-txt dark:text-d-txt;
-  }
-  .txt-semi {
-    @apply text-l-txt-semi dark:text-d-txt-semi;
-  }
-  .txt-red {
-    @apply text-l-red dark:text-d-red;
-  }
-  .txt-green {
-    @apply text-l-green dark:text-d-green;
-  }
-  .bg-1 {
-    @apply bg-l-bg-1 dark:bg-d-bg-1;
-  }
-  .bg-2 {
-    @apply bg-l-bg-2 dark:bg-d-bg-2;
-  }
-  .bg-3 {
-    @apply bg-l-bg-3 dark:bg-d-bg-3;
-  }
-  .bg-4 {
-    @apply bg-l-bg-4 dark:bg-d-bg-4;
-  }
-  .bg-5 {
-    @apply bg-l-bg-5 dark:bg-d-bg-5;
-  }
-  .bg-6 {
-    @apply bg-l-bg-6 dark:bg-d-bg-6;
-  }
-  .bg-red {
-    @apply bg-l-red dark:bg-d-red;
-  }
-  .bg-red-semi {
-    @apply bg-l-red-semi dark:bg-d-red-semi;
-  }
-  .bg-green {
-    @apply bg-l-green dark:bg-d-green;
-  }
-  .bg-green-semi {
-    @apply bg-l-green-semi dark:bg-d-green-semi;
-  }
-  .brdr-1 {
-    @apply border-l-bg-1 dark:border-d-bg-1;
-  }
-  .brdr-2 {
-    @apply border-l-bg-2 dark:border-d-bg-2;
-  }
-  .brdr-3 {
-    @apply border-l-bg-3 dark:border-d-bg-3;
-  }
-  .brdr-4 {
-    @apply border-l-bg-4 dark:border-d-bg-4;
-  }
-  .flex-center {
-    @apply flex items-center justify-center;
-  }
-  .btn-padding {
-    @apply px-5 py-2;
-  }
-  .btn-styles {
-    @apply btn-padding rounded-primary transition-colors;
+  /* Links */
+  .link {
+    @apply txt-primary transition-colors hover:text-blue-600 dark:hover:text-blue-400;
   }
 }
 

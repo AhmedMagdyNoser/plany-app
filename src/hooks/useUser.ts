@@ -3,8 +3,7 @@ import { UserContextProps } from "@/types/user";
 import { UserContext } from "@/context/UserContext";
 
 function useUser(): UserContextProps {
-  const context = useContext(UserContext);
-  return context;
+  return useContext(UserContext);
 }
 
 export default useUser;

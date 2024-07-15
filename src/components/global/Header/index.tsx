@@ -9,16 +9,16 @@ function Header() {
   return (
     <header className="shadow">
       <div className="container flex items-center justify-between p-4">
-        <Link to="/" className="txt text-xl font-bold">
+        <Link to="/" className="txt-basic-h text-xl font-bold">
           Plany
         </Link>
-        <nav className="flex items-center gap-2 font-semibold">
+        <nav className="flex items-center gap-3 font-semibold">
           {user ? (
             <>
-              <Link to={paths.tasks} className="btn-d">
+              <Link to={paths.tasks} className="btn-basic">
                 Tasks
               </Link>
-              <Link to={paths.notes} className="btn-d">
+              <Link to={paths.notes} className="btn-basic">
                 Notes
               </Link>
               <ToggleThemeButton />
@@ -29,11 +29,11 @@ function Header() {
           ) : (
             <>
               <ToggleThemeButton />
-              <div className="bg-4 h-[20px] w-[2px]"></div>
-              <Link to={paths.login} className="btn-d">
+              <div className="bg-basic-3 h-[20px] w-[2px]"></div>
+              <Link to={paths.login} className="btn-basic">
                 Login
               </Link>
-              <Link to={paths.register} className="btn-a">
+              <Link to={paths.register} className="btn-primary">
                 Start for free
               </Link>
             </>

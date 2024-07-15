@@ -3,7 +3,7 @@ import Header from "@/components/global/Header";
 
 function Layout() {
   return (
-    <div className="flex min-h-screen flex-col transition-colors">
+    <div className="flex min-h-screen flex-col">
       <Header />
       <Outlet />
     </div>

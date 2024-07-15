@@ -17,9 +17,9 @@ function Checkbox({ label, checked, onClick }: CheckboxProps) {
   return (
     <div tabIndex={0} onClick={onClick} onKeyDown={handleKeyDown} className="flex cursor-pointer items-center gap-1">
       {checked ? (
-        <SVGIcon.CheckedSquare size={18} className="text-primary" />
+        <SVGIcon.CheckedSquare size={18} className="txt-primary" />
       ) : (
-        <SVGIcon.EmptySquare size={18} className="text-primary" />
+        <SVGIcon.EmptySquare size={18} className="txt-primary" />
       )}
       <p>{label}</p>
     </div>

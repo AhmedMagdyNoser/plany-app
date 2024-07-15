@@ -6,7 +6,7 @@ type AlertProps = {
   colors?: string;
 };
 
-export default function Alert({ Icon, message, colors = "txt-semi bg-3" }: AlertProps) {
+export default function Alert({ Icon, message, colors = "light-basic-block" }: AlertProps) {
   return (
     <div className={`animate-fade-in rounded-primary flex items-center gap-2 px-4 py-3 ${colors}`}>
       {Icon && <Icon size={14} />}
@@ -16,9 +16,9 @@ export default function Alert({ Icon, message, colors = "txt-semi bg-3" }: Alert
 }
 
 Alert.Error = function Error({ message = "An error occurred" }) {
-  return <Alert message={message} colors="txt-red bg-red-semi" Icon={SVGIcon.ExclamationCircle} />;
+  return <Alert message={message} colors="light-red-block" Icon={SVGIcon.ExclamationCircle} />;
 };
 
 Alert.Success = function Success({ message = "Success" }) {
-  return <Alert message={message} colors="txt-green bg-green-semi" Icon={SVGIcon.CheckedCircle} />;
+  return <Alert message={message} colors="light-green-block" Icon={SVGIcon.CheckedCircle} />;
 };

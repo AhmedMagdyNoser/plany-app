@@ -57,7 +57,7 @@ function Register() {
         <button
           type="submit"
           disabled={!firstName || !lastName || !email || !password || loading}
-          className="btn-a flex-center h-[39px] font-semibold uppercase"
+          className="btn-primary flex-center h-[39px] font-semibold uppercase"
         >
           {loading ? <SVGIcon.Spinner size={20} /> : "Register"}
         </button>

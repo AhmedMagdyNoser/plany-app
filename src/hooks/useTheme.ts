@@ -3,8 +3,7 @@ import { ThemeContextProps } from "@/types/theme";
 import { ThemeContext } from "@/context/ThemeContext";
 
 function useTheme(): ThemeContextProps {
-  const context = useContext(ThemeContext);
-  return context;
+  return useContext(ThemeContext);
 }
 
 export default useTheme;
