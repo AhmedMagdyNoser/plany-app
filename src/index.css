@@ -188,5 +188,5 @@
 /* Change the input autofill background color */
 input:-webkit-autofill {
   /* -webkit-background-clip: text; */
-  -webkit-text-fill-color: #3b82f6;
+  /* -webkit-text-fill-color: #3b82f6; */
 }
