@@ -40,7 +40,7 @@ function VerifyCode() {
             method: "POST",
             body: JSON.stringify({ code, email, purpose }),
           });
-          navigate(`/${paths.resetPassword}`, { state: { email, token } });
+          navigate(`/${paths.resetPassword}`, { state: { token } });
         });
       }}
     >
