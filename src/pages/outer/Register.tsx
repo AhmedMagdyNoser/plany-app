@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { apiRequest } from "@/utils/api";
-import { appName } from "@/utils/constants";
+import { appName, paths } from "@/utils/constants";
 import { handleFormSubmission, getUserFromAccessToken, remeberUser } from "@/utils/helpers";
 import useDocumentTitle from "@/hooks/useDocumentTitle";
 import useFetchingStatus from "@/hooks/useFetchingStatus";
@@ -26,7 +26,7 @@ function Register() {
     <AuthForm
       title="Create new account"
       submitLabel="Register"
-      leave={{ to: "/login", label: "Login", hint: "Already have an account?" }}
+      leave={{ to: `/${paths.login}`, label: "Login", hint: "Already have an account?" }}
       requiredFields={requiredFields}
       loading={loading}
       error={error}

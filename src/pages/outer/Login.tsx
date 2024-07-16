@@ -27,7 +27,7 @@ function Login() {
     <AuthForm
       title="Welcome back!"
       submitLabel="Login"
-      leave={{ to: "/register", label: "Register", hint: "Don't have an account?" }}
+      leave={{ to: `/${paths.register}`, label: "Register", hint: "Don't have an account?" }}
       requiredFields={requiredFields}
       loading={loading}
       error={error}

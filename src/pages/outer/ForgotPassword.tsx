@@ -25,7 +25,7 @@ function ForgotPassword() {
     <AuthForm
       title="Forgot Password?"
       submitLabel="Continue"
-      leave={{ to: "/login", label: "Back to Login", hint: "" }}
+      leave={{ to: `/${paths.login}`, label: "Back to Login", hint: "" }}
       requiredFields={requiredFields}
       loading={loading}
       error={error}

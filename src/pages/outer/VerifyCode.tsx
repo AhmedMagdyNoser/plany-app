@@ -29,7 +29,7 @@ function VerifyCode() {
   return (
     <AuthForm
       title="Check your email"
-      leave={{ to: "/forgot-password", label: "Back", hint: "" }}
+      leave={{ to: `/${paths.forgotPassword}`, label: "Back", hint: "" }}
       requiredFields={requiredFields}
       loading={loading}
       error={error}
