@@ -16,7 +16,7 @@ type AuthFormProps = {
 
 function AuthForm({ onSubmit, title, submitLabel, leave, requiredFields, error, loading, children }: AuthFormProps) {
   return (
-    <div className="mx-auto w-[385px] max-w-full px-4 py-[75px]">
+    <div className="animate-fade-in mx-auto w-[385px] max-w-full px-4 py-[75px]">
       <h1 className="mb-6 text-center">{title}</h1>
       <form onSubmit={onSubmit} className="flex flex-col gap-4">
         {children}
