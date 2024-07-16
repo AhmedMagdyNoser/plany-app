@@ -31,6 +31,7 @@ function VerifyCode() {
       title="Check your email"
       leave={{ to: `/${paths.forgotPassword}`, label: "Back", hint: "" }}
       requiredFields={requiredFields}
+      isValidated={code.length === 6}
       loading={loading}
       error={error}
       submitLabel="Verify"

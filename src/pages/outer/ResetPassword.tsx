@@ -1,12 +1,13 @@
-import useDocumentTitle from "@/hooks/useDocumentTitle";
-import useFetchingStatus from "@/hooks/useFetchingStatus";
-import { appName, paths } from "@/utils/constants";
 import { useState } from "react";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
-import AuthForm from "./components/AuthForm";
-import { handleFormSubmission } from "@/utils/helpers";
 import { apiRequest } from "@/utils/api";
+import { appName, paths } from "@/utils/constants";
+import { handleFormSubmission } from "@/utils/helpers";
+import { validationRegex } from "@/utils/validation";
+import useDocumentTitle from "@/hooks/useDocumentTitle";
+import useFetchingStatus from "@/hooks/useFetchingStatus";
 import InputField from "@/components/ui/InputField";
+import AuthForm from "./components/AuthForm";
 
 function ResetPassword() {
   useDocumentTitle(`Reset Your Password | ${appName}`);
@@ -21,6 +22,8 @@ function ResetPassword() {
 
   const [newPassword, setNewPassword] = useState<string>("");
 
+  const isValidPassword = validationRegex.password.test(newPassword);
+
   const requiredFields = { newPassword };
 
   const { loading, setLoading, error, setError } = useFetchingStatus();
@@ -33,6 +36,7 @@ function ResetPassword() {
     <AuthForm
       title="Hello again!"
       requiredFields={requiredFields}
+      isValidated={isValidPassword}
       loading={loading}
       error={error}
       submitLabel="Reset"
@@ -51,6 +55,7 @@ function ResetPassword() {
       <InputField.Password
         value={newPassword}
         onChange={(e) => setNewPassword(e.target.value)}
+        isValid={isValidPassword}
         placeholder="New Password"
         autoFocus
       />

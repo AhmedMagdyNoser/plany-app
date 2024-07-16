@@ -7,6 +7,7 @@ import useDocumentTitle from "@/hooks/useDocumentTitle";
 import useFetchingStatus from "@/hooks/useFetchingStatus";
 import InputField from "@/components/ui/InputField";
 import AuthForm from "./components/AuthForm";
+import { validationRegex } from "@/utils/validation";
 
 const purpose = "Reset Password";
 
@@ -16,6 +17,8 @@ function ForgotPassword() {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState<string>("");
+
+  const isValidEmail = validationRegex.email.test(email);
 
   const requiredFields = { email };
 
@@ -27,6 +30,7 @@ function ForgotPassword() {
       submitLabel="Continue"
       leave={{ to: `/${paths.login}`, label: "Back to Login", hint: "" }}
       requiredFields={requiredFields}
+      isValidated={isValidEmail}
       loading={loading}
       error={error}
       onSubmit={(event) => {

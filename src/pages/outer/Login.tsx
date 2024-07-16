@@ -43,20 +43,8 @@ function Login() {
         });
       }}
     >
-      <InputField
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Email"
-        autoComplete="off"
-        autoFocus
-      />
-      <InputField
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Password"
-        autoComplete="new-password"
-      />
+      <InputField.Email value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="off" autoFocus />
+      <InputField.Password value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="new-password" />
       <div className="flex items-center justify-between">
         <Checkbox label="Remember me" checked={remember} onClick={() => setRemember(!remember)} />
         <Link to={`/${paths.forgotPassword}`} className="link">
