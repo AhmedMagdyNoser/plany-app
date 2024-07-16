@@ -14,34 +14,37 @@ import Contact from "@/pages/inner/Contact";
 import Note from "@/pages/inner/Note";
 import NotFound from "@/pages/routes/NotFound";
 import AuthGaurd from "@/pages/routes/AuthGaurd";
+import RemembereUser from "@/pages/routes/RemebereUser";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route element={<Layout />}>
-          <Route index element={<Home />} />
+        <Route element={<RemembereUser />}>
+          <Route element={<Layout />}>
+            <Route index element={<Home />} />
 
-          {/* Outer Pages */}
-          <Route element={<AuthGaurd requireLoggedIn={false} />}>
-            <Route path={paths.login} element={<Login />} />
-            <Route path={paths.register} element={<Register />} />
-            <Route path={paths.forgotPassword} element={<ForgotPassword />} />
-            <Route path={paths.verifyCode} element={<VerifyCode />} />
-            <Route path={paths.resetPassword} element={<ResetPassword />} />
+            {/* Outer Pages */}
+            <Route element={<AuthGaurd requireLoggedIn={false} />}>
+              <Route path={paths.login} element={<Login />} />
+              <Route path={paths.register} element={<Register />} />
+              <Route path={paths.forgotPassword} element={<ForgotPassword />} />
+              <Route path={paths.verifyCode} element={<VerifyCode />} />
+              <Route path={paths.resetPassword} element={<ResetPassword />} />
+            </Route>
+
+            {/* Inner Pages */}
+            <Route element={<AuthGaurd requireLoggedIn={true} />}>
+              <Route path={paths.profile} element={<Profile />} />
+              <Route path={paths.tasks} element={<Tasks />} />
+              <Route path={paths.notes} element={<Notes />} />
+              <Route path={paths.notes + "/:id"} element={<Note />} />
+              <Route path={paths.contact} element={<Contact />} />
+            </Route>
+
+            {/* Catch All */}
+            <Route path="*" element={<NotFound />} />
           </Route>
-
-          {/* Inner Pages */}
-          <Route element={<AuthGaurd requireLoggedIn={true} />}>
-            <Route path={paths.profile} element={<Profile />} />
-            <Route path={paths.tasks} element={<Tasks />} />
-            <Route path={paths.notes} element={<Notes />} />
-            <Route path={paths.notes + "/:id"} element={<Note />} />
-            <Route path={paths.contact} element={<Contact />} />
-          </Route>
-
-          {/* Catch All */}
-          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </Router>
