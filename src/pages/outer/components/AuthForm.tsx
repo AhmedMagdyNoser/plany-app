@@ -9,12 +9,23 @@ type AuthFormProps = {
   submitLabel: string;
   leave?: { to: string; label: string; hint: string };
   requiredFields?: Record<string, string>;
+  isValidated?: boolean;
   error: string;
   loading: boolean;
   children: React.ReactNode;
 };
 
-function AuthForm({ onSubmit, title, submitLabel, leave, requiredFields, error, loading, children }: AuthFormProps) {
+function AuthForm({
+  onSubmit,
+  title,
+  submitLabel,
+  leave,
+  requiredFields,
+  isValidated,
+  error,
+  loading,
+  children,
+}: AuthFormProps) {
   return (
     <div className="animate-fade-in mx-auto w-[385px] max-w-full px-4 py-[75px]">
       <h1 className="mb-6 text-center">{title}</h1>
@@ -22,7 +33,7 @@ function AuthForm({ onSubmit, title, submitLabel, leave, requiredFields, error, 
         {children}
         <button
           type="submit"
-          disabled={(requiredFields && !hasCompleteData(requiredFields)) || loading}
+          disabled={(requiredFields && !hasCompleteData(requiredFields)) || isValidated === false || loading}
           className="btn-primary flex-center h-[39px] font-semibold uppercase"
         >
           {loading ? <SVGIcon.Spinner size={20} /> : submitLabel}
