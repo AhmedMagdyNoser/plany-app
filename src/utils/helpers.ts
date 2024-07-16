@@ -1,5 +1,4 @@
 import { jwtDecode } from "jwt-decode";
-import { globalErrorMessage } from "./constants";
 
 export function getUserFromAccessToken(accessToken: string) {
   return { ...(jwtDecode(accessToken) as any).user, accessToken };
@@ -27,7 +26,7 @@ export async function handleFormSubmission(
       await callback();
     } catch (error) {
       console.log("%cError from handleFormSubmission", "color: red; font-weight: bold;", error);
-      setError((error as string) || globalErrorMessage);
+      setError(error as string);
     } finally {
       setLoading(false);
     }

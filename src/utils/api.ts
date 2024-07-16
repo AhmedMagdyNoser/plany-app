@@ -1,3 +1,5 @@
+import { globalErrorMessage } from "@/utils/constants";
+
 export async function apiRequest(url: string, options: RequestInit = {}): Promise<string> {
   try {
     const defaultHeaders = { "Content-Type": "application/json" };
@@ -9,6 +11,7 @@ export async function apiRequest(url: string, options: RequestInit = {}): Promis
     console.log("%cError from `apiRequest` helper function", "color: red; font-weight: bold;", error);
     if (error instanceof TypeError && error.message === "Failed to fetch")
       throw "Oops! We’re having trouble reaching our servers.";
-    throw (error as TypeError).message || error || "`apiRequest` helper function error.";
+    if (typeof error === "string") throw error;
+    throw globalErrorMessage;
   }
 }
