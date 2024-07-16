@@ -3,7 +3,7 @@ import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { apiRequest } from "@/utils/api";
 import { appName, paths } from "@/utils/constants";
 import { handleFormSubmission } from "@/utils/helpers";
-import { validationRegex } from "@/utils/validation";
+import { inputFieldsInstructions, validationRegex } from "@/utils/validation";
 import useDocumentTitle from "@/hooks/useDocumentTitle";
 import useFetchingStatus from "@/hooks/useFetchingStatus";
 import InputField from "@/components/ui/InputField";
@@ -20,11 +20,13 @@ function ResetPassword() {
   // Accessing this page is not allowed if you didn't get a token using the Verify Code page
   if (!token) return <Navigate to={`/${paths.login}`} replace={true} />;
 
-  const [newPassword, setNewPassword] = useState<string>("");
+  const [newPassword, setNewPassord] = useState<string>("");
+  const [confirmNewPassword, setConfirmNewPassword] = useState<string>("");
 
-  const isValidPassword = validationRegex.password.test(newPassword);
+  const isValidNewPassword = validationRegex.password.test(newPassword);
+  const isValidConfirmNewPassword = confirmNewPassword === newPassword;
 
-  const requiredFields = { newPassword };
+  const requiredFields = { newPassword, confirmNewPassword };
 
   const { loading, setLoading, error, setError } = useFetchingStatus();
 
@@ -36,7 +38,7 @@ function ResetPassword() {
     <AuthForm
       title="Hello again!"
       requiredFields={requiredFields}
-      isValidated={isValidPassword}
+      isValidated={isValidNewPassword && isValidConfirmNewPassword}
       loading={loading}
       error={error}
       submitLabel="Reset"
@@ -54,10 +56,17 @@ function ResetPassword() {
       <p className="text-center">Please choose your new password.</p>
       <InputField.Password
         value={newPassword}
-        onChange={(e) => setNewPassword(e.target.value)}
-        isValid={isValidPassword}
+        onChange={(e) => setNewPassord(e.target.value)}
+        isValid={isValidNewPassword}
         placeholder="New Password"
         autoFocus
+      />
+      <InputField.Password
+        value={confirmNewPassword}
+        onChange={(e) => setConfirmNewPassword(e.target.value)}
+        isValid={isValidConfirmNewPassword}
+        instructions={inputFieldsInstructions.confirmPassword}
+        placeholder="Confirm New Password"
       />
     </AuthForm>
   );
