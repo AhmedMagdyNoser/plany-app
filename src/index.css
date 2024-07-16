@@ -81,6 +81,18 @@
   .brdr-basic-5 {
     @apply border-gray-400 dark:border-gray-600;
   }
+  .brdr-primary {
+    @apply border-blue-500 dark:border-blue-500;
+  }
+  .brdr-red {
+    @apply border-red-500 dark:border-red-500;
+  }
+  .brdr-green {
+    @apply border-emerald-500 dark:border-emerald-500;
+  }
+  .brdr-orange {
+    @apply border-orange-500 dark:border-orange-500;
+  }
 
   /* Other Utilities */
   .flex-center {
@@ -99,7 +111,7 @@
 
 @layer base {
   * {
-    @apply text-sm selection:bg-primary selection:text-white scrollbar-hide
+    @apply scrollbar-hide text-sm selection:bg-primary selection:text-white;
   }
   body {
     @apply bg-basic-1 txt-basic-p transition-colors;
@@ -185,7 +197,6 @@
   }
 }
 
-
 /* Hide scrollbar for Chrome, Safari and Opera */
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
@@ -196,7 +207,6 @@
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
-
 
 /* Change the input autofill background color */
 /* input:-webkit-autofill {

@@ -1,19 +1,25 @@
-import { validationRegex, inputFieldsInstructions } from "@/utils/validation";
+import { inputFieldsInstructions } from "@/utils/validation";
+import SVGIcon from "../icons/SVGIcon";
 
 type InputFieldExtraProps = {
-  validation?: RegExp;
+  isValid?: boolean;
   instructions?: string;
   className?: string;
 };
 
 type InputFieldProps = React.InputHTMLAttributes<HTMLInputElement> & InputFieldExtraProps;
 
-export default function InputField({ value, validation, instructions, className = "", ...rest }: InputFieldProps) {
+export default function InputField({ value, isValid, instructions, className = "", ...rest }: InputFieldProps) {
+  const isNotValid = value && isValid === false; // there is a value + this value is not valid
+
   return (
     <div className="w-full">
       <input
         className={
-          "rounded-primary bg-basic-2 brdr-basic-3 txt-basic-h placeholder:txt-basic-p w-full border p-3 font-semibold outline-none placeholder:font-normal " +
+          "rounded-primary bg-basic-2 txt-basic-h placeholder:txt-basic-p w-full border p-3 font-semibold outline-none transition-colors placeholder:font-normal " +
+          " " +
+          (isNotValid ? "brdr-red" : "brdr-basic-3") +
+          " " +
           className
         }
         value={value}
@@ -21,9 +27,9 @@ export default function InputField({ value, validation, instructions, className 
         {...rest}
       />
 
-      {validation && value && !validation.test(value as string) && (
-        <div className="flex flex-col gap-1 py-2">
-          <div className="animate-progress bg-red h-[3px] rounded"></div>
+      {isNotValid && (
+        <div className="flex items-center pt-1">
+          <SVGIcon.ExclamationCircle size={11} className="txt-red px-1" />
           <div className="animate-fade-in txt-red">{instructions}</div>
         </div>
       )}
@@ -32,16 +38,7 @@ export default function InputField({ value, validation, instructions, className 
 }
 
 InputField.Name = function Name({ ...rest }: InputFieldProps) {
-  return (
-    <InputField
-      type="text"
-      placeholder="Name"
-      validation={validationRegex.name}
-      instructions={inputFieldsInstructions.name}
-      maxLength={18}
-      {...rest}
-    />
-  );
+  return <InputField type="text" placeholder="Name" instructions={inputFieldsInstructions.name} maxLength={18} {...rest} />;
 };
 
 InputField.FirstName = function FirstName({ ...rest }: InputFieldProps) {
@@ -57,7 +54,6 @@ InputField.Email = function Email({ ...rest }: InputFieldProps) {
     <InputField
       type="text" // replaced to text due to validation factors
       placeholder="Email"
-      validation={validationRegex.email}
       instructions={inputFieldsInstructions.email}
       maxLength={50}
       {...rest}
@@ -70,7 +66,6 @@ InputField.Password = function Password({ ...rest }: InputFieldProps) {
     <InputField
       type="password"
       placeholder="Password"
-      validation={validationRegex.password}
       instructions={inputFieldsInstructions.password}
       maxLength={32}
       {...rest}
