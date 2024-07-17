@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Outlet } from "react-router-dom";
 import useUser from "@/hooks/useUser";
 import useRefresh from "@/hooks/useRefresh";
@@ -10,8 +10,8 @@ function RemembereUser() {
 
   const accessToken = user?.accessToken;
 
-  const remember = localStorage.getItem("remember") === "true";
-
+  const [remember, setRemember] = useState<Boolean>(localStorage.getItem("remember") === "true");
+  
   const refreshAccessToken = useRefresh();
 
   const logout = useLogout();
@@ -26,7 +26,8 @@ function RemembereUser() {
         try {
           await refreshAccessToken();
         } catch (error) {
-          logout();
+          setRemember(false);
+          await logout();
         }
       })();
     }
