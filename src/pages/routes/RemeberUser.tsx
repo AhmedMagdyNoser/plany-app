@@ -5,13 +5,13 @@ import useRefresh from "@/hooks/useRefresh";
 import useLogout from "@/hooks/useLogout";
 import FullScreenLoader from "@/components/global/FullScreenLoader";
 
-function RemembereUser() {
+function RememberUser() {
   const { user } = useUser();
 
   const accessToken = user?.accessToken;
 
   const [remember, setRemember] = useState<Boolean>(localStorage.getItem("remember") === "true");
-  
+
   const refreshAccessToken = useRefresh();
 
   const logout = useLogout();
@@ -36,4 +36,4 @@ function RemembereUser() {
   return !accessToken && remember ? <FullScreenLoader /> : <Outlet />;
 }
 
-export default RemembereUser;
+export default RememberUser;

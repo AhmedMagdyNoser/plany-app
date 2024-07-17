@@ -14,13 +14,13 @@ import Contact from "@/pages/inner/Contact";
 import Note from "@/pages/inner/Note";
 import NotFound from "@/pages/routes/NotFound";
 import AuthGaurd from "@/pages/routes/AuthGaurd";
-import RemembereUser from "@/pages/routes/RemebereUser";
+import RememberUser from "@/pages/routes/RemeberUser";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route element={<RemembereUser />}>
+        <Route element={<RememberUser />}>
           <Route element={<Layout />}>
             <Route index element={<Home />} />
 
