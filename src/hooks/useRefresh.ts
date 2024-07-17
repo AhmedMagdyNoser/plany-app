@@ -1,5 +1,5 @@
 import { apiRequest } from "@/utils/api";
-import { getUserFromAccessToken } from "@/utils/helpers";
+import { getUserFromAccessToken, logError } from "@/utils/helpers";
 import useUser from "./useUser";
 
 function useRefresh() {
@@ -11,7 +11,7 @@ function useRefresh() {
       setUser(getUserFromAccessToken(at));
       return at;
     } catch (error) {
-      console.log("%cError from `refreshAccessToken` function", "color: red; font-weight: bold;", error);
+      logError("refreshAccessToken", error);
       throw error;
     }
   };

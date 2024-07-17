@@ -1,5 +1,13 @@
 import { jwtDecode } from "jwt-decode";
 
+export function logRender(componentName: string, dataObject?: Record<string, any>) {
+  console.log(`%c\`${componentName}\` Rendered`, "color: green; font-weight: bold;", dataObject ? dataObject : "");
+}
+
+export function logError(functionName: string, error?: any) {
+  console.log(`%c\`${functionName}\` Error`, "color: red; font-weight: bold;", error ? error : "");
+}
+
 export function getUserFromAccessToken(accessToken: string) {
   return { ...(jwtDecode(accessToken) as any).user, accessToken };
 }
@@ -25,7 +33,7 @@ export async function handleFormSubmission(
       setLoading(true);
       await callback();
     } catch (error) {
-      console.log("%cError from handleFormSubmission", "color: red; font-weight: bold;", error);
+      logError("handleFormSubmission", error);
       setError(error as string);
     } finally {
       setLoading(false);

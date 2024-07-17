@@ -1,4 +1,5 @@
 import { apiRequest } from "@/utils/api";
+import { logError } from "@/utils/helpers";
 import useRefresh from "./useRefresh";
 import useUser from "./useUser";
 import useLogout from "./useLogout";
@@ -10,7 +11,7 @@ function usePrivateRequest() {
 
   async function privateRequest(url: string, options: RequestInit = {}): Promise<any> {
     try {
-      if (!user) throw "privateRequest Error: Please login first";
+      if (!user) throw "No user logged in.";
       // Add the access token to the request headers if it doesn't exist
       let finalOptions = options;
       if (!options?.headers?.auth)
@@ -28,6 +29,7 @@ function usePrivateRequest() {
           throw error;
         }
       } else {
+        logError("privateRequest", error);
         throw error;
       }
     }

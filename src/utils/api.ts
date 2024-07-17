@@ -1,4 +1,5 @@
 import { globalErrorMessage } from "@/utils/constants";
+import { logError } from "@/utils/helpers";
 
 export async function apiRequest(url: string, options: RequestInit = {}): Promise<any> {
   try {
@@ -17,7 +18,7 @@ export async function apiRequest(url: string, options: RequestInit = {}): Promis
     const isJson = contentType && contentType.includes("application/json");
     return isJson ? await response.json() : await response.text();
   } catch (error) {
-    console.log("%cError from `apiRequest` helper function", "color: red; font-weight: bold;", error);
+    logError("apiRequest", error);
     if (error instanceof TypeError && error.message === "Failed to fetch") {
       throw "Oops! We’re having trouble reaching our servers.";
     } else if (typeof error === "string") {

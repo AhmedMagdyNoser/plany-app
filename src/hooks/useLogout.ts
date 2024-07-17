@@ -1,5 +1,5 @@
 import { apiRequest } from "@/utils/api";
-import { forgetUser } from "@/utils/helpers";
+import { forgetUser, logError } from "@/utils/helpers";
 import useUser from "@/hooks/useUser";
 
 function useLogout() {
@@ -11,7 +11,7 @@ function useLogout() {
       forgetUser();
       await apiRequest("auth/logout", { method: "POST", credentials: "include" });
     } catch (error) {
-      console.log("%cError from `Logout` function", "color: red; font-weight: bold;", error);
+      logError("logout", error);
       throw error;
     }
   };
