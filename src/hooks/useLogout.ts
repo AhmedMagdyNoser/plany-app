@@ -12,6 +12,7 @@ function useLogout() {
       await apiRequest("auth/logout", { method: "POST", credentials: "include" });
     } catch (error) {
       console.log("%cError from `Logout` function", "color: red; font-weight: bold;", error);
+      throw error;
     }
   };
 
