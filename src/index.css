@@ -111,7 +111,7 @@
 
 @layer base {
   * {
-    @apply scrollbar-hide text-sm selection:bg-primary selection:text-white;
+    @apply scrollbar-hide selection:bg-primary text-sm selection:text-white;
   }
   body {
     @apply bg-basic-1 txt-basic-p transition-colors;
@@ -140,6 +140,9 @@
 
 @layer components {
   /* Buttons */
+  .btn-blank {
+    @apply btn-styles bg-gray-50 text-gray-950 hover:bg-gray-200 disabled:opacity-75 disabled:hover:bg-gray-50 dark:bg-gray-950 dark:text-gray-50 dark:hover:bg-gray-800 dark:disabled:hover:bg-gray-950;
+  }
   .btn-basic {
     @apply btn-styles bg-gray-200 text-gray-600 hover:bg-gray-300 disabled:opacity-75 disabled:hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 disabled:dark:hover:bg-gray-800;
   }
@@ -147,7 +150,7 @@
     @apply btn-styles text-gray-600 hover:bg-gray-100 disabled:opacity-75 disabled:hover:bg-transparent dark:text-gray-300 dark:hover:bg-gray-900 disabled:dark:hover:bg-transparent;
   }
   .btn-primary {
-    @apply btn-styles bg-primary text-white hover:bg-blue-600 disabled:opacity-75 disabled:hover:bg-primary;
+    @apply btn-styles bg-primary disabled:hover:bg-primary text-white hover:bg-blue-600 disabled:opacity-75;
   }
   .btn-primary-light {
     @apply btn-styles light-primary-block disabled:hover:light-primary-block hover:bg-blue-100 disabled:opacity-75 dark:hover:bg-blue-900;
