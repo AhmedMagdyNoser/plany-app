@@ -9,7 +9,8 @@ export function logError(functionName: string, error?: any) {
 }
 
 export function getUserFromAccessToken(accessToken: string) {
-  return { ...(jwtDecode(accessToken) as any).user, accessToken };
+  const data = jwtDecode(accessToken) as any;
+  return { ...data.user, fullName: `${data.user.firstName} ${data.user.lastName}`, accessToken };
 }
 
 export function hasCompleteData(data: Record<string, string>) {
