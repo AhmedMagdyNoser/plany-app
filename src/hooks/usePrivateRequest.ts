@@ -14,15 +14,15 @@ function usePrivateRequest() {
       if (!user) throw "No user logged in.";
       // Add the access token to the request headers if it doesn't exist
       let finalOptions = options;
-      if (!options?.headers?.auth)
-        finalOptions = { ...options, headers: { auth: `Bearer ${user.accessToken}`, ...options.headers } };
+      if (!options?.headers?.authorization)
+        finalOptions = { ...options, headers: { authorization: `Bearer ${user.accessToken}`, ...options.headers } };
       // Send the request
       return await apiRequest(url, finalOptions);
     } catch (error) {
       if (error === "Invalid access token.") {
         try {
           const newAccessToken = await refreshAccessToken();
-          const newOptions = { ...options, headers: { auth: `Bearer ${newAccessToken}`, ...options.headers } };
+          const newOptions = { ...options, headers: { authorization: `Bearer ${newAccessToken}`, ...options.headers } };
           return await privateRequest(url, newOptions); // Send a new request with the new access token
         } catch (error) {
           if (error === "Invalid refresh token.") logout();
