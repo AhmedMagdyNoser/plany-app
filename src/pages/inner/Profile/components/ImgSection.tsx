@@ -17,11 +17,11 @@ function ImgSection() {
     <section className="flex-center w-full flex-col gap-5">
       {/* Cover */}
       <div
-        className="rounded-primary relative w-full"
+        className="rounded-primary relative w-full transition-colors"
         style={{
           height: `${SIZE}px`,
           marginBottom: `${SIZE / 2}px`,
-          backgroundImage: getCoverColor("orange"),
+          backgroundImage: getCoverColor(user.favColor),
         }}
       >
         {/* Img */}

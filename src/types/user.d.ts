@@ -1,3 +1,5 @@
+export type colors = "red" | "green" | "blue" | "orange" | "fuchsia";
+
 export type User = {
   _id: string;
   firstName: string;
@@ -6,6 +8,7 @@ export type User = {
   email: string;
   emailVerified: boolean;
   imgUrl: string;
+  favColor: colors;
   createdAt: Date;
   updatedAt: Date;
   accessToken: string;

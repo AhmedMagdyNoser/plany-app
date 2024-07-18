@@ -1,3 +1,4 @@
+import { colors } from "@/types/user";
 import { jwtDecode } from "jwt-decode";
 
 export function logRender(componentName: string, dataObject?: Record<string, any>) {
@@ -13,7 +14,7 @@ export function getUserFromAccessToken(accessToken: string) {
   return { ...data.user, fullName: `${data.user.firstName} ${data.user.lastName}`, accessToken };
 }
 
-export function getCoverColor(color: "red" | "green" | "blue" | "orange" | "fuchsia") {
+export function getCoverColor(color: colors) {
   switch (color) {
     case "red":
       return "radial-gradient(circle, #fca5a5, #f87171, #ef4444)";
@@ -27,7 +28,6 @@ export function getCoverColor(color: "red" | "green" | "blue" | "orange" | "fuch
       return "radial-gradient(circle, #f0abfc, #e879f9, #d946ef)";
   }
 }
-
 
 export function hasCompleteData(data: Record<string, string>) {
   return Object.values(data).every((value) => value !== "");
