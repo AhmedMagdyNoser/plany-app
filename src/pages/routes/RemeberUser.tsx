@@ -10,7 +10,7 @@ function RememberUser() {
 
   const accessToken = user?.accessToken;
 
-  const [remember, setRemember] = useState<Boolean>(localStorage.getItem("remember") === "true");
+  const [remember, setRemember] = useState<boolean>(localStorage.getItem("remember") === "true");
 
   const refreshAccessToken = useRefresh();
 

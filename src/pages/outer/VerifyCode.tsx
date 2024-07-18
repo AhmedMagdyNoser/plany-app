@@ -17,14 +17,14 @@ function VerifyCode() {
   const email = location.state?.email;
   const purpose = location.state?.purpose;
 
-  // Accessing this page is not allowed if you didn't provide your email using the Forgot Password page
-  if (!email) return <Navigate to={`/${paths.login}`} replace={true} />;
-
   const [code, setCode] = useState<string>("");
 
   const requiredFields = { code };
 
   const { loading, setLoading, error, setError } = useFetchingStatus();
+
+  // Accessing this page is not allowed if you didn't provide your email using the Forgot Password page
+  if (!email) return <Navigate to={`/${paths.login}`} replace={true} />;
 
   return (
     <AuthForm

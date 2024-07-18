@@ -17,9 +17,6 @@ function ResetPassword() {
 
   const token = location.state?.token;
 
-  // Accessing this page is not allowed if you didn't get a token using the Verify Code page
-  if (!token) return <Navigate to={`/${paths.login}`} replace={true} />;
-
   const [newPassword, setNewPassord] = useState<string>("");
   const [confirmNewPassword, setConfirmNewPassword] = useState<string>("");
 
@@ -31,6 +28,9 @@ function ResetPassword() {
   const { loading, setLoading, error, setError } = useFetchingStatus();
 
   const [success, setSuccess] = useState<boolean>(false);
+
+  // Accessing this page is not allowed if you didn't get a token using the Verify Code page
+  if (!token) return <Navigate to={`/${paths.login}`} replace={true} />;
 
   return success ? (
     <SuccessMessage />
@@ -76,7 +76,7 @@ export default ResetPassword;
 
 function SuccessMessage() {
   return (
-    <div className="animate-fade-in flex-center mx-auto w-[385px] max-w-full flex-col gap-5 px-4 py-[75px]">
+    <div className="flex-center mx-auto w-[385px] max-w-full animate-fade-in flex-col gap-5 px-4 py-[75px]">
       <span className="brdr-basic-3 flex-center h-28 w-28 rounded-full border text-3xl">♥</span>
       <h2 className="text-center">Password reset successfully</h2>
       <p className="text-center">Now you can login with your new password.</p>
