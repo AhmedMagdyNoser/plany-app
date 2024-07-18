@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { paths } from "@/utils/constants";
 import useUser from "@/hooks/useUser";
+import DefaultProfileImg from "@/components/global/DefaultProfileImg";
 import ToggleThemeButton from "./ToggleThemeButton";
 
 function Header() {
@@ -23,7 +24,13 @@ function Header() {
               </Link>
               <ToggleThemeButton />
               <Link to={paths.profile} className="transition-opacity hover:opacity-85">
-                <img src={user.imgUrl} alt={user.firstName} className="h-10 w-10 rounded-full" />
+                {user.imgUrl ? (
+                  <img src={user.imgUrl} alt={user.fullName} className="h-10 w-10 rounded-full" />
+                ) : (
+                  <div className="h-10 w-10">
+                    <DefaultProfileImg />
+                  </div>
+                )}
               </Link>
             </>
           ) : (
