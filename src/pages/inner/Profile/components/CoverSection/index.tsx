@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { getCoverColor } from "@/utils/helpers";
 import useUser from "@/hooks/useUser";
-import SVGIcon from "@/components/icons/SVGIcon";
 import DefaultProfileImg from "@/components/global/DefaultProfileImg";
+import ColorChangerButton from "./components/ColorChangerButton";
 
 const SIZE = 150; // px
 
-function ImgSection() {
+function CoverSection() {
   const { user } = useUser();
 
   const [imgOptionsOpened, setImgOptionsOpened] = useState<boolean>(false);
@@ -40,9 +40,7 @@ function ImgSection() {
           )}
         </div>
         {/* Change Color */}
-        <button className="btn-basic flex-center absolute right-2 top-2 h-8 w-8 rounded-full p-0">
-          <SVGIcon.Edit size={15} />
-        </button>
+        <ColorChangerButton className="absolute right-[10px] top-[10px]" />
       </div>
       {/* Image Options */}
       {imgOptionsOpened && (
@@ -55,4 +53,4 @@ function ImgSection() {
   );
 }
 
-export default ImgSection;
+export default CoverSection;
