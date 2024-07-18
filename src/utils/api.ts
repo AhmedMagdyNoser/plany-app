@@ -3,9 +3,12 @@ import { logError } from "@/utils/helpers";
 
 export async function apiRequest(url: string, options: RequestInit = {}): Promise<any> {
   try {
-    // Prepare headers
+    // Prepare headers to set content type as json by default
     const defaultHeaders = { "Content-Type": "application/json" };
-    const finalOptions = { ...options, headers: { ...defaultHeaders, ...options.headers } };
+    // Check if body exists and is an object, then stringify it
+    const body = options.body && typeof options.body === "object" ? JSON.stringify(options.body) : options.body;
+    
+    const finalOptions = { ...options, body, headers: { ...defaultHeaders, ...options.headers } };
 
     // Send the request
     const response = await fetch(`${import.meta.env.VITE_API_URL}/${url}`, finalOptions);
