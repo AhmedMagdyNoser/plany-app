@@ -1,3 +1,4 @@
+import { ApiRequestOptions } from "@/types/api";
 import { apiRequest } from "@/utils/api";
 import { logError } from "@/utils/helpers";
 import useRefresh from "./useRefresh";
@@ -9,21 +10,29 @@ function usePrivateRequest() {
   const logout = useLogout();
   const refreshAccessToken = useRefresh();
 
-  async function privateRequest(url: string, options: RequestInit = {}): Promise<any> {
+  async function privateRequest({
+    url,
+    method = "GET",
+    headers = {},
+    data = null,
+    credentials = "same-origin",
+  }: ApiRequestOptions): Promise<string | object> {
     try {
       if (!user) throw "No user logged in.";
       // Add the access token to the request headers if it doesn't exist
-      let finalOptions = options;
-      if (!options?.headers?.authorization)
-        finalOptions = { ...options, headers: { authorization: `Bearer ${user.accessToken}`, ...options.headers } };
-      // Send the request
-      return await apiRequest(url, finalOptions);
+      let newHeaders = headers;
+      if (!headers.authorization)
+        newHeaders = { authorization: `Bearer ${user.accessToken}`, ...headers }
+      // Send the request with the access token
+      return await apiRequest({ url, method, headers: newHeaders, data, credentials });
     } catch (error) {
       if (error === "Invalid access token.") {
         try {
+          // Refresh the access token
           const newAccessToken = await refreshAccessToken();
-          const newOptions = { ...options, headers: { authorization: `Bearer ${newAccessToken}`, ...options.headers } };
-          return await privateRequest(url, newOptions); // Send a new request with the new access token
+          const newHeaders = { authorization: `Bearer ${newAccessToken}`, ...headers };
+          // Send a new request with the new access token
+          return await privateRequest({ url, method, headers: newHeaders, data, credentials });
         } catch (error) {
           if (error === "Invalid refresh token.") logout();
           throw error;

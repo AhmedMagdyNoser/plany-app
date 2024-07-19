@@ -35,7 +35,11 @@ function ForgotPassword() {
       error={error}
       onSubmit={(event) => {
         handleFormSubmission(event, requiredFields, setLoading, setError, async () => {
-          await apiRequest("auth/send-verification-code", { method: "POST", body: JSON.stringify({ email, purpose }) });
+          await apiRequest({
+            method: "POST",
+            url: "auth/send-verification-code",
+            data: { email, purpose },
+          });
           navigate(`/${paths.verifyCode}`, { state: { email, purpose } });
         });
       }}

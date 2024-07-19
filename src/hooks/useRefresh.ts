@@ -7,8 +7,8 @@ function useRefresh() {
 
   const refreshAccessToken = async () => {
     try {
-      const at = await apiRequest("auth/refresh-access-token", { method: "GET", credentials: "include" });
-      setUser(getUserFromAccessToken(at));
+      const at = await apiRequest({ url: "auth/refresh-access-token", credentials: "include" });
+      setUser(getUserFromAccessToken(at as string));
       return at;
     } catch (error) {
       logError("refreshAccessToken", error);

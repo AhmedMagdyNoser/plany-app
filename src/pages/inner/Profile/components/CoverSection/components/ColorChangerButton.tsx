@@ -36,7 +36,7 @@ function ColorChangerButton({ className }: { className?: string }) {
 
     try {
       setLoading(true);
-      await privateRequest("profile/change-color", { method: "PATCH", body: JSON.stringify({ color: newColor }) });
+      await privateRequest({ method: "PATCH", url: "profile/change-color", data: { color: newColor } });
       setUser({ ...user, favColor: newColor } as User);
     } catch (error) {
       logError("changeColor", error);

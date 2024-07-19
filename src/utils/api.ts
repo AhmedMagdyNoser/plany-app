@@ -1,22 +1,28 @@
+import { ApiRequestOptions } from "@/types/api";
 import { globalErrorMessage } from "@/utils/constants";
 import { logError } from "@/utils/helpers";
 
-export async function apiRequest(url: string, options: RequestInit = {}): Promise<any> {
+export async function apiRequest({
+  url,
+  method = "GET",
+  headers = {},
+  data = null,
+  credentials = "same-origin",
+}: ApiRequestOptions): Promise<string | object> {
   try {
-    // Prepare headers to set content type as json by default
-    const defaultHeaders = { "Content-Type": "application/json" };
-    // Check if body exists and is an object, then stringify it
-    const body = options.body && typeof options.body === "object" ? JSON.stringify(options.body) : options.body;
-    
-    const finalOptions = { ...options, body, headers: { ...defaultHeaders, ...options.headers } };
+    // Stringify the data if it's an object
+    const body = data && typeof data === "object" ? JSON.stringify(data) : data;
+
+    // Prepare the final options
+    const finalOptions = { method, headers: { "Content-Type": "application/json", ...headers }, body, credentials };
 
     // Send the request
     const response = await fetch(`${import.meta.env.VITE_API_URL}/${url}`, finalOptions);
 
-    // throw an error if the response isn't ok
+    // Throw an error if the response isn't ok
     if (!response.ok) throw await response.text();
 
-    // return the response as string or object if it's ok
+    // If it's ok, return the response as string or object
     const contentType = response.headers.get("Content-Type");
     const isJson = contentType && contentType.includes("application/json");
     return isJson ? await response.json() : await response.text();

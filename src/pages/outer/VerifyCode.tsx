@@ -37,9 +37,10 @@ function VerifyCode() {
       submitLabel="Verify"
       onSubmit={(event) => {
         handleFormSubmission(event, requiredFields, setLoading, setError, async () => {
-          const token = await apiRequest("auth/verify-verification-code", {
+          const token = await apiRequest({
             method: "POST",
-            body: JSON.stringify({ code, email, purpose }),
+            url: "auth/verify-verification-code",
+            data: { code, email, purpose },
           });
           navigate(`/${paths.resetPassword}`, { state: { token } });
         });

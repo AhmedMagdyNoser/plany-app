@@ -39,12 +39,13 @@ function Register() {
       error={error}
       onSubmit={(event) => {
         handleFormSubmission(event, requiredFields, setLoading, setError, async () => {
-          const at = await apiRequest("auth/register", {
+          const at = await apiRequest({
             method: "POST",
+            url: "auth/register",
+            data: { firstName, lastName, email, password },
             credentials: "include",
-            body: JSON.stringify({ firstName, lastName, email, password }),
           });
-          setUser(getUserFromAccessToken(at));
+          setUser(getUserFromAccessToken(at as string));
           remeberUser();
         });
       }}

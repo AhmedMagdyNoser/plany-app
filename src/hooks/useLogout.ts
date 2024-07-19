@@ -9,7 +9,7 @@ function useLogout() {
     try {
       setUser(null);
       forgetUser();
-      await apiRequest("auth/logout", { method: "POST", credentials: "include" });
+      await apiRequest({ method: "POST", url: "auth/logout", credentials: "include" });
     } catch (error) {
       logError("logout", error);
       throw error;

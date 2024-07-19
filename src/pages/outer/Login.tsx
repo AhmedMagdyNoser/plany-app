@@ -33,12 +33,13 @@ function Login() {
       error={error}
       onSubmit={(event) => {
         handleFormSubmission(event, requiredFields, setLoading, setError, async () => {
-          const at = await apiRequest("auth/login", {
+          const at = await apiRequest({
             method: "POST",
+            url: "auth/login",
+            data: { email, password },
             credentials: "include",
-            body: JSON.stringify({ email, password }),
           });
-          setUser(getUserFromAccessToken(at));
+          setUser(getUserFromAccessToken(at as string));
           remember && remeberUser();
         });
       }}

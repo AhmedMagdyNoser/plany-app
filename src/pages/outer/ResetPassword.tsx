@@ -44,9 +44,10 @@ function ResetPassword() {
       submitLabel="Reset"
       onSubmit={(event) => {
         handleFormSubmission(event, requiredFields, setLoading, setError, async () => {
-          await apiRequest("auth/reset-password", {
+          await apiRequest({
             method: "PATCH",
-            body: JSON.stringify({ token, newPassword }),
+            url: "auth/reset-password",
+            data: { token, newPassword },
           });
           setSuccess(true); // Displays the success message
           setTimeout(() => navigate(`/${paths.login}`, { state: null }), 3500);
