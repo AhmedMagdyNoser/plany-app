@@ -4,6 +4,7 @@ import useUser from "@/hooks/useUser";
 import DefaultProfileImg from "@/components/global/DefaultProfileImg";
 import ColorChangerButton from "./components/ColorChangerButton";
 import UploadImgButton from "./components/UploadImgButton";
+import DeleteImgButton from "./components/DeleteImgButton";
 
 const SIZE = 150; // px
 
@@ -47,7 +48,7 @@ function CoverSection() {
       {imgOptionsOpened && (
         <div className="flex animate-fade-in gap-3">
           <UploadImgButton />
-          {user.imgUrl && <button className="btn-red-light">Delete Picture</button>}
+          <DeleteImgButton />
         </div>
       )}
     </section>
