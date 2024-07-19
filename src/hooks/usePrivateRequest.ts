@@ -16,13 +16,12 @@ function usePrivateRequest() {
     headers = {},
     data = null,
     credentials = "same-origin",
-  }: ApiRequestOptions): Promise<string | object> {
+  }: ApiRequestOptions) {
     try {
       if (!user) throw "No user logged in.";
       // Add the access token to the request headers if it doesn't exist
       let newHeaders = headers;
-      if (!headers.authorization)
-        newHeaders = { authorization: `Bearer ${user.accessToken}`, ...headers }
+      if (!headers.authorization) newHeaders = { authorization: `Bearer ${user.accessToken}`, ...headers };
       // Send the request with the access token
       return await apiRequest({ url, method, headers: newHeaders, data, credentials });
     } catch (error) {

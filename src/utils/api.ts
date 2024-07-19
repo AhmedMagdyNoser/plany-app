@@ -10,11 +10,19 @@ export async function apiRequest({
   credentials = "same-origin",
 }: ApiRequestOptions): Promise<string | object> {
   try {
-    // Stringify the data if it's an object
-    const body = data && typeof data === "object" ? JSON.stringify(data) : data;
+    // Prepare the body and headers
+    let body: ApiRequestOptions["data"] = null;
+    let finalHeaders = headers;
 
-    // Prepare the final options
-    const finalOptions = { method, headers: { "Content-Type": "application/json", ...headers }, body, credentials };
+    if (data)
+      if (data instanceof FormData) body = data;
+      else {
+        body = JSON.stringify(data);
+        finalHeaders = { ...headers, "Content-Type": "application/json" };
+      }
+
+    // Prepare final options
+    const finalOptions = { method, headers: finalHeaders, body, credentials };
 
     // Send the request
     const response = await fetch(`${import.meta.env.VITE_API_URL}/${url}`, finalOptions);

@@ -2,6 +2,6 @@ export type ApiRequestOptions = {
   url: string;
   method?: string;
   headers?: HeadersInit;
-  data?: Record<string, unknown> | string | null;
+  data?: Record<string, unknown> | string | FormData | null;
   credentials?: RequestCredentials;
 };
