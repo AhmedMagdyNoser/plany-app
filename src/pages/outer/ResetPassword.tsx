@@ -7,6 +7,7 @@ import { inputFieldsInstructions, validationRegex } from "@/utils/validation";
 import useDocumentTitle from "@/hooks/useDocumentTitle";
 import useFetchingStatus from "@/hooks/useFetchingStatus";
 import InputField from "@/components/ui/InputField";
+import SVGIcon from "@/components/icons/SVGIcon";
 import AuthForm from "./components/AuthForm";
 
 function ResetPassword() {
@@ -78,7 +79,9 @@ export default ResetPassword;
 function SuccessMessage() {
   return (
     <div className="flex-center mx-auto w-[385px] max-w-full animate-fade-in flex-col gap-5 px-4 py-[75px]">
-      <span className="brdr-basic-3 flex-center h-28 w-28 rounded-full border text-3xl">♥</span>
+      <span className="brdr-basic-3 flex-center h-28 w-28 rounded-full border text-3xl">
+        <SVGIcon.CheckedCircle className="text-green-500" />
+      </span>
       <h2 className="text-center">Password reset successfully</h2>
       <p className="text-center">Now you can login with your new password.</p>
     </div>
