@@ -4,7 +4,8 @@ import useUser from "@/hooks/useUser";
 import DefaultProfileImg from "@/components/global/DefaultProfileImg";
 import ColorChangerButton from "./components/ColorChangerButton";
 import UploadImgButton from "./components/UploadImgButton";
-import DeleteImgButton from "./components/DeleteImgButton";
+import DeletePromptButton from "./components/DeletePromptButton";
+import DeleteImgPrompt from "./components/DeleteImgPrompt";
 
 const SIZE = 150; // px
 
@@ -12,6 +13,7 @@ function CoverSection() {
   const { user } = useUser();
 
   const [imgOptionsOpened, setImgOptionsOpened] = useState<boolean>(false);
+  const [confirmPromptOpened, setConfirmPromptOpened] = useState<boolean>(false);
 
   if (!user) return null;
 
@@ -32,7 +34,10 @@ function CoverSection() {
           className="brdr-basic-1 absolute left-1/2 top-full -translate-x-1/2 -translate-y-1/2 transform overflow-hidden rounded-full border-4"
         >
           <div
-            onClick={() => setImgOptionsOpened(!imgOptionsOpened)}
+            onClick={() => {
+              setImgOptionsOpened(!imgOptionsOpened);
+              setConfirmPromptOpened(false);
+            }}
             className="flex-center absolute left-0 top-0 h-full w-full cursor-pointer bg-black opacity-0 transition-opacity hover:opacity-20"
           ></div>
           {user.imgUrl ? (
@@ -45,12 +50,15 @@ function CoverSection() {
         <ColorChangerButton className="absolute right-[10px] top-[10px]" />
       </div>
       {/* Image Options */}
-      {imgOptionsOpened && (
-        <div className="flex animate-fade-in gap-3">
-          <UploadImgButton />
-          <DeleteImgButton />
-        </div>
-      )}
+      {imgOptionsOpened &&
+        (confirmPromptOpened ? (
+          <DeleteImgPrompt closePrompt={() => setConfirmPromptOpened(false)} />
+        ) : (
+          <div className="flex animate-fade-in gap-3">
+            <UploadImgButton />
+            <DeletePromptButton openPrompt={() => setConfirmPromptOpened(true)} />
+          </div>
+        ))}
     </section>
   );
 }
