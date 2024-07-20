@@ -25,8 +25,7 @@ function UploadImgButton() {
       const formData = new FormData();
       formData.append("img", file);
       const data = await privateRequest({ url: "profile/upload-img", method: "PATCH", data: formData });
-      const typedData = data as { imgUrl: string };
-      setUser({ ...user, imgUrl: typedData.imgUrl } as User);
+      setUser({ ...user, imgUrl: data.imgUrl } as User);
     } catch (error) {
       logError("Uploading Image:", error);
     } finally {

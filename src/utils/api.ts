@@ -8,7 +8,7 @@ export async function apiRequest({
   headers = {},
   data = null,
   credentials = "same-origin",
-}: ApiRequestOptions): Promise<string | object> {
+}: ApiRequestOptions): Promise<any> {
   try {
     // Prepare the body and headers
     let body: ApiRequestOptions["data"] = null;
