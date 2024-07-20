@@ -28,9 +28,9 @@ export default function InputField({ value, isValid, instructions, className = "
       />
 
       {isNotValid && (
-        <div className="flex items-center pt-1">
-          <SVGIcon.ExclamationCircle size={11} className="txt-red px-1" />
-          <div className="animate-fade-in txt-red">{instructions}</div>
+        <div className="flex pt-1">
+          <SVGIcon.ExclamationCircle size={11} className="txt-red px-[5px] pt-[3px]" />
+          <div className="txt-red animate-fade-in">{instructions}</div>
         </div>
       )}
     </div>
