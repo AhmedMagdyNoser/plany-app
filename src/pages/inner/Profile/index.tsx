@@ -10,7 +10,7 @@ function Profile() {
   const [moreOptionsOpened, setMoreOptionsOpened] = useState<boolean>(false);
 
   return (
-    <div className="flex-center container animate-fade-in flex-col gap-6 p-4 pb-8 sm:gap-8">
+    <div className="flex-center container animate-fade-in flex-col gap-6 p-4 pb-20 sm:gap-8">
       <CoverSection />
       <NameSection />
       <Divider />

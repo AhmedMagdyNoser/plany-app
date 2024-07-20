@@ -136,6 +136,9 @@
   p {
     @apply txt-basic-p text-xs sm:text-sm;
   }
+  span {
+    @apply text-xs sm:text-sm;
+  }
 }
 
 @layer components {
