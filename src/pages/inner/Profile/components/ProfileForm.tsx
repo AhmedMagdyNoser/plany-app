@@ -7,6 +7,7 @@ type ProfileFormProps = {
   closeForm: () => void;
   title?: string;
   submitLabel: string;
+  submitClass?: string;
   requiredFields?: Record<string, string>;
   isValidated?: boolean;
   error: string;
@@ -19,6 +20,7 @@ function ProfileForm({
   closeForm,
   title,
   submitLabel,
+  submitClass = "btn-primary",
   requiredFields,
   isValidated,
   error,
@@ -35,7 +37,7 @@ function ProfileForm({
         </button>
         <button
           type="submit"
-          className="btn-primary flex-center flex-1"
+          className={`${submitClass} flex-center flex-1`}
           disabled={(requiredFields && !hasCompleteData(requiredFields)) || isValidated === false || loading}
         >
           {loading ? <SVGIcon.Spinner size={15} /> : submitLabel}
