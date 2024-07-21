@@ -1,5 +1,6 @@
-import SVGIcon from "@/components/icons/SVGIcon";
 import useUser from "@/hooks/useUser";
+import SVGIcon from "@/components/icons/SVGIcon";
+import MiniUpdateButton from "./MiniUpdateButton";
 
 function EmailSection() {
   const { user } = useUser();
@@ -8,7 +9,7 @@ function EmailSection() {
 
   return (
     <section className="flex-center flex-col gap-3 sm:gap-4">
-      <div className="flex-center flex-wrap gap-2">
+      <div className="flex-center relative flex-wrap gap-2">
         <p className="text-center">{user.email}</p>
         <span>
           {user.emailVerified ? (
@@ -23,11 +24,7 @@ function EmailSection() {
             </div>
           )}
         </span>
-        {user.emailVerified && (
-          <button className="btn-primary-light rounded-full p-[5px]" style={{ left: "calc(100% + 10px)" }}>
-            <SVGIcon.Edit size={12} />
-          </button>
-        )}
+        {user.emailVerified && <MiniUpdateButton onClick={() => console.log("Open Form")} />}
       </div>
 
       {!user.emailVerified && (
