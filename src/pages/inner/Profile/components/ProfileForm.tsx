@@ -4,7 +4,7 @@ import Alert from "@/components/ui/Alert";
 
 type ProfileFormProps = {
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-  closeForm: () => void;
+  closeForm?: () => void;
   title?: string;
   submitLabel: string;
   submitClass?: string;
@@ -32,9 +32,11 @@ function ProfileForm({
       {title && <h2 className="text-center">{title}</h2>}
       {children}
       <div className="flex gap-2">
-        <button type="button" className="btn-basic flex-1" onClick={closeForm}>
-          Cancel
-        </button>
+        {closeForm && (
+          <button type="button" className="btn-basic flex-1" onClick={closeForm}>
+            Cancel
+          </button>
+        )}
         <button
           type="submit"
           className={`${submitClass} flex-center flex-1`}
