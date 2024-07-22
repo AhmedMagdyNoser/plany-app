@@ -13,9 +13,11 @@ function NameSection() {
   if (!user) return null;
 
   return (
-    <section className="flex-center w-full flex-col gap-2">
-      {!updatingMode ? (
-        <>
+    <section className="w-full flex-center">
+      {updatingMode ? (
+        <UpdatingForm closeForm={() => setUpdatingMode(false)} />
+      ) : (
+        <div className="flex-center animate-fade-in flex-col gap-2">
           <div className="relative">
             <h1 className="text-center tracking-tighter">{user.fullName}</h1>
             <MiniUpdateButton onClick={() => setUpdatingMode(true)} />
@@ -24,9 +26,7 @@ function NameSection() {
           <button className="btn-basic mt-4" onClick={logout}>
             Logout
           </button>
-        </>
-      ) : (
-        <UpdatingForm closeForm={() => setUpdatingMode(false)} />
+        </div>
       )}
     </section>
   );

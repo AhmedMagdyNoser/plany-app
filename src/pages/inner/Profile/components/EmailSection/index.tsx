@@ -32,7 +32,7 @@ function EmailSection() {
   }
 
   return (
-    <section className="flex-center flex-col gap-3 sm:gap-4">
+    <section className="w-full flex-center">
       {updateEmailFormOpened ? (
         <UpdateEmailForm close={close} openCodeVerificationForm={() => openCodeVerificationForm("Change Email")} />
       ) : verifyEmailFormOpened ? (
@@ -40,7 +40,7 @@ function EmailSection() {
       ) : codeVerificationFormOpened ? (
         <CodeVerificationForm close={close} purpose={purpose} />
       ) : (
-        <>
+        <div className="flex-center animate-fade-in flex-col gap-3 sm:gap-4">
           <div className="flex-center relative flex-wrap gap-2">
             <p className="text-center">{user.email}</p>
             <span>
@@ -61,7 +61,7 @@ function EmailSection() {
 
           {!user.emailVerified && (
             <>
-              <p>Secure your account by verifying your email.</p>
+              <p className="text-center">Secure your account by verifying your email.</p>
               <div className="flex-center gap-2">
                 <button className="btn-basic" onClick={() => setUpdateEmailFormOpened(true)}>
                   Change Email
@@ -72,7 +72,7 @@ function EmailSection() {
               </div>
             </>
           )}
-        </>
+        </div>
       )}
     </section>
   );

@@ -17,13 +17,13 @@ function DeleteSection() {
   }
 
   return (
-    <section className="animate-fade-in">
+    <section className="flex-center w-full animate-fade-in">
       {promptOpened ? (
         <PromptMessage openForm={openForm} cancel={cancel} />
       ) : deletingFormOpened ? (
         <DeletingForm cancel={cancel} />
       ) : (
-        <button className="btn-red-light" onClick={() => setPromptOpened(true)}>
+        <button className="btn-red-light animate-fade-in" onClick={() => setPromptOpened(true)}>
           Delete Your Account
         </button>
       )}

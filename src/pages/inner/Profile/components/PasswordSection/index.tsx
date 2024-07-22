@@ -7,16 +7,18 @@ function PasswordSection() {
   const [success, setSuccess] = useState<boolean>(false);
 
   return (
-    <section className="flex-center flex-col gap-3">
-      <p>Password</p>
-      {success ? (
-        <SuccessMessage />
-      ) : updatingMode ? (
+    <section className="flex-center w-full">
+      {updatingMode ? (
         <UpdatingForm closeForm={() => setUpdatingMode(false)} success={() => setSuccess(true)} />
+      ) : success ? (
+        <SuccessMessage />
       ) : (
-        <button className="btn-basic" onClick={() => setUpdatingMode(true)}>
-          Change Password
-        </button>
+        <div className="flex-center animate-fade-in flex-col gap-3">
+          <p>Password</p>
+          <button className="btn-basic" onClick={() => setUpdatingMode(true)}>
+            Change Password
+          </button>
+        </div>
       )}
     </section>
   );
