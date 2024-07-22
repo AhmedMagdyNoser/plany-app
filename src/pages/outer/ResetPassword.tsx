@@ -47,7 +47,7 @@ function ResetPassword() {
         handleFormSubmission(event, requiredFields, setLoading, setError, async () => {
           await apiRequest({
             method: "PATCH",
-            url: "auth/reset-password",
+            url: "auth/forgot-password/reset-password",
             data: { token, newPassword },
           });
           setSuccess(true); // Displays the success message
@@ -80,7 +80,7 @@ function SuccessMessage() {
   return (
     <div className="flex-center mx-auto w-[385px] max-w-full animate-fade-in flex-col gap-5 px-4 py-[75px]">
       <span className="brdr-basic-3 flex-center h-28 w-28 rounded-full border text-3xl">
-        <SVGIcon.CheckedCircle className="text-green-500" />
+        <SVGIcon.CheckedCircle className="txt-green" />
       </span>
       <h2 className="text-center">Password reset successfully</h2>
       <p className="text-center">Now you can login with your new password.</p>

@@ -9,8 +9,6 @@ import InputField from "@/components/ui/InputField";
 import AuthForm from "./components/AuthForm";
 import { validationRegex } from "@/utils/validation";
 
-const purpose = "Reset Password";
-
 function ForgotPassword() {
   useDocumentTitle(`Forgot Password? | ${appName}`);
 
@@ -37,10 +35,10 @@ function ForgotPassword() {
         handleFormSubmission(event, requiredFields, setLoading, setError, async () => {
           await apiRequest({
             method: "POST",
-            url: "auth/send-verification-code",
-            data: { email, purpose },
+            url: "auth/forgot-password/mail-code",
+            data: { email },
           });
-          navigate(`/${paths.verifyCode}`, { state: { email, purpose } });
+          navigate(`/${paths.verifyCode}`, { state: { email } });
         });
       }}
     >

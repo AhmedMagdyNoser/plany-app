@@ -15,7 +15,6 @@ function VerifyCode() {
   const navigate = useNavigate();
 
   const email = location.state?.email;
-  const purpose = location.state?.purpose;
 
   const [code, setCode] = useState<string>("");
 
@@ -39,8 +38,8 @@ function VerifyCode() {
         handleFormSubmission(event, requiredFields, setLoading, setError, async () => {
           const token = await apiRequest({
             method: "POST",
-            url: "auth/verify-verification-code",
-            data: { code, email, purpose },
+            url: "auth/forgot-password/verify-code",
+            data: { email, code },
           });
           navigate(`/${paths.resetPassword}`, { state: { token } });
         });
