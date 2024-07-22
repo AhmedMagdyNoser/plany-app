@@ -8,7 +8,7 @@ function Header() {
   const { user } = useUser();
 
   return (
-    <header className="shadow">
+    <header className="bg-header brdr-basic-3 sticky top-0 z-40 shadow dark:border-b">
       <div className="container flex items-center justify-between p-4">
         <Link to="/" className="txt-basic-h text-xl font-bold">
           Plany
