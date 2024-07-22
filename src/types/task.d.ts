@@ -3,3 +3,8 @@ export type TaskType = {
   title: string;
   completed: boolean;
 };
+
+export interface TasksContextProps {
+  tasks: TaskType[] | null;
+  setTasks: (tasks: TaskType[]) => void;
+}
