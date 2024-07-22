@@ -32,7 +32,7 @@ function EmailSection() {
   }
 
   return (
-    <section className="w-full flex-center">
+    <section className="flex-center w-full">
       {updateEmailFormOpened ? (
         <UpdateEmailForm close={close} openCodeVerificationForm={() => openCodeVerificationForm("Change Email")} />
       ) : verifyEmailFormOpened ? (
@@ -51,7 +51,7 @@ function EmailSection() {
                 </div>
               ) : (
                 <div className="txt-red flex gap-1">
-                  <SVGIcon.XCircle size={15} />
+                  <SVGIcon.SolidXCircle size={15} />
                   <span>Not verified</span>
                 </div>
               )}
