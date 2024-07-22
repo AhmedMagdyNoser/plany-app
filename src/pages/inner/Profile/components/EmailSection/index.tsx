@@ -1,61 +1,44 @@
 import { useState } from "react";
-import { VerificationPurpose } from "@/types/verificationPurpose";
 import useUser from "@/hooks/useUser";
 import SVGIcon from "@/components/icons/SVGIcon";
 import MiniUpdateButton from "../MiniUpdateButton";
-import UpdatingForm from "./components/UpdatingForm";
-import VerificationForm from "./components/VerificationForm";
-import { apiRequest } from "@/utils/api";
-import useFetchingStatus from "@/hooks/useFetchingStatus";
+import UpdateEmailForm from "./components/UpdateEmailForm";
+import CodeVerificationForm from "./components/CodeVerificationForm";
+import VerifyEmailForm from "./components/VerifyEmailForm";
+
+export type VerificationPurpose = "Change Email" | "Verify Email";
 
 function EmailSection() {
   const { user } = useUser();
 
-  const [updatingMode, setUpdatingMode] = useState<boolean>(false);
-  const [verificationMode, setVerificationMode] = useState<boolean>(false);
+  const [updateEmailFormOpened, setUpdateEmailFormOpened] = useState<boolean>(false);
+  const [verifyEmailFormOpened, setVerifyEmailFormOpened] = useState<boolean>(false);
+  const [codeVerificationFormOpened, setCodeVerificationFormOpened] = useState<boolean>(false);
   const [purpose, setPurpose] = useState<VerificationPurpose>(user?.emailVerified ? "Change Email" : "Verify Email");
-
-  const { loading, setLoading } = useFetchingStatus();
 
   if (!user) return null;
 
-  function openUpdatingForm() {
-    setUpdatingMode(true);
-  }
-
-  function openVerificationForm(purpose: VerificationPurpose) {
-    setUpdatingMode(false);
-    setVerificationMode(true);
+  function openCodeVerificationForm(purpose: VerificationPurpose) {
+    setUpdateEmailFormOpened(false);
+    setVerifyEmailFormOpened(false);
+    setCodeVerificationFormOpened(true);
     setPurpose(purpose);
   }
 
   function close() {
-    setUpdatingMode(false);
-    setVerificationMode(false);
-  }
-
-  async function sendVerifyEmailCode() {
-    try {
-      setLoading(true);
-      await apiRequest({
-        method: "POST",
-        url: "auth/send-verification-code",
-        data: { email: user?.email, purpose: "Verify Email" },
-      });
-      openVerificationForm("Verify Email");
-    } catch (error) {
-      console.dir(error);
-    } finally {
-      setLoading(false);
-    }
+    setUpdateEmailFormOpened(false);
+    setVerifyEmailFormOpened(false);
+    setCodeVerificationFormOpened(false);
   }
 
   return (
     <section className="flex-center flex-col gap-3 sm:gap-4">
-      {updatingMode ? (
-        <UpdatingForm closeForm={close} openVerificationForm={openVerificationForm} />
-      ) : verificationMode ? (
-        <VerificationForm closeForm={close} purpose={purpose} />
+      {updateEmailFormOpened ? (
+        <UpdateEmailForm close={close} openCodeVerificationForm={() => openCodeVerificationForm("Change Email")} />
+      ) : verifyEmailFormOpened ? (
+        <VerifyEmailForm close={close} openCodeVerificationForm={() => openCodeVerificationForm("Verify Email")} />
+      ) : codeVerificationFormOpened ? (
+        <CodeVerificationForm close={close} purpose={purpose} />
       ) : (
         <>
           <div className="flex-center relative flex-wrap gap-2">
@@ -73,18 +56,18 @@ function EmailSection() {
                 </div>
               )}
             </span>
-            {user.emailVerified && <MiniUpdateButton onClick={openUpdatingForm} />}
+            {user.emailVerified && <MiniUpdateButton onClick={() => setUpdateEmailFormOpened(true)} />}
           </div>
 
           {!user.emailVerified && (
             <>
               <p>Secure your account by verifying your email.</p>
               <div className="flex-center gap-2">
-                <button className="btn-basic" onClick={openUpdatingForm}>
+                <button className="btn-basic" onClick={() => setUpdateEmailFormOpened(true)}>
                   Change Email
                 </button>
-                <button className="btn-basic" onClick={sendVerifyEmailCode} disabled={loading}>
-                  {loading ? <SVGIcon.Spinner size={15} /> : "Verify Email"}
+                <button className="btn-basic" onClick={() => setVerifyEmailFormOpened(true)}>
+                  Verify Email
                 </button>
               </div>
             </>

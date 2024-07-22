@@ -1,14 +1,16 @@
 import { useState } from "react";
-import { apiRequest } from "@/utils/api";
 import { getUserFromAccessToken, handleFormSubmission } from "@/utils/helpers";
-import { VerificationPurpose } from "@/types/verificationPurpose";
 import useUser from "@/hooks/useUser";
+import usePrivateRequest from "@/hooks/usePrivateRequest";
 import useFetchingStatus from "@/hooks/useFetchingStatus";
 import InputField from "@/components/ui/InputField";
+import { VerificationPurpose } from "../index";
 import ProfileForm from "../../ProfileForm";
 
-function VerificationForm({ purpose, closeForm }: { purpose: VerificationPurpose; closeForm: () => void }) {
+function CodeVerificationForm({ purpose, close }: { purpose: VerificationPurpose; close: () => void }) {
   const { user, setUser } = useUser();
+
+  const privateRequest = usePrivateRequest();
 
   const [code, setCode] = useState<string>("");
 
@@ -28,21 +30,26 @@ function VerificationForm({ purpose, closeForm }: { purpose: VerificationPurpose
       error={error}
       onSubmit={(event) => {
         handleFormSubmission(event, requiredFields, setLoading, setError, async () => {
-          const at = await apiRequest({
-            method: "POST",
-            url: "auth/verify-verification-code",
-            data: { email: user.email, purpose, code },
-            credentials: "include",
-          });
           switch (purpose) {
             case "Change Email":
+              const at = await privateRequest({
+                method: "PATCH",
+                url: "profile/change-email/verify-code",
+                data: { code },
+                credentials: "include",
+              });
               setUser(getUserFromAccessToken(at as string));
               break;
             case "Verify Email":
+              await privateRequest({
+                method: "PATCH",
+                url: "profile/verify-email/verify-code",
+                data: { code },
+              });
               setUser({ ...user, emailVerified: true });
               break;
           }
-          closeForm();
+          close();
         });
       }}
     >
@@ -59,4 +66,4 @@ function VerificationForm({ purpose, closeForm }: { purpose: VerificationPurpose
   );
 }
 
-export default VerificationForm;
+export default CodeVerificationForm;

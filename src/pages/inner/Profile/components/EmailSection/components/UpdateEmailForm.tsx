@@ -1,21 +1,16 @@
 import { useState } from "react";
-import { apiRequest } from "@/utils/api";
 import { validationRegex } from "@/utils/validation";
 import { handleFormSubmission } from "@/utils/helpers";
-import { VerificationPurpose } from "@/types/verificationPurpose";
 import useUser from "@/hooks/useUser";
+import usePrivateRequest from "@/hooks/usePrivateRequest";
 import useFetchingStatus from "@/hooks/useFetchingStatus";
 import InputField from "@/components/ui/InputField";
 import ProfileForm from "../../ProfileForm";
 
-function UpdatingForm({
-  closeForm,
-  openVerificationForm,
-}: {
-  closeForm: () => void;
-  openVerificationForm: (purpose: VerificationPurpose) => void;
-}) {
+function UpdateEmailForm({ close, openCodeVerificationForm }: { close: () => void; openCodeVerificationForm: () => void }) {
   const { user } = useUser();
+
+  const privateRequest = usePrivateRequest();
 
   const [newEmail, setNewEmail] = useState<string>("");
 
@@ -35,15 +30,15 @@ function UpdatingForm({
       isValidated={isValidEmail}
       loading={loading}
       error={error}
-      closeForm={closeForm}
+      closeForm={close}
       onSubmit={(event) => {
         handleFormSubmission(event, requiredFields, setLoading, setError, async () => {
-          await apiRequest({
+          await privateRequest({
             method: "POST",
-            url: "auth/send-verification-code",
-            data: { email: user.email, purpose: "Change Email", newEmail },
+            url: "profile/change-email/mail-code",
+            data: { newEmail },
           });
-          openVerificationForm("Change Email");
+          openCodeVerificationForm();
         });
       }}
     >
@@ -59,4 +54,4 @@ function UpdatingForm({
   );
 }
 
-export default UpdatingForm;
+export default UpdateEmailForm;
