@@ -1,4 +1,5 @@
 import { useState } from "react";
+import useDocumentTitle from "@/hooks/useDocumentTitle";
 import CoverSection from "./components/CoverSection";
 import NameSection from "./components/NameSection";
 import EmailSection from "./components/EmailSection";
@@ -7,6 +8,8 @@ import DeleteSection from "./components/DeleteSection";
 import Divider from "./components/Divider";
 
 function Profile() {
+  useDocumentTitle("Profile");
+
   const [moreOptionsOpened, setMoreOptionsOpened] = useState<boolean>(false);
 
   return (

@@ -125,7 +125,7 @@
   h4,
   h5,
   h6 {
-    @apply txt-basic-h font-bold capitalize;
+    @apply txt-basic-h font-bold;
   }
   h1 {
     @apply text-2xl sm:text-3xl;
