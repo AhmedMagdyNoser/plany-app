@@ -65,3 +65,21 @@ export function remeberUser() {
 export function forgetUser() {
   localStorage.removeItem("remember");
 }
+
+export default async function handleRequest(
+  setLoading: (loading: boolean) => void,
+  setError: (error: string) => void,
+  callback: () => Promise<void>,
+): Promise<void> {
+  {
+    try {
+      setError("");
+      setLoading(true);
+      await callback();
+    } catch (err) {
+      setError(err as string);
+    } finally {
+      setLoading(false);
+    }
+  }
+}

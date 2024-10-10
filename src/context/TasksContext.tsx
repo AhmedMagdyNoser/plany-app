@@ -1,21 +1,39 @@
-import { createContext, ReactNode, useState } from "react";
-import { TaskType, TasksContextProps } from "@/types/task";
+import { createContext, ReactNode, useEffect, useState } from "react";
+import { Task, TasksContextProps } from "@/types/task";
+import useFetchingStatus from "@/hooks/useFetchingStatus";
+import usePrivateRequest from "@/hooks/usePrivateRequest";
+import handleRequest from "@/utils/helpers";
+import useUser from "@/hooks/useUser";
 
-export const TasksContext = createContext<TasksContextProps>({ tasks: null, setTasks: () => {} });
+export const TasksContext = createContext<TasksContextProps>({
+  tasks: [],
+  setTasks: () => {},
+  loading: false,
+  error: "",
+  reLoad: () => {},
+});
 
-const testTasks: TaskType[] = [
-  { _id: "1", title: "Study React", completed: true },
-  { _id: "2", title: "Study TypeScript", completed: false },
-  { _id: "3", title: "Study Next.js", completed: false },
-  { _id: "4", title: "Study Node.js", completed: true },
-  { _id: "5", title: "Study Express.js", completed: false },
-  { _id: "6", title: "Study MongoDB", completed: false },
-];
+export default function TasksProvider({ children }: { children: ReactNode }) {
+  const { user } = useUser();
 
-function TasksProvider({ children }: { children: ReactNode }) {
-  const [tasks, setTasks] = useState<TaskType[] | null>(testTasks);
+  const [tasks, setTasks] = useState<Task[]>([]);
 
-  return <TasksContext.Provider value={{ tasks, setTasks }}>{children}</TasksContext.Provider>;
+  const { loading, setLoading, error, setError } = useFetchingStatus();
+
+  const privateRequest = usePrivateRequest();
+
+  async function getTasks() {
+    handleRequest(setLoading, setError, async () => {
+      const tasks = await privateRequest({ url: "tasks" });
+      setTasks(tasks);
+    });
+  }
+
+  useEffect(() => {
+    if (user) getTasks();
+  }, [user]);
+
+  return (
+    <TasksContext.Provider value={{ tasks, setTasks, loading, error, reLoad: getTasks }}>{children}</TasksContext.Provider>
+  );
 }
-
-export default TasksProvider;

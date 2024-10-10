@@ -1,10 +1,13 @@
-export type TaskType = {
+export type Task = {
   _id: string;
   title: string;
   completed: boolean;
 };
 
 export interface TasksContextProps {
-  tasks: TaskType[] | null;
-  setTasks: (tasks: TaskType[]) => void;
+  tasks: Task[];
+  setTasks: (tasks: Task[]) => void;
+  loading: boolean;
+  error: string;
+  reLoad: () => void;
 }
