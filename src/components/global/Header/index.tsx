@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { paths } from "@/utils/constants";
+import logo from "@/assets/logo.png";
 import useUser from "@/hooks/useUser";
 import DefaultProfileImg from "@/components/global/DefaultProfileImg";
 import ToggleThemeButton from "./ToggleThemeButton";
@@ -10,7 +11,8 @@ function Header() {
   return (
     <header className="bg-header brdr-basic-3 sticky top-0 z-40 shadow dark:border-b">
       <div className="container flex items-center justify-between p-4">
-        <Link to="/" className="txt-basic-h text-xl font-bold">
+        <Link to="/" className="txt-basic-h flex items-center gap-3 text-xl font-bold">
+          <img src={logo} alt="Plany Logo" className="h-[25px] w-[25px]" />
           Plany
         </Link>
         <nav className="flex items-center gap-3 font-semibold">
