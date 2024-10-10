@@ -27,7 +27,7 @@ export default function AddTask() {
 
   return (
     <form onSubmit={addTask} className="flex flex-col gap-2">
-      <div className="bg-basic-2 brdr-basic-3 rounded-primary flex items-center border">
+      <div className="bg-basic-2 rounded-primary flex items-center">
         <solidIcons.Plus size={20} className="ml-5 mr-2" />
         <InputField
           type="text"
