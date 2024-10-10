@@ -25,7 +25,7 @@ export default function TasksProvider({ children }: { children: ReactNode }) {
   async function getTasks() {
     handleRequest(setLoading, setError, async () => {
       const tasks = await privateRequest({ url: "tasks" });
-      setTasks(tasks);
+      setTasks(tasks.reverse());
     });
   }
 

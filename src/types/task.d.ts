@@ -6,7 +6,7 @@ export type Task = {
 
 export interface TasksContextProps {
   tasks: Task[];
-  setTasks: (tasks: Task[]) => void;
+  setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
   loading: boolean;
   error: string;
   reLoad: () => void;
