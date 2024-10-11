@@ -27,7 +27,7 @@
 
   /* Background Colors */
   .bg-header {
-    @apply bg-gray-50/85 backdrop-blur-[6px] dark:bg-gray-950/75;
+    @apply bg-gray-50/80 backdrop-blur-[7.5px] dark:bg-gray-950/80;
   }
   .bg-basic-1 {
     @apply bg-gray-50 dark:bg-gray-950;

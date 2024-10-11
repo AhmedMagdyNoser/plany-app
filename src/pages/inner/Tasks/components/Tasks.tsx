@@ -1,23 +1,17 @@
 import { Task as TaskType } from "@/types/task";
-import solidIcons from "@/components/icons/solid";
 import outlineIcons from "@/components/icons/outline";
-import useFetchingStatus from "@/hooks/useFetchingStatus";
 import usePrivateRequest from "@/hooks/usePrivateRequest";
 import useTasks from "@/hooks/useTasks";
-import handleRequest from "@/utils/helpers";
 import completedSound from "@/assets/sounds/completed.mp3";
 
-function Task({ task }: { task: TaskType }) {
+export default function Task({ task }: { task: TaskType }) {
   const { setTasks } = useTasks();
 
   const privateRequest = usePrivateRequest();
-  const { loading: deleting, setLoading: setDeleting, setError: setDeleteError } = useFetchingStatus();
 
   async function handleDelete() {
-    handleRequest(setDeleting, setDeleteError, async () => {
-      await privateRequest({ url: `tasks/${task._id}`, method: "DELETE" });
-      setTasks((prevTasks) => prevTasks.filter((t) => t._id !== task._id));
-    });
+    await privateRequest({ url: `tasks/${task._id}`, method: "DELETE" });
+    setTasks((prevTasks) => prevTasks.filter((t) => t._id !== task._id));
   }
 
   async function handleComplete() {
@@ -34,8 +28,10 @@ function Task({ task }: { task: TaskType }) {
     }
   }
 
+  // In this component, loading and error are not handled intentionally.
+
   return (
-    <div className="rounded-primary bg-basic-3 flex w-full justify-between px-8 py-4 transition-colors">
+    <div className="rounded-primary bg-basic-3 flex w-full animate-fade-in justify-between px-8 py-4 transition-colors">
       <div className="flex items-center gap-4">
         <button onClick={handleComplete} className="flex-center hover:bg-basic-2 rounded-primary h-10 w-10">
           {task.completed ? (
@@ -48,10 +44,8 @@ function Task({ task }: { task: TaskType }) {
       </div>
 
       <button onClick={handleDelete} className="hover:txt-red transition-colors" title="Delete this task">
-        {deleting ? <solidIcons.Spinner size={16.5} className="animate-spin" /> : <outlineIcons.Trash size={18} />}
+        <outlineIcons.Trash size={18} />
       </button>
     </div>
   );
 }
-
-export default Task;

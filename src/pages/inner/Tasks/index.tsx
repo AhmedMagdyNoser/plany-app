@@ -4,7 +4,7 @@ import Task from "./components/Tasks";
 import AddTask from "./components/add-task";
 import LoadingSection from "@/components/ui/loading-section";
 import ErrorSection from "@/components/ui/error-section";
-import ballon from "@/assets/balloon.png";
+import ballon from "@/assets/imgs/balloon.png";
 import { Task as TaskType } from "@/types/task";
 
 export default function Tasks() {
@@ -26,24 +26,29 @@ export default function Tasks() {
             onClick: reLoad,
           }}
         />
+      ) : tasks.length === 0 ? (
+        <>
+          <section className="flex-center bg-basic-2 rounded-primary animate-fade-in flex-col gap-2 px-4 py-12">
+            <img src={ballon} alt="No tasks" className="h-20 w-20" />
+            <p className="txt-basic-h font-bold">Looks like your task list is empty!</p>
+            <p>Add your first task and take the first step!</p>
+          </section>
+          <div className="mt-6">
+            <AddTask />
+          </div>
+        </>
       ) : (
-        <div className="flex animate-fade-in flex-col gap-6 sm:gap-8">
-          {tasks.length === 0 ? (
-            <section className="flex-center bg-basic-2 rounded-primary flex-col gap-2 px-4 py-12">
-              <img src={ballon} alt="No tasks" className="h-20 w-20" />
-              <p className="txt-basic-h font-bold">It seems you have no tasks on your list.</p>
-              <p>Add a task to get started.</p>
+        <>
+          <section className="flex animate-fade-in flex-col gap-6 sm:gap-8">
+            <h2>Your have {tasks.length} tasks on your list</h2>
+            <section className="flex flex-col gap-2">
+              {tasks && tasks.map((task: TaskType) => <Task key={task._id} task={task} />)}
             </section>
-          ) : (
-            <>
-              <h2>Your have {tasks.length} tasks on your list</h2>
-              <section className="flex flex-col gap-2">
-                {tasks && tasks.map((task: TaskType) => <Task key={task._id} task={task} />)}
-              </section>
-            </>
-          )}
-          <AddTask />
-        </div>
+          </section>
+          <div className="mt-6">
+            <AddTask />
+          </div>
+        </>
       )}
     </div>
   );

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { paths } from "@/utils/constants";
-import logo from "@/assets/logo.png";
+import logo from "@/assets/imgs/logo.png";
 import useUser from "@/hooks/useUser";
 import DefaultProfileImg from "@/components/global/DefaultProfileImg";
 import ToggleThemeButton from "./ToggleThemeButton";
