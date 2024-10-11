@@ -1,8 +1,24 @@
-import outlineIcons from "@/components/icons/outline";
+import { Task as TaskType } from "@/types/task";
 import solidIcons from "@/components/icons/solid";
-import { Menu } from "@mantine/core";
+import outlineIcons from "@/components/icons/outline";
+import useFetchingStatus from "@/hooks/useFetchingStatus";
+import usePrivateRequest from "@/hooks/usePrivateRequest";
+import useTasks from "@/hooks/useTasks";
+import handleRequest from "@/utils/helpers";
 
-function Task({ task }: { task: any }) {
+function Task({ task }: { task: TaskType }) {
+  const { setTasks } = useTasks();
+
+  const privateRequest = usePrivateRequest();
+  const { loading, setLoading, setError } = useFetchingStatus();
+
+  async function handleDelete() {
+    handleRequest(setLoading, setError, async () => {
+      await privateRequest({ url: `tasks/${task._id}`, method: "DELETE" });
+      setTasks((prevTasks) => prevTasks.filter((t) => t._id !== task._id));
+    });
+  }
+
   return (
     <div className="rounded-primary bg-basic-3 flex w-full justify-between px-8 py-4 transition-colors">
       <div className="flex items-center gap-4">
@@ -10,29 +26,15 @@ function Task({ task }: { task: any }) {
           {task.completed ? (
             <outlineIcons.CheckedCircle size={23.5} className="txt-green" />
           ) : (
-            <outlineIcons.EmptyCircle size={21.5} />
+            <outlineIcons.EmptyCircle size={21.5} className="txt-basic-h" />
           )}
         </button>
         <span className={`txt-basic-h font-semibold ${task.completed ? "line-through" : ""}`}>{task.title}</span>
       </div>
 
-      <Menu shadow="md" width={185} withArrow radius={7.5}>
-        <Menu.Target>
-          <button className="flex-center h-[30px] w-[30px] rounded-full p-0">
-            <outlineIcons.KebabMenu size={15} />
-          </button>
-        </Menu.Target>
-
-        <Menu.Dropdown className="bg-basic-">
-          <Menu.Label>Options</Menu.Label>
-          <Menu.Item px={15} py={10} leftSection={<solidIcons.Edit size={14} />}>
-            Edit this task
-          </Menu.Item>
-          <Menu.Item px={15} py={10} color="red" leftSection={<outlineIcons.Trash size={14} />}>
-            Delete this task
-          </Menu.Item>
-        </Menu.Dropdown>
-      </Menu>
+      <button onClick={handleDelete} className="hover:txt-red transition-colors" title="Delete this task">
+        {loading ? <solidIcons.Spinner size={16.5} className="animate-spin" /> : <outlineIcons.Trash size={18} />}
+      </button>
     </div>
   );
 }
