@@ -3,7 +3,7 @@ import { logError } from "@/utils/helpers";
 import useUser from "@/hooks/useUser";
 import usePrivateRequest from "@/hooks/usePrivateRequest";
 import useFetchingStatus from "@/hooks/useFetchingStatus";
-import SVGIcon from "@/components/icons/SVGIcon";
+import solidIcons from "@/components/icons/solid";
 
 function DeleteImgPrompt({ closePrompt }: { closePrompt: () => void }) {
   const { user, setUser } = useUser();
@@ -36,7 +36,7 @@ function DeleteImgPrompt({ closePrompt }: { closePrompt: () => void }) {
         <button className="btn-red" onClick={handleDeleteImg} disabled={loading}>
           {loading ? (
             <span className="flex gap-2">
-              <SVGIcon.Spinner size={15} />
+              <solidIcons.Spinner size={15} />
               <span>Deleting..</span>
             </span>
           ) : (

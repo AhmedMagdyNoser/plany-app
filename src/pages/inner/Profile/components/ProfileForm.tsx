@@ -1,5 +1,5 @@
 import { hasCompleteData } from "@/utils/helpers";
-import SVGIcon from "@/components/icons/SVGIcon";
+import solidIcons from "@/components/icons/solid";
 import Alert from "@/components/ui/Alert";
 
 type ProfileFormProps = {
@@ -42,7 +42,7 @@ function ProfileForm({
           className={`${submitClass} flex-center flex-1`}
           disabled={(requiredFields && !hasCompleteData(requiredFields)) || isValidated === false || loading}
         >
-          {loading ? <SVGIcon.Spinner size={15} /> : submitLabel}
+          {loading ? <solidIcons.Spinner size={15} /> : submitLabel}
         </button>
       </div>
       {error && <Alert.Error message={error} />}

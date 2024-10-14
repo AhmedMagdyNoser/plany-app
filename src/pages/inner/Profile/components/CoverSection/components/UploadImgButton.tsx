@@ -4,7 +4,7 @@ import { logError } from "@/utils/helpers";
 import useUser from "@/hooks/useUser";
 import usePrivateRequest from "@/hooks/usePrivateRequest";
 import useFetchingStatus from "@/hooks/useFetchingStatus";
-import SVGIcon from "@/components/icons/SVGIcon";
+import solidIcons from "@/components/icons/solid";
 
 function UploadImgButton() {
   const { user, setUser } = useUser();
@@ -39,7 +39,7 @@ function UploadImgButton() {
       <button className="btn-basic" onClick={() => fileInputRef.current?.click()} disabled={loading}>
         {loading ? (
           <span className="flex gap-2">
-            <SVGIcon.Spinner size={15} />
+            <solidIcons.Spinner size={15} />
             <span>Uploading..</span>
           </span>
         ) : (

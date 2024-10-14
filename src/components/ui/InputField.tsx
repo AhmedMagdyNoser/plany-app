@@ -1,5 +1,5 @@
 import { inputFieldsInstructions } from "@/utils/validation";
-import SVGIcon from "../icons/SVGIcon";
+import solidIcons from "@/components/icons/solid";
 
 type InputFieldExtraProps = {
   isValid?: boolean;
@@ -28,9 +28,9 @@ export default function InputField({ value, isValid, instructions, className = "
       />
 
       {isNotValid && (
-        <div className="flex pt-1">
-          <SVGIcon.SolidExclamationCircle size={11} className="txt-red px-[5px] pt-[3px]" />
-          <div className="txt-red animate-fade-in">{instructions}</div>
+        <div className="flex animate-fade-in pt-1">
+          <solidIcons.ExclamationCircle size={11.25} className="txt-red mx-[5px] mt-[3px]" />
+          <div className="txt-red">{instructions}</div>
         </div>
       )}
     </div>

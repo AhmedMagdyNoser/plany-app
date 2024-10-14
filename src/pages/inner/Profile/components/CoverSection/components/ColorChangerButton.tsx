@@ -3,7 +3,7 @@ import { logError } from "@/utils/helpers";
 import useUser from "@/hooks/useUser";
 import useFetchingStatus from "@/hooks/useFetchingStatus";
 import usePrivateRequest from "@/hooks/usePrivateRequest";
-import SVGIcon from "@/components/icons/SVGIcon";
+import solidIcons from "@/components/icons/solid";
 
 function ColorChangerButton({ className }: { className?: string }) {
   const { user, setUser } = useUser();
@@ -51,7 +51,7 @@ function ColorChangerButton({ className }: { className?: string }) {
       onClick={changeColor}
       disabled={loading}
     >
-      {loading ? <SVGIcon.Spinner size={18} /> : <SVGIcon.Colors size={18} />}
+      {loading ? <solidIcons.Spinner size={18} /> : <solidIcons.Colors size={18} />}
     </button>
   );
 }

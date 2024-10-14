@@ -13,7 +13,7 @@ type Props = {
 export default function ErrorSection({ errorTitle, errorMessage, button, className = "" }: Props) {
   return (
     <div className={`flex-center rounded-primary light-red-block flex-col gap-4 p-10 ${className}`}>
-      <solidIcons.CircleExclamation size={23.5} />
+      <solidIcons.ExclamationCircle size={23.5} />
       <div className="flex-center flex-col gap-2">
         <span className="max-w-[500px] text-center font-bold">{errorTitle}</span>
         <span className="max-w-[500px] text-center">{errorMessage}</span>

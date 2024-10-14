@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { hasCompleteData } from "@/utils/helpers";
-import SVGIcon from "@/components/icons/SVGIcon";
+import solidIcons from "@/components/icons/solid";
 import Alert from "@/components/ui/Alert";
 
 type AuthFormProps = {
@@ -27,7 +27,7 @@ function AuthForm({
   children,
 }: AuthFormProps) {
   return (
-    <div className="animate-fade-in mx-auto w-[385px] max-w-full px-4 py-[75px]">
+    <div className="mx-auto w-[385px] max-w-full animate-fade-in px-4 py-[75px]">
       <h1 className="mb-6 text-center">{title}</h1>
       <form onSubmit={onSubmit} className="flex flex-col gap-4">
         {children}
@@ -36,7 +36,7 @@ function AuthForm({
           disabled={(requiredFields && !hasCompleteData(requiredFields)) || isValidated === false || loading}
           className="btn-primary flex-center h-[39px] font-semibold uppercase"
         >
-          {loading ? <SVGIcon.Spinner size={20} /> : submitLabel}
+          {loading ? <solidIcons.Spinner size={20} /> : submitLabel}
         </button>
         {error && <Alert.Error message={error} />}
         {leave && (

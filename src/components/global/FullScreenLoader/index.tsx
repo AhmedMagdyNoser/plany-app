@@ -1,9 +1,9 @@
-import SVGIcon from "@/components/icons/SVGIcon";
+import solidIcons from "@/components/icons/solid";
 
 function FullScreenLoader({ message = "Just one second..." }) {
   return (
     <div className="flex-center h-screen flex-col gap-5">
-      <SVGIcon.Spinner className="txt-primary" size={35} />
+      <solidIcons.Spinner className="txt-primary" size={30} />
       <p className="txt-h text-xl">{message}</p>
     </div>
   );

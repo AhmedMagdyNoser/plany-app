@@ -1,4 +1,4 @@
-import SVGIcon from "@/components/icons/SVGIcon";
+import solidIcons from "@/components/icons/solid";
 import useUser from "@/hooks/useUser";
 import { Link } from "react-router-dom";
 
@@ -13,11 +13,11 @@ function Home() {
           <p>Using Plany you can manage your tasks and notes in one place</p>
           <div className="flex gap-4">
             <Link to="/tasks" className="btn-basic flex-center h-40 w-40 flex-col gap-4">
-              <SVGIcon.CheckedCircle />
+              <solidIcons.CheckedCircle size={24.5} />
               Tasks
             </Link>
             <Link to="/notes" className="btn-basic flex-center h-40 w-40 flex-col gap-4">
-              <SVGIcon.Pen />
+              <solidIcons.Pencil size={24.5} />
               Notes
             </Link>
           </div>

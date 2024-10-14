@@ -1,4 +1,5 @@
-import SVGIcon from "@/components/icons/SVGIcon";
+import solidIcons from "@/components/icons/solid";
+import outlineIcons from "@/components/icons/outline";
 
 type CheckboxProps = {
   label: string;
@@ -17,9 +18,9 @@ function Checkbox({ label, checked, onClick }: CheckboxProps) {
   return (
     <div tabIndex={0} onClick={onClick} onKeyDown={handleKeyDown} className="flex cursor-pointer items-center gap-1">
       {checked ? (
-        <SVGIcon.CheckedSquare size={15} className="txt-primary" />
+        <solidIcons.CheckedSquare size={15} className="txt-primary" />
       ) : (
-        <SVGIcon.EmptySquare size={15} className="txt-primary" />
+        <outlineIcons.EmptySquare size={15} className="txt-primary" />
       )}
       <p>{label}</p>
     </div>

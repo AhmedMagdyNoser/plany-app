@@ -1,6 +1,6 @@
 import { useState } from "react";
 import useUser from "@/hooks/useUser";
-import SVGIcon from "@/components/icons/SVGIcon";
+import solidIcons from "@/components/icons/solid";
 import MiniUpdateButton from "../MiniUpdateButton";
 import UpdateEmailForm from "./components/UpdateEmailForm";
 import CodeVerificationForm from "./components/CodeVerificationForm";
@@ -46,12 +46,12 @@ function EmailSection() {
             <span>
               {user.emailVerified ? (
                 <div className="txt-green flex gap-1">
-                  <SVGIcon.CheckedCircle size={15} />
+                  <solidIcons.CheckedCircle size={15} />
                   <span>Verified</span>
                 </div>
               ) : (
                 <div className="txt-red flex gap-1">
-                  <SVGIcon.SolidXCircle size={15} />
+                  <solidIcons.XmarkCircle size={15} />
                   <span>Not verified</span>
                 </div>
               )}

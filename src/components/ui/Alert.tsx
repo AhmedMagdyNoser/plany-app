@@ -1,7 +1,8 @@
-import SVGIcon, { SVGIconProps } from "../icons/SVGIcon";
+import { IconType } from "react-icons";
+import solidIcons from "@/components/icons/solid";
 
 type AlertProps = {
-  Icon?: React.ComponentType<SVGIconProps>;
+  Icon?: IconType;
   message: string;
   colors?: string;
 };
@@ -16,9 +17,9 @@ export default function Alert({ Icon, message, colors = "light-basic-block" }: A
 }
 
 Alert.Error = function Error({ message = "An error occurred" }) {
-  return <Alert message={message} colors="light-red-block" Icon={SVGIcon.SolidExclamationCircle} />;
+  return <Alert message={message} colors="light-red-block" Icon={solidIcons.ExclamationCircle} />;
 };
 
 Alert.Success = function Success({ message = "Success" }) {
-  return <Alert message={message} colors="light-green-block" Icon={SVGIcon.CheckedCircle} />;
+  return <Alert message={message} colors="light-green-block" Icon={solidIcons.CheckedCircle} />;
 };

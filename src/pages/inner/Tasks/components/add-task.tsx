@@ -40,7 +40,7 @@ export default function AddTask() {
       </div>
 
       <button type="submit" className="btn-primary flex-center h-12 w-full font-bold" disabled={loading}>
-        {loading ? <solidIcons.Spinner className="animate-spin" size={18} /> : "Add"}
+        {loading ? <solidIcons.Spinner size={18} /> : "Add"}
       </button>
 
       {error && <Alert.Error message={error} />}
