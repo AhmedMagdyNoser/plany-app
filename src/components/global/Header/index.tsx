@@ -1,21 +1,31 @@
 import { Link } from "react-router-dom";
-import { paths } from "@/utils/constants";
+import { appName, paths } from "@/utils/constants";
 import logo from "@/assets/imgs/logo.png";
 import useUser from "@/hooks/useUser";
 import DefaultProfileImg from "@/components/global/DefaultProfileImg";
-import ToggleThemeButton from "./ToggleThemeButton";
+import ToggleThemeButton from "./toggle-theme";
+import solidIcons from "@/components/icons/solid";
+import { useDisclosure } from "@mantine/hooks";
+import MobileDrawer from "./mobile-drawer";
 
-function Header() {
+export default function Header() {
   const { user } = useUser();
 
+  const [opened, { open, close }] = useDisclosure(false);
+
   return (
-    <header className="bg-header brdr-basic-3 sticky top-0 z-40 shadow dark:border-b">
-      <div className="container flex items-center justify-between p-4">
+    <header className="bg-header brdr-basic-3 sticky top-0 z-40 h-[75px] shadow dark:border-b">
+      <div className="container flex h-full items-center justify-between px-4">
         <Link to="/" className="txt-basic-h flex items-center gap-3 text-xl font-bold">
           <img src={logo} alt="Plany Logo" className="h-[25px] w-[25px]" />
-          Plany
+          {appName}
         </Link>
-        <nav className="flex items-center gap-3 font-semibold">
+
+        <button className="btn-basic rounded-primary px-4 py-3 md:hidden" onClick={open}>
+          <solidIcons.Menu size={17.5} />
+        </button>
+
+        <nav className="hidden items-center gap-3 font-semibold md:flex">
           {user ? (
             <>
               <Link to={paths.tasks} className="btn-basic">
@@ -49,8 +59,9 @@ function Header() {
           )}
         </nav>
       </div>
+
+      {/* Mobile Drawer */}
+      <MobileDrawer opened={opened} close={close} />
     </header>
   );
 }
-
-export default Header;
