@@ -1,12 +1,13 @@
 import { appName, paths } from "@/utils/constants";
 import { Drawer } from "@mantine/core";
 import { Link } from "react-router-dom";
-import logo from "@/assets/imgs/logo.png";
-import solidIcons from "@/components/icons/solid";
 import useUser from "@/hooks/useUser";
-import DefaultProfileImg from "@/components/global/DefaultProfileImg";
-import ToggleThemeButton from "./mobile-drawer-toggle-theme";
+import useTheme from "@/hooks/useTheme";
 import useWindowHeight from "@/hooks/useWindowHeight";
+import logo from "@/assets/imgs/logo.png";
+import DefaultProfileImg from "@/components/global/default-profile-img";
+import outlineIcons from "@/components/icons/outline";
+import solidIcons from "@/components/icons/solid";
 
 export default function MobileDrawer({ opened, close }: { opened: boolean; close: () => void }) {
   const { user } = useUser();
@@ -74,5 +75,27 @@ export default function MobileDrawer({ opened, close }: { opened: boolean; close
         </nav>
       </div>
     </Drawer>
+  );
+}
+
+// =======================================================================
+
+function ToggleThemeButton() {
+  const { theme, toggleTheme } = useTheme();
+
+  return (
+    <button onClick={toggleTheme} className="btn-basic flex items-center gap-2 py-4">
+      {theme === "dark" ? (
+        <>
+          <solidIcons.LightMode size={21} />
+          Light Mode
+        </>
+      ) : (
+        <>
+          <outlineIcons.DarkMode size={21} />
+          Dark Mode
+        </>
+      )}
+    </button>
   );
 }

@@ -4,7 +4,7 @@ import useFetchingStatus from "@/hooks/useFetchingStatus";
 import usePrivateRequest from "@/hooks/usePrivateRequest";
 import useUser from "@/hooks/useUser";
 import ProfileForm from "../../ProfileForm";
-import InputField from "@/components/ui/InputField";
+import InputField from "@/components/ui/input-field";
 
 function DeletingForm({ cancel }: { cancel: () => void }) {
   const { setUser } = useUser();

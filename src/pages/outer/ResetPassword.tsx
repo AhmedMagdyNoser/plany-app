@@ -6,7 +6,7 @@ import { handleFormSubmission } from "@/utils/helpers";
 import { inputFieldsInstructions, validationRegex } from "@/utils/validation";
 import useDocumentTitle from "@/hooks/useDocumentTitle";
 import useFetchingStatus from "@/hooks/useFetchingStatus";
-import InputField from "@/components/ui/InputField";
+import InputField from "@/components/ui/input-field";
 import solidIcons from "@/components/icons/solid";
 import AuthForm from "./components/AuthForm";
 

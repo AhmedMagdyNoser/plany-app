@@ -5,7 +5,7 @@ import { handleFormSubmission } from "@/utils/helpers";
 import { apiRequest } from "@/utils/api";
 import useDocumentTitle from "@/hooks/useDocumentTitle";
 import useFetchingStatus from "@/hooks/useFetchingStatus";
-import InputField from "@/components/ui/InputField";
+import InputField from "@/components/ui/input-field";
 import AuthForm from "./components/AuthForm";
 
 function VerifyCode() {

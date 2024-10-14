@@ -4,8 +4,8 @@ import usePrivateRequest from "@/hooks/usePrivateRequest";
 import useFetchingStatus from "@/hooks/useFetchingStatus";
 import handleRequest from "@/utils/helpers";
 import solidIcons from "@/components/icons/solid";
-import InputField from "@/components/ui/InputField";
-import Alert from "@/components/ui/Alert";
+import InputField from "@/components/ui/input-field";
+import Alert from "@/components/ui/alert-g";
 
 export default function AddTask() {
   const { setTasks } = useTasks();

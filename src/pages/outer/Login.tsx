@@ -5,8 +5,8 @@ import { handleFormSubmission, getUserFromAccessToken, remeberUser } from "@/uti
 import useDocumentTitle from "@/hooks/useDocumentTitle";
 import useFetchingStatus from "@/hooks/useFetchingStatus";
 import useUser from "@/hooks/useUser";
-import InputField from "@/components/ui/InputField";
-import Checkbox from "@/components/ui/Checkbox";
+import InputField from "@/components/ui/input-field";
+import Checkbox from "@/components/ui/checkbox-g";
 import AuthForm from "./components/AuthForm";
 import { Link } from "react-router-dom";
 

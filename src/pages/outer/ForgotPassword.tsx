@@ -5,7 +5,7 @@ import { appName, paths } from "@/utils/constants";
 import { handleFormSubmission } from "@/utils/helpers";
 import useDocumentTitle from "@/hooks/useDocumentTitle";
 import useFetchingStatus from "@/hooks/useFetchingStatus";
-import InputField from "@/components/ui/InputField";
+import InputField from "@/components/ui/input-field";
 import AuthForm from "./components/AuthForm";
 import { validationRegex } from "@/utils/validation";
 

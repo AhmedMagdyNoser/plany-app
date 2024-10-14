@@ -1,11 +1,11 @@
+import { Task as TaskType } from "@/types/task";
 import useDocumentTitle from "@/hooks/useDocumentTitle";
 import useTasks from "@/hooks/useTasks";
-import Task from "./components/Tasks";
-import AddTask from "./components/add-task";
 import LoadingSection from "@/components/ui/loading-section";
 import ErrorSection from "@/components/ui/error-section";
 import ballon from "@/assets/imgs/balloon.png";
-import { Task as TaskType } from "@/types/task";
+import Task from "./components/task";
+import AddTask from "./components/add-task";
 
 export default function Tasks() {
   useDocumentTitle("Your Tasks");

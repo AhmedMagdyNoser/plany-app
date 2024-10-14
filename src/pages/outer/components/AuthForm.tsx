@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { hasCompleteData } from "@/utils/helpers";
 import solidIcons from "@/components/icons/solid";
-import Alert from "@/components/ui/Alert";
+import Alert from "@/components/ui/alert-g";
 
 type AuthFormProps = {
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;

@@ -6,7 +6,7 @@ import { handleFormSubmission, getUserFromAccessToken, remeberUser } from "@/uti
 import useDocumentTitle from "@/hooks/useDocumentTitle";
 import useFetchingStatus from "@/hooks/useFetchingStatus";
 import useUser from "@/hooks/useUser";
-import InputField from "@/components/ui/InputField";
+import InputField from "@/components/ui/input-field";
 import AuthForm from "./components/AuthForm";
 
 function Register() {

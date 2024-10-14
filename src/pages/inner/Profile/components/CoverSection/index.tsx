@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { getCoverColor } from "@/utils/helpers";
 import useUser from "@/hooks/useUser";
-import DefaultProfileImg from "@/components/global/DefaultProfileImg";
+import DefaultProfileImg from "@/components/global/default-profile-img";
 import ColorChangerButton from "./components/ColorChangerButton";
 import UploadImgButton from "./components/UploadImgButton";
 import DeletePromptButton from "./components/DeletePromptButton";

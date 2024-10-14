@@ -4,7 +4,7 @@ import { handleFormSubmission } from "@/utils/helpers";
 import useUser from "@/hooks/useUser";
 import usePrivateRequest from "@/hooks/usePrivateRequest";
 import useFetchingStatus from "@/hooks/useFetchingStatus";
-import InputField from "@/components/ui/InputField";
+import InputField from "@/components/ui/input-field";
 import ProfileForm from "../../ProfileForm";
 
 function UpdatingForm({ closeForm }: { closeForm: () => void }) {

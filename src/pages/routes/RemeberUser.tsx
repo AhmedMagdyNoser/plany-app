@@ -3,9 +3,9 @@ import { Outlet } from "react-router-dom";
 import useUser from "@/hooks/useUser";
 import useRefresh from "@/hooks/useRefresh";
 import useLogout from "@/hooks/useLogout";
-import FullScreenLoader from "@/components/global/FullScreenLoader";
+import solidIcons from "@/components/icons/solid";
 
-function RememberUser() {
+export default function RememberUser() {
   const { user } = useUser();
 
   const accessToken = user?.accessToken;
@@ -36,4 +36,13 @@ function RememberUser() {
   return !accessToken && remember ? <FullScreenLoader /> : <Outlet />;
 }
 
-export default RememberUser;
+// =======================================================================
+
+function FullScreenLoader({ message = "Just one second..." }) {
+  return (
+    <div className="flex-center h-screen flex-col gap-5">
+      <solidIcons.Spinner className="txt-primary" size={30} />
+      <p className="txt-h text-xl">{message}</p>
+    </div>
+  );
+}

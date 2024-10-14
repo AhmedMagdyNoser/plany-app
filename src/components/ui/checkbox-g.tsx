@@ -7,7 +7,7 @@ type CheckboxProps = {
   onClick: () => void;
 };
 
-function Checkbox({ label, checked, onClick }: CheckboxProps) {
+export default function Checkbox({ label, checked, onClick }: CheckboxProps) {
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (e.key === " " || e.key === "Spacebar" || e.key === "Enter") {
       e.preventDefault();
@@ -26,5 +26,3 @@ function Checkbox({ label, checked, onClick }: CheckboxProps) {
     </div>
   );
 }
-
-export default Checkbox;

@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
 import { appName, paths } from "@/utils/constants";
-import logo from "@/assets/imgs/logo.png";
-import useUser from "@/hooks/useUser";
-import DefaultProfileImg from "@/components/global/DefaultProfileImg";
-import ToggleThemeButton from "./toggle-theme";
-import solidIcons from "@/components/icons/solid";
 import { useDisclosure } from "@mantine/hooks";
+import useTheme from "@/hooks/useTheme";
+import useUser from "@/hooks/useUser";
+import logo from "@/assets/imgs/logo.png";
+import DefaultProfileImg from "@/components/global/default-profile-img";
+import outlineIcons from "@/components/icons/outline";
+import solidIcons from "@/components/icons/solid";
 import MobileDrawer from "./mobile-drawer";
 
 export default function Header() {
@@ -63,5 +64,17 @@ export default function Header() {
       {/* Mobile Drawer */}
       <MobileDrawer opened={opened} close={close} />
     </header>
+  );
+}
+
+// =======================================================================
+
+function ToggleThemeButton() {
+  const { theme, toggleTheme } = useTheme();
+
+  return (
+    <button onClick={toggleTheme} className="btn-basic flex-center h-10 w-10 rounded-full p-0">
+      {theme === "dark" ? <solidIcons.LightMode size={21} /> : <outlineIcons.DarkMode size={21} />}
+    </button>
   );
 }
