@@ -5,7 +5,7 @@ import useFetchingStatus from "@/hooks/useFetchingStatus";
 import handleRequest from "@/utils/helpers";
 import solidIcons from "@/components/icons/solid";
 import InputField from "@/components/ui/input-field";
-import Alert from "@/components/ui/alert-g";
+import Alert from "@/components/ui/alert";
 
 export default function AddTask() {
   const { setTasks } = useTasks();

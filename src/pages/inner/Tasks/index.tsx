@@ -1,3 +1,4 @@
+import { appName } from "@/utils/constants";
 import { Task as TaskType } from "@/types/task";
 import useDocumentTitle from "@/hooks/useDocumentTitle";
 import useTasks from "@/hooks/useTasks";
@@ -8,7 +9,7 @@ import Task from "./components/task";
 import AddTask from "./components/add-task";
 
 export default function Tasks() {
-  useDocumentTitle("Your Tasks");
+  useDocumentTitle(`Your Tasks | ${appName}`);
 
   const { tasks, loading, error, reLoad } = useTasks();
 
@@ -28,7 +29,7 @@ export default function Tasks() {
         />
       ) : tasks.length === 0 ? (
         <>
-          <section className="flex-center bg-basic-2 rounded-primary animate-fade-in flex-col gap-2 px-4 py-12">
+          <section className="flex-center bg-basic-2 rounded-primary flex-col gap-2 px-4 py-12">
             <img src={ballon} alt="No tasks" className="h-20 w-20" />
             <p className="txt-basic-h font-bold">Looks like your task list is empty!</p>
             <p>Add your first task and take the first step!</p>
@@ -39,7 +40,7 @@ export default function Tasks() {
         </>
       ) : (
         <>
-          <section className="flex animate-fade-in flex-col gap-6 sm:gap-8">
+          <section className="flex flex-col gap-6 sm:gap-8">
             <h2>Your have {tasks.length} tasks on your list</h2>
             <section className="flex flex-col gap-2">
               {tasks && tasks.map((task: TaskType) => <Task key={task._id} task={task} />)}

@@ -6,7 +6,7 @@ import useDocumentTitle from "@/hooks/useDocumentTitle";
 import useFetchingStatus from "@/hooks/useFetchingStatus";
 import useUser from "@/hooks/useUser";
 import InputField from "@/components/ui/input-field";
-import Checkbox from "@/components/ui/checkbox-g";
+import Checkbox from "@/components/ui/checkbox";
 import AuthForm from "./components/AuthForm";
 import { Link } from "react-router-dom";
 

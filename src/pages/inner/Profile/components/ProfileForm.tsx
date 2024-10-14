@@ -1,6 +1,6 @@
 import { hasCompleteData } from "@/utils/helpers";
 import solidIcons from "@/components/icons/solid";
-import Alert from "@/components/ui/alert-g";
+import Alert from "@/components/ui/alert";
 
 type ProfileFormProps = {
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;

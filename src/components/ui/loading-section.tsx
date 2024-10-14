@@ -8,7 +8,7 @@ export default function LoadingSection({
   className?: string;
 }) {
   return (
-    <div className={`flex-center rounded-primary bg-basic-2 brdr-basic-3 flex-col gap-4 border p-10 ${className}`}>
+    <div className={`flex-center rounded-primary bg-basic-2 animate-fade-in flex-col gap-4 p-10 ${className}`}>
       <div className="text-gray-600">{<solidIcons.Spinner size={20} />}</div>
       <p>{message}</p>
     </div>

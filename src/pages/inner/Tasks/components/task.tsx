@@ -23,7 +23,7 @@ export default function Task({ task }: { task: TaskType }) {
     setTasks((prevTasks) => prevTasks.map((t) => (t._id === updatedTask._id ? updatedTask : t)));
     if (!task.completed) {
       const audio = new Audio(completedSound);
-      audio.volume = 0.35;
+      audio.volume = 0.5;
       audio.play();
     }
   }
@@ -31,7 +31,7 @@ export default function Task({ task }: { task: TaskType }) {
   // In this component, loading and error are not handled intentionally.
 
   return (
-    <div className="rounded-primary bg-basic-3 flex w-full animate-fade-in justify-between px-8 py-4 transition-colors">
+    <div className="rounded-primary bg-basic-3 flex w-full justify-between px-8 py-4 transition-colors">
       <div className="flex items-center gap-4">
         <button onClick={handleComplete} className="flex-center hover:bg-basic-2 rounded-primary h-10 w-10">
           {task.completed ? (
